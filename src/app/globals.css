@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 :root {
   --background: #ffffff;
@@ -23,4 +24,43 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* === Gradient Animation Keyframes === */
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-move {
+  background-size: 200% 200%;
+  animation: gradient-move 10s ease-in-out infinite;
+}
+
+.custom-shape-divider-top-1753541072 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-top-1753541072 svg {
+    position: relative;
+    display: block;
+    width: calc(186% + 1.3px);
+    height: 370px;
+}
+
+.custom-shape-divider-top-1753541072 .shape-fill {
+    fill: #FFFFFF;
 }
