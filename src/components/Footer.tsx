@@ -49,6 +49,7 @@ export default function (){
   <p className="text-black">
    Made with love Truf
   </p>
+  
 </footer>
     )
 }

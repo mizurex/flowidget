@@ -29,7 +29,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo:'/user/wizard',
+         redirectTo: `${window.location.origin}/user/wizard`
       },
     });
 

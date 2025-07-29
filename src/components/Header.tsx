@@ -40,7 +40,7 @@ export default function Header() {
           }`}
         >
       
-          <span className={`text-stone-900  ${space.className}`}>Crompti.</span>
+          <span className={`text-stone-900  ${space.className}`}>flowidget.</span>
         </div>
 
         {/* Right: Links */}

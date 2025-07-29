@@ -32,7 +32,7 @@ if (!user) {
   return Response.json({ user: null });
 }
 
-console.log("me running")
+
 return Response.json({
   data: {
     email: user.email,

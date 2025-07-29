@@ -6,6 +6,7 @@ import { Indie_Flower } from "next/font/google";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Montserrat_Alternates } from "next/font/google";
+import { useEffect } from "react";
 
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ const mont = Montserrat_Alternates({
 
 
 export default function HeroSection() {
+   
   return (
     <div className="text-black bg-[#ef9700]">
      <section className={`relative  w-full h-[120vh] pt-20 flex items-center justify-center overflow-hidden bg-amber-600 `}>
@@ -204,7 +206,7 @@ export default function HeroSection() {
       </h2>
 
       <p className="text-gray-600 text-lg leading-relaxed">
-        Deliver personalized support by responding within the context of a user's journey.
+        Deliver personalized support by responding within the context of a users journey.
         Our AI bot handles questions, assists visitors, and helps you offer exceptional customer
         experiences — automatically and effortlessly.
       </p>
@@ -246,7 +248,7 @@ export default function HeroSection() {
    
   {/* Heading */}
  <h2 className="text-4xl  text-gray-900 mb-4">
-  FAQs Can't Cover Everything 
+  FAQs Can&apos;t Cover Everything 
 </h2>
 
 <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">

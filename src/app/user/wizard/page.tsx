@@ -77,60 +77,68 @@ export default function RedesignedDashboard() {
   const [checkingWidget, setCheckingWidget] = useState(true);
   const [showEmbedPopup, setShowEmbedPopup] = useState(false);
 
-  // Fetch user and check for existing widget
-  useEffect(() => {
-    const initializeUser = async () => {
+// Fetch user and check for existing widget
+
+useEffect(() => {
+  const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+    if (event === "SIGNED_IN" && session?.user) {
       const res = await fetch("/api/auth/me");
-      const { data: userData } = await res.json();
-      if (userData) {
-        setUser(userData);
-        await checkExistingWidget(userData.id);
+      const { data } = await res.json();
+
+      if (data && data.id) {
+        setUser(data);
+        await checkExistingWidget(data.id); // ✅ calling it here
       }
+
       setCheckingWidget(false);
-    };
+    }
+  });
 
-    const checkExistingWidget = async (userId: string) => {
-      try {
-        const res = await fetch(`https://widget-xxtv.onrender.com/get-widget?user_id=${userId}`);
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.content) {
-            const content = data.content;
-            const lines = content.split('\n');
-            const parsedWidget: Partial<Widget> = { id: data.id, created_at: data.created_at };
+  return () => {
+    authListener?.subscription.unsubscribe();
+  };
+}, []);
+   
 
-            lines.forEach((line: string) => {
-              if (line.startsWith('Bot Name:')) parsedWidget.bot_name = line.replace('Bot Name:', '').trim();
-              else if (line.startsWith('Welcome Message:')) parsedWidget.welcome_message = line.replace('Welcome Message:', '').trim();
-              else if (line.startsWith('Role:')) parsedWidget.role = line.replace('Role:', '').trim();
-              else if (line.startsWith('Content:')) parsedWidget.content = line.replace('Content:', '').trim();
-            });
+      const checkExistingWidget = async (userId: string) => {
+        try {
+          const res = await fetch(`https://widget-xxtv.onrender.com/get-widget?user_id=${userId}`);
+          if (res.ok) {
+            const data = await res.json();
+            if (data && data.content) {
+              const content = data.content;
+              const lines = content.split('\n');
+              const parsedWidget: Partial<Widget> = { id: data.id, created_at: data.created_at };
 
-            setHasExistingWidget(true);
-            setExistingWidget(parsedWidget as Widget);
-            setBotName(parsedWidget.bot_name || "");
-            setWelcomeMessage(parsedWidget.welcome_message || "");
-            setRole(parsedWidget.role || "");
-            setContent(parsedWidget.content || "");
+              lines.forEach((line: string) => {
+                if (line.startsWith('Bot Name:')) parsedWidget.bot_name = line.replace('Bot Name:', '').trim();
+                else if (line.startsWith('Welcome Message:')) parsedWidget.welcome_message = line.replace('Welcome Message:', '').trim();
+                else if (line.startsWith('Role:')) parsedWidget.role = line.replace('Role:', '').trim();
+                else if (line.startsWith('Content:')) parsedWidget.content = line.replace('Content:', '').trim();
+              });
+
+              setHasExistingWidget(true);
+              setExistingWidget(parsedWidget as Widget);
+              setBotName(parsedWidget.bot_name || "");
+              setWelcomeMessage(parsedWidget.welcome_message || "");
+              setRole(parsedWidget.role || "");
+              setContent(parsedWidget.content || "");
+            }
           }
+        } catch (err) {
+          console.error("Error checking widget:", err);
         }
-      } catch (err) {
-        console.error("Error checking widget:", err);
-      }
-    };
+      };
 
-    initializeUser();
-  }, []);
+       
 
   const handleCreateOrUpdateWidget = async () => {
     if (!user?.id) return;
-
     const finalContent = `Bot Name: ${botName}\nWelcome Message: ${welcomeMessage}\nRole: ${role}\nContent: ${content}`.trim();
 
     try {
       setLoading(true);
       setError("");
-
       const res = await fetch("https://widget-xxtv.onrender.com/add-context", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -142,11 +150,10 @@ export default function RedesignedDashboard() {
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
       const newWidget = { id: data.id, bot_name: botName, welcome_message: welcomeMessage, role, content, created_at: new Date().toISOString() };
-      
+
       setHasExistingWidget(true);
       setExistingWidget(newWidget);
-      setShowEmbedPopup(true); // Show embed code popup on success
-
+      setShowEmbedPopup(true);
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -157,10 +164,9 @@ export default function RedesignedDashboard() {
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setUser(null);
-    window.location.href = "/"; // Redirect to home on logout
+    window.location.href = "/";
   };
 
-  // Loading state UI
   if (checkingWidget) {
     return (
       <ProtectedRoute>
@@ -174,6 +180,8 @@ export default function RedesignedDashboard() {
     );
   }
 
+ 
+
   return (
     <ProtectedRoute>
       <div className={`flex h-screen bg-slate-100 text-slate-800 overflow-hidden ${space.className}`}>
@@ -181,7 +189,7 @@ export default function RedesignedDashboard() {
         <header className="fixed top-0 left-0 w-full z-30 bg-white border-b border-slate-200 h-16">
           <div className="max-w-screen-2xl mx-auto px-6 flex items-center justify-between h-full">
             <div className="text-xl font-bold tracking-tight text-slate-900">
-              Crompti.
+              flowidget.
             </div>
             <div className="flex items-center gap-4">
                <button onClick={handleLogout} className="text-sm font-medium text-slate-600 hover:text-amber-600 transition-colors flex items-center gap-2">
