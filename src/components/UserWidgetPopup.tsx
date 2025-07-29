@@ -8,7 +8,7 @@ type UserWidgetProps = {
 
 export default function UserWidget({ userId, onClose }: UserWidgetProps) {
   const [showModal, setShowModal] = useState(true);
-  const scriptCode = `<script src="https://yourcdn.com/dist/widget.js" user="${userId}"></script>`;
+  const scriptCode = `<script src="https://widget-bot-ui.vercel.app/widget.js" user="${userId}"></script>`;
 
 
   const handleClick = ()=>{

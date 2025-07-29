@@ -4,7 +4,7 @@ import { X } from "lucide-react";
 
 export default function WidgetEmbedPopup({ userId }: { userId: string }) {
   const [showModal, setShowModal] = useState(false);
-  const scriptCode = `<script src="https://yourcdn.com/dist/widget.js" user="${userId}"></script>`;
+  const scriptCode = `<script src="https://widget-bot-ui.vercel.app/widget.js" user="${userId}"></script>`;
 
   return (
     <div>
