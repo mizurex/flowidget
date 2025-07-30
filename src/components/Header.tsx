@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { Space_Grotesk } from "next/font/google";
-
+import Link from "next/link";
 
 const space = Space_Grotesk({
   subsets:["latin"],
   weight:"600"
 })
+
+
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -50,7 +52,11 @@ export default function Header() {
           }`}
         >
           <p className="cursor-pointer  transition">About</p>
-          <p className="cursor-pointer  transition">Sign In</p>
+          <Link href={"/user/signin"}>
+             <button className="cursor-pointer  transition">Signin</button>
+          </Link>
+          
+        
         </nav>
       </div>
     </header>

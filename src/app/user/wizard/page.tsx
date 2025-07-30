@@ -34,7 +34,7 @@ interface Widget {
   created_at: string;
 }
 
-// Reusable Input Field Component for consistent styling
+
 const FormInput = ({ label, value, onChange, placeholder, type = "text" }: any) => (
   <div>
     <label className="block text-sm font-medium text-slate-700 mb-1.5">{label}</label>
@@ -48,7 +48,6 @@ const FormInput = ({ label, value, onChange, placeholder, type = "text" }: any) 
   </div>
 );
 
-// Reusable Textarea Component
 const FormTextarea = ({ label, value, onChange, placeholder, rows = 6 }: any) => (
   <div>
     <label className="block text-sm font-medium text-slate-700 mb-1.5">{label}</label>
@@ -77,7 +76,7 @@ export default function RedesignedDashboard() {
   const [checkingWidget, setCheckingWidget] = useState(true);
   const [showEmbedPopup, setShowEmbedPopup] = useState(false);
 
-// Fetch user and check for existing widget
+
 
 useEffect(() => {
   const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
@@ -87,7 +86,7 @@ useEffect(() => {
 
       if (data && data.id) {
         setUser(data);
-        await checkExistingWidget(data.id); // ✅ calling it here
+        await checkExistingWidget(data.id);
       }
 
       setCheckingWidget(false);
@@ -101,7 +100,6 @@ useEffect(() => {
    
 
       const checkExistingWidget = async (userId: string) => {
-        try {
           const res = await fetch(`https://widget-xxtv.onrender.com/get-widget?user_id=${userId}`);
           if (res.ok) {
             const data = await res.json();
@@ -124,10 +122,7 @@ useEffect(() => {
               setRole(parsedWidget.role || "");
               setContent(parsedWidget.content || "");
             }
-          }
-        } catch (err) {
-          console.error("Error checking widget:", err);
-        }
+          }  
       };
 
        
@@ -172,7 +167,7 @@ useEffect(() => {
       <ProtectedRoute>
         <div className="flex justify-center items-center h-screen bg-slate-50">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-amber-600 mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-orange-400 mx-auto mb-4"></div>
             <p className={`text-slate-600 ${space.className}`}>Loading your dashboard...</p>
           </div>
         </div>
@@ -184,11 +179,10 @@ useEffect(() => {
 
   return (
     <ProtectedRoute>
-      <div className={`flex h-screen bg-slate-100 text-slate-800 overflow-hidden ${space.className}`}>
-        {/* ===== HEADER ===== */}
-        <header className="fixed top-0 left-0 w-full z-30 bg-white border-b border-slate-200 h-16">
+      <div className={`flex h-screen bg-[#fffaf5] text-slate-800 overflow-hidden ${space.className}`}>
+        <header className="fixed top-0 left-0 w-full z-30  border-b  h-16">
           <div className="max-w-screen-2xl mx-auto px-6 flex items-center justify-between h-full">
-            <div className="text-xl font-bold tracking-tight text-slate-900">
+            <div className="text-xl pl-16 font-bold tracking-tight text-slate-900">
               flowidget.
             </div>
             <div className="flex items-center gap-4">
@@ -206,16 +200,7 @@ useEffect(() => {
         <div className="flex flex-1 pt-16 overflow-hidden">
           {/* ===== SIDEBAR ===== */}
           <aside className="w-[320px] p-6 border-r border-slate-200 bg-white overflow-y-auto flex flex-col gap-8">
-            <div>
-              <h2 className="text-lg font-bold text-slate-800">
-                Welcome, {user?.email?.split("@")[0] ?? "Guest"}
-              </h2>
-              <p className="text-sm text-slate-500 mt-1">
-                {hasExistingWidget
-                  ? "Your AI assistant is active."
-                  : "Let's create your AI assistant."}
-              </p>
-            </div>
+            
             
             {hasExistingWidget && existingWidget ? (
               // Widget Info Card

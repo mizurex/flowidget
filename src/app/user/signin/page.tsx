@@ -73,7 +73,8 @@ export default function LoginPage() {
 
   // Main component render
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4 font-sans">
+    <div className="min-h-screen bg-[url('/box.svg')] bg-no-repeat bg-cover bg-center flex items-center justify-center p-4 font-sans">
+    
       <div className="w-full max-w-sm bg-white rounded-xl shadow-md p-8">
         {loading ? (
           <div className="flex justify-center items-center">
@@ -81,7 +82,8 @@ export default function LoginPage() {
           </div>
         ) : !user ? (
           // Login View
-          <div className="text-center">
+          <div className="text-center h-[40vh] z-40">
+            
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
               Welcome
             </h1>
@@ -90,7 +92,7 @@ export default function LoginPage() {
             </p>
             <button
               onClick={handleLogin}
-              className="w-full flex items-center justify-center gap-3 py-3 px-4 bg-white border border-gray-300 rounded-lg text-gray-800 font-semibold hover:bg-gray-50 transition-colors duration-300"
+              className="w-full flex items-center justify-center gap-3 mt-25 cursor-pointer py-3 px-4 bg-white border border-gray-300 rounded-lg text-gray-800 font-semibold hover:bg-gray-50 transition-colors duration-300"
             >
               <GoogleIcon />
               Continue with Google

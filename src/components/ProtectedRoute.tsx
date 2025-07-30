@@ -6,10 +6,9 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase-browser';
 import type { User } from '@supabase/supabase-js';
 
-// A full-page loading indicator for better UX
+
 const FullPageLoader = () => (
   <div className="flex h-screen w-screen items-center justify-center bg-gray-100">
-    <span className="loading loading-ring loading-xl text-black"></span>
   </div>
 );
 
