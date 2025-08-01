@@ -24,19 +24,16 @@ export default function LoginPage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Handle Google OAuth login
-  const handleLogin = async () => {
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-         redirectTo: `${window.location.origin}/user/wizard`
-      },
-    });
-
-    if (error) {
-      console.error('Login error:', error.message);
+const handleGoogleLogin = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: `${window.location.origin}/auth/callback`
     }
-  };
+  });
+  
+  if (error) console.error('Error logging in:', error);
+};
 
   // Handle user logout
   const handleLogout = async () => {
@@ -44,7 +41,7 @@ export default function LoginPage() {
     setUser(null);
   };
 
-  // Effect to check for user session and set up auth listener
+  
   useEffect(() => {
     // Start with loading true
     setLoading(true);
@@ -91,7 +88,7 @@ export default function LoginPage() {
               Sign in to continue to your account.
             </p>
             <button
-              onClick={handleLogin}
+              onClick={handleGoogleLogin}
               className="w-full flex items-center justify-center gap-3 mt-25 cursor-pointer py-3 px-4 bg-white border border-gray-300 rounded-lg text-gray-800 font-semibold hover:bg-gray-50 transition-colors duration-300"
             >
               <GoogleIcon />
