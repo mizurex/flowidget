@@ -4,6 +4,7 @@ import { cookies } from 'next/headers'
 
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url)
+  const baseUrl = process.env.NEXT_PUBLIC_URL  ?? origin;
   const code = searchParams.get('code')
   const next = searchParams.get('next') ?? '/user/wizard'
 
@@ -38,12 +39,12 @@ export async function GET(request: NextRequest) {
     
     if (!error) {
       console.log('Successfully exchanged code for session')
-      return NextResponse.redirect(`${origin}${next}`)
+      return NextResponse.redirect(`${baseUrl}${next}`)
     } else {
       console.error('Error exchanging code:', error)
     }
   }
 
   // Redirect to error page or home if no code or error
-  return NextResponse.redirect(`${origin}/`)
+  return NextResponse.redirect(`${baseUrl}/`)
 }
