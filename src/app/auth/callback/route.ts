@@ -45,5 +45,5 @@ export async function GET(request: NextRequest) {
   }
 
   // Redirect to error page or home if no code or error
-  return NextResponse.redirect(`${origin}/user/wizard`)
+  return NextResponse.redirect(`${origin}/`)
 }
