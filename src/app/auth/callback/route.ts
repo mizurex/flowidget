@@ -31,7 +31,7 @@ export async function GET(request: NextRequest) {
     )
 
     const { error } = await supabase.auth.exchangeCodeForSession(code);
-    
+
     if(!error){
 
     }
@@ -45,5 +45,5 @@ export async function GET(request: NextRequest) {
   }
 
   // Redirect to error page or home if no code or error
-  return NextResponse.redirect(`${origin}/`)
+  return NextResponse.redirect(`${origin}/user/wizard`)
 }
