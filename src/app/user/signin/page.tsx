@@ -35,7 +35,7 @@ const handleGoogleLogin = async () => {
   if (error) console.error('Error logging in:', error);
 };
 
-  // Handle user logout
+
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setUser(null);
@@ -43,29 +43,21 @@ const handleGoogleLogin = async () => {
 
   
   useEffect(() => {
-    // Start with loading true
     setLoading(true);
 
-    // Check for an existing session
-    const getSession = async () => {
-      const { data } = await supabase.auth.getSession();
-      setUser(data.session?.user ?? null);
+   
+    const getCurrUser = async () => {
+      const { data:{user} } = await supabase.auth.getUser();
+      if(!user){
+        setUser(null);
+      }
+      else{
+        setUser(user);
+      } 
       setLoading(false);
     };
-    getSession();
+    getCurrUser();
 
-    // Set up a listener for authentication state changes
-    const { data: authListener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        setUser(session?.user ?? null);
-        setLoading(false);
-      }
-    );
-
-    // Cleanup the listener when the component unmounts
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
   }, []);
 
   // Main component render

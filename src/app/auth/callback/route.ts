@@ -30,7 +30,11 @@ export async function GET(request: NextRequest) {
       }
     )
 
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    const { error } = await supabase.auth.exchangeCodeForSession(code);
+    
+    if(!error){
+
+    }
     
     if (!error) {
       console.log('Successfully exchanged code for session')

@@ -1,5 +1,7 @@
 import { createServerClient } from '@supabase/ssr'
-import { NextResponse, type NextRequest } from 'next/server'
+import { redirect } from 'next/dist/server/api-utils'
+import { NextURL } from 'next/dist/server/web/next-url'
+import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -27,21 +29,18 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  // IMPORTANT: Refreshing the auth tokens - this is what makes SSR work
-  const {
-    data: { session },
-  } = await supabase.auth.getSession()
+  const isAuthorized = request.nextUrl.pathname.startsWith("/user/wizard");
 
-  // Don't redirect if it's the auth callback route
-  if (request.nextUrl.pathname.startsWith('/auth/callback')) {
-    return supabaseResponse
+  if(isAuthorized){
+      const{
+        data : {user},
+      } = await supabase.auth.getUser();
+
+     if(!user){
+      return NextResponse.redirect(new URL("/user/signin"));
+  }
   }
 
-  // Redirect to login if not authenticated and trying to access protected route
-  if (!session && request.nextUrl.pathname.startsWith('/user/wizard')) {
-    const redirectUrl = new URL('/', request.url)
-    return NextResponse.redirect(redirectUrl)
-  }
 
   return supabaseResponse
 }
