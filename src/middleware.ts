@@ -1,6 +1,4 @@
 import { createServerClient } from '@supabase/ssr'
-import { redirect } from 'next/dist/server/api-utils'
-import { NextURL } from 'next/dist/server/web/next-url'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function middleware(request: NextRequest) {
@@ -29,18 +27,21 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const isAuthorized = request.nextUrl.pathname.startsWith("/user/wizard");
+  // Check if user is trying to access protected routes
+  const isProtectedRoute = request.nextUrl.pathname.startsWith("/user/dashboard") || 
+                          request.nextUrl.pathname.startsWith("/dashboard")
 
-  if(isAuthorized){
-      const{
-        data : {user},
-      } = await supabase.auth.getUser();
+  if (isProtectedRoute) {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
 
-     if(!user){
-      return NextResponse.redirect(new URL("/user/signin"));
+    if (!user) {
+      // Redirect to signin with the correct URL construction
+      const redirectUrl = new URL("/user/signin", request.url)
+      return NextResponse.redirect(redirectUrl)
+    }
   }
-  }
-
 
   return supabaseResponse
 }
@@ -52,7 +53,8 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - api routes
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|api|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }

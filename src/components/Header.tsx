@@ -26,9 +26,8 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full border-black text-black z-20 transition-all duration-500 ${
-        scrolled ? 'backdrop-blur-md bg-white/80 shadow-md' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 bg-black z-50 left-0 w-full h-[10vh] border-black text-black  transition-all duration-500 
+      `}
     >
       <div
         className={`mx-auto px-6 py-4 flex items-center justify-between transition-all duration-500 ${
@@ -42,18 +41,20 @@ export default function Header() {
           }`}
         >
       
-          <span className={`text-stone-900  ${space.className}`}>flowidget.</span>
+          <span className={`text-white  ${space.className}`}>flowidget.</span>
         </div>
 
         {/* Right: Links */}
         <nav
-          className={`flex space-x-6 text-sm md:text-base font-medium transition-all duration-500 ${
+          className={`flex space-x-6 text-sm md:text-base items-center font-medium transition-all duration-500 ${
             scrolled ? 'translate-x-0' : '-translate-x-8'
           }`}
         >
-          <p className="cursor-pointer  transition">About</p>
+          <p className="cursor-pointe text-blue-600  transition">About</p>
           <Link href={"/user/signin"}>
-             <button className="cursor-pointer  transition">Signin</button>
+            <button className="px-3 py-1 font-medium bg-white text-black w-fit transition-all shadow-[-2px_4px_0px_orange] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] cursor-pointer">
+              Signin
+            </button>
           </Link>
           
         

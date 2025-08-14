@@ -64,3 +64,13 @@ body {
 .custom-shape-divider-top-1753541072 .shape-fill {
     fill: #FFFFFF;
 }
+
+@theme inline {
+  --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+ 
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
+}
