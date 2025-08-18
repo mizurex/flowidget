@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 type UserWidgetProps = {
   userId: string;
-  onClose: () => void;
+  onClose: any;
 };
 
 export default function UserWidget({ userId, onClose }: UserWidgetProps) {

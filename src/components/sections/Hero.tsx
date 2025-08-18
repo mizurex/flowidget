@@ -1,5 +1,5 @@
 "use client";
-import Header from "@/components/Header";
+import Header from "@/components/sections/Header";
 import { Bricolage_Grotesque } from 'next/font/google';
 import { Indie_Flower } from "next/font/google";
 import Link from "next/link";
@@ -11,10 +11,11 @@ import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase-browser';
 import CreateWidgetModal from "@/components/model/WidgetModel";
 import HeaderLogged from "@/components/HeaderLoggedIn";
-import { Compare } from "./ui/compare";
+import { Compare } from "../ui/compare";
 import { PT_Serif } from "next/font/google";
 import { pt } from "zod/locales";
 import { BiArrowToRight } from "react-icons/bi";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 
 const bricolage = Bricolage_Grotesque({
@@ -48,8 +49,8 @@ interface HeroProps {
 export default function HeroSection({ initialUser = null }: HeroProps) {
   const [user, setUser] = useState<User | null>(initialUser);
   const [showWidgetModal, setShowWidgetModal] = useState(false);
-
-  
+  const [hasWid,setHasWid] = useState(false);
+  const [showNoti,setShowNotification] = useState(false);
 
    useEffect(() => {
     // Listen for real-time auth changes (login/logout)
@@ -61,22 +62,81 @@ export default function HeroSection({ initialUser = null }: HeroProps) {
 
     return () => subscription.unsubscribe();
   }, []);
+
+useEffect(() => {
+  const fetchWidgetStatus = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/widget-status?user_id=${user?.id}`
+
+      );
+
+      if (!response.ok) {
+        console.error("Server returned:", response.status, response.statusText);
+        return;
+      }
+
+      const data = await response.json();
+
+      if (!data.success) {
+        window.alert("error test");
+        return;
+      }
+
+      setHasWid(data.status.wid);
+    } catch (error) {
+      console.error("Fetch failed:", error);
+      window.alert("error test");
+    }
+  };
+
+  if (user?.id) {
+    fetchWidgetStatus();
+  }
+}, []);
+
+
+
   
+  const handleCreateClick = () => {
+    if (hasWid) {
+      setShowNotification(true);
+      setTimeout(() => setShowNotification(false), 3000);
+    } else {
+      setShowWidgetModal(true);
+    }
+  };
    
   return (
     <div className="text-white bg-[#010101]">
         {user ? (
-        <HeaderLogged user={user} onCreateClick={() => setShowWidgetModal(true)} />
+        <HeaderLogged user={user} onCreateClick={handleCreateClick} />
       ) : (
         <Header/>
       )}
-
-        {user && (
+        {user && !hasWid && (
         <CreateWidgetModal
           isOpen={showWidgetModal}
           onClose={() => setShowWidgetModal(false)}
           user={user}
         />
+      )}
+
+      {showNoti && (
+        <div className="fixed bottom-1 right-5 z-50 border border-zinc-300 animate-fade-in-down">
+          <div className="bg-[#09090b] text-white px-4 py-3 shadow-lg flex items-center gap-2">
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>You’ve already created 1 free widget</span>
+          </div>
+        </div>
       )}
       
      <section className={`relative pt-20 w-full   overflow-hidden bg-black `}>
@@ -249,34 +309,31 @@ export default function HeroSection({ initialUser = null }: HeroProps) {
     
     
     <div className="text-center">
-    
-      <div className="text-center">
-  <h3 className={`text-7xl font-bold mb-4 ${Ptfont.className}`}>
+       <h3 className={`text-7xl font-bold mb-4 ${Ptfont.className}`}>
     Conversational Support <br/>
-    <span className="font-light">Without Endless FAQs</span>
+    <span className="">Without Endless FAQs</span>
   </h3>
-  <p className="text-xl md:text-2xl text-gray-800 font-normal">
+  <p className="text-lg leading-relaxed opacity-70 text-gray-700 mt-8">
     Answer customer questions automatically — straight from your own content.
   </p>
-</div>
+    </div>
 
-<div className="grid md:grid-cols-2 gap-10 items-start">
-  {/* Left Column */}
-  <div className="space-y-8">
-    <div>
-      <h2 className="text-2xl font-semibold mb-4 text-gray-900">
+    
+    <div className="grid md:grid-cols-2 gap-10 items-start">
+      {/* Left Column */}
+      <div className="space-y-8">
+        <div>
+           <h2 className="text-2xl font-semibold mb-4 text-black">
         From Description to Answers
       </h2>
-      <p className="text-lg leading-relaxed text-gray-800 mb-4">
+      <p className="text-lg leading-relaxed opacity-70 text-gray-700 mt-8">
         Forget creating a long list of FAQs. Just give the widget a short description of your product or service, and it will handle visitor questions instantly.
       </p>
-      <p className="text-lg leading-relaxed text-gray-800">
+      <p className="text-lg leading-relaxed opacity-70 text-gray-700 mt-8">
         Your customers get accurate, human-like answers in real time — without you having to predefine every possible question.
       </p>
-    </div>
-  </div>
-</div>
-
+        </div>
+      </div>
 
       {/* Right Column */}
       <div className="space-y-8">
@@ -357,19 +414,17 @@ export default function HeroSection({ initialUser = null }: HeroProps) {
    <section className="py-20 text-center px-4 bg-black text-white">
    
   {/* Heading */}
- <h3 className="text-7xl mb-8">
+ <h3 className={`text-7xl mb-8 ${Ptfont.className}`}>
   FAQs Can&apos;t Cover Everything 
 </h3>
 
-<p className="text-lg  max-w-2xl mx-auto mb-8">
+<p className="text-lg leading-relaxed opacity-70 text-white mt-8">
   Give your website visitors real-time answers and a more interactive experience.
 </p>
 
   {/* CTA */}
-  <div className="flex justify-center mb-3">
-     <button className="px-10 py-2 font-medium bg-white text-black w-fit transition-all shadow-[-3px_5px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] cursor-pointer">
-        Try Now
-      </button>
+  <div className="flex justify-center mb-3  gap-2.5 items-center">
+   First time? Check out our <span><a href="" className=" mt-4 text-sm font-medium border-b border-dotted pb-0.5 transition-colors text-green-400 border-green-500 hover:text-blue-500 hover:border-blue-500"> First time Guide </a> </span>
   </div>
 
 

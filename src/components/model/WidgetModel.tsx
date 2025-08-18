@@ -2,9 +2,8 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-import RedesignedDashboard from '../Dashboard';
 import type { User } from '@supabase/supabase-js';
-import RedesignedDashboard2 from '@/app/user/test/page';
+import RedesignedDashboard2 from '@/app/(user)/wizard/page';
 
 type Props = {
   isOpen: boolean;
@@ -50,11 +49,11 @@ export default function CreateWidgetModal({ isOpen, onClose, user }: Props) {
         className="relative w-fit h-fit">
         <button
           onClick={onClose}
-          className="absolute top-[-2.5rem] right-0 bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
+          className="absolute top-[-2.5rem] right-0 bg-black px-3 py-1 rounded hover:bg-neutral-800 cursor-pointer"
         >
           X
         </button>
-        <RedesignedDashboard2 user={user} widget={null} />
+        <RedesignedDashboard2 user={user} widget={null} onSuccess={onClose} />
       </div>
     </div>
   );

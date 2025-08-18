@@ -1,5 +1,5 @@
 import UiDashBoard from "@/components/DashBoard-ui";
-import Footer from "@/components/Footer";
+import Footer from "@/components/sections/Footer";
 import HeaderLogged from "@/components/HeaderLoggedIn";
 import { createSupabaseServer } from "@/lib/supabase-server";
 
@@ -9,7 +9,6 @@ export default async function(){
     const {data:{user}} = await supabase.auth.getUser();
     return(
         <>
-        
         <UiDashBoard initialUser={user}/>
         <Footer/>
         </>

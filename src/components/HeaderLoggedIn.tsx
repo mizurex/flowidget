@@ -5,8 +5,7 @@ import LogoutModalTrigger from './ProfileModal';
 
 export default function HeaderLogged({ user, onCreateClick }: { user: User; onCreateClick : () => void }) {
 
- const handleLogout = async () => {
-      await supabase.auth.signOut();
+ const handleLogoClick =  () => {
       window.location.href = "/";
     };
 
@@ -21,6 +20,7 @@ export default function HeaderLogged({ user, onCreateClick }: { user: User; onCr
       >
        
         <h1
+          onClick={handleLogoClick}
           className={`text-2xl font-bold text-white transition-all duration-500 `}
         >
           flowidget.
@@ -37,7 +37,7 @@ export default function HeaderLogged({ user, onCreateClick }: { user: User; onCr
             Create Widget
           </button>
 
-          <Link href="/user/dashboard">
+          <Link href="/dashboard">
             <button
               className="px-6 py-2 font-medium bg-white text-black w-fit transition-all shadow-[-2px_4px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] cursor-pointer"
             >

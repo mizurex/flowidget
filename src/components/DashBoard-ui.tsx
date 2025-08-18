@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase-browser';
 import HeaderLogged from './HeaderLoggedIn';
-import UserWidget from './UserWidgetPopup';
+import UserWidget from './widget/UserWidgetPopup';
 import { ArrowBigDown, ArrowDown, ArrowRight, ArrowUp, ArrowUpNarrowWideIcon, GiftIcon } from 'lucide-react';
 import { BsArrow90DegRight, BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
 
