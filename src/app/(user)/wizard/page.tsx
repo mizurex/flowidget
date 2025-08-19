@@ -125,8 +125,6 @@ export default function RedesignedDashboard2({ user, widget,onSuccess }: Props) 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to create widget.");
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
      
       setShowEmbedPopup(true);
     } catch (err: any) {
@@ -148,9 +146,9 @@ export default function RedesignedDashboard2({ user, widget,onSuccess }: Props) 
               <>
                 <h1 className="text-3xl font-bold">Create Your AI Assistant</h1>
                 <div className="flex items-center justify-between text-sm text-white mb-4">
-                  <span className={step === 1 ? "text-[#FF6600] font-semibold" : ""}> Basic</span>
-                  <span className={step === 2 ? "text-[#FF6600] font-semibold" : ""}> Behavior</span>
-                  <span className={step === 3 ? "text-[#FF6600] font-semibold" : ""}> Confirm</span>
+                    <span className={step === 1 ? "text-[#7cff3f] font-semibold" : ""}> Bot Details </span>
+                    <span className={step === 2 ? "text-[#7cff3f] font-semibold" : ""}> Personality & Content</span>
+                    <span className={step === 3 ? "text-[#7cff3f] font-semibold" : ""}> Review & Confirm</span>
                 </div>
 
                 <AnimatePresence mode="wait">
@@ -163,34 +161,24 @@ export default function RedesignedDashboard2({ user, widget,onSuccess }: Props) 
                       transition={{ duration: 0.4 }}
                       className="space-y-6 bg-[#16151517] mx-5 "
                     ><FormInput
-                        label="1. Bot Name"
+                        label=" Bot Name"
                         value={botName}
                         onChange={(e: any) => setBotName(e.target.value)}
                         placeholder="e.g., Support Pro"
                         error={fieldErrors.botName}
                         />
                       <div>
-                        <label className="block text-lg leading-relaxed font-medium text-white mb-1.5">2. Select UI Style</label>
+                        <label className="block text-lg leading-relaxed font-medium text-white mb-1.5"> Select UI Style</label>
                        <select
                         value={selectedUI}
                          onChange={(e) => setSelectedUI(e.target.value)}
                          className="w-[25vh] px-4 py-2 border border-stone-700 bg-[#1b1b1d] text-white text-sm  hover:border-orange-500 "
                         >
                           <option value="classic">Classic</option>
-                          <option value="minimal">Minimal</option>
-                          <option value="bubble">Bubble</option>
-                          <option value="modern">Modern</option>
+                          
                         </select>
                       </div>
-                      <div>
-                        <label className="block text-lg font-medium leading-relaxed text-white mb-1.5">3. Pick Primary Color</label>
-                        <input
-                          type="color"
-                          value={selectedColor}
-                          onChange={(e) => setSelectedColor(e.target.value)}
-                          className="w-9 h-8 border-2  p-1 rounded cursor-pointer"
-                        />
-                      </div>
+                    
                     </motion.div>
                   )}
 
@@ -232,12 +220,12 @@ export default function RedesignedDashboard2({ user, widget,onSuccess }: Props) 
 
                 <div className="flex justify-between items-center mt-6">
                   {step > 1 && (
-                    <button onClick={() => setStep(step - 1)} className="text-white underline hover:text-red-700 cursor-pointer">
+                    <button onClick={() => setStep(step - 1)} className="text-white underline hover:text-gray-400 cursor-pointer">
                       ← Back
                     </button>
                   )}
                   {step < 3 ? (
-                          <button onClick={handleNextStep} className="bg-white text-black cursor-pointer px-6 py-2 font-medium shadow-[-2px_4px_0px_#FF6600] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px]">
+                          <button onClick={handleNextStep} className="bg-white text-black cursor-pointer px-6 py-2 font-medium shadow-[-2px_4px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px]">
                           Next →
                              </button>
                         ) : (
@@ -250,7 +238,7 @@ export default function RedesignedDashboard2({ user, widget,onSuccess }: Props) 
               </>
           </div>
       {showEmbedPopup && user?.id && (
-        <UserWidget onClose={() => {
+        <UserWidget userId={user?.id} onClose={() => {
       setShowEmbedPopup(false);
       onSuccess();  
     }} />
