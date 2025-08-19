@@ -52,7 +52,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:3001/dashboard-data?user_id=${user.id}`);
+      const response = await fetch(`https://widget-xxtv.onrender.com/dashboard-data?user_id=${user.id}`);
       const data = await response.json();
 
       if (!response.ok) {

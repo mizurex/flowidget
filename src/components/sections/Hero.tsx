@@ -67,7 +67,7 @@ useEffect(() => {
   const fetchWidgetStatus = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/widget-status?user_id=${user?.id}`
+        `https://widget-xxtv.onrender.com/widget-status?user_id=${user?.id}`
 
       );
 
