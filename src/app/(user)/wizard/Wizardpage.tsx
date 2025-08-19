@@ -1,11 +1,9 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabase-browser";
 import type { User } from "@supabase/supabase-js";
 import UserWidget from "@/components/widget/UserWidgetPopup";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, Code, LogOut, ListChecks, Lightbulb } from "lucide-react";
 import { Space_Grotesk } from "next/font/google";
 import { widgetFormSchema } from "@/lib/schema/schema";
 import {z} from "zod";
@@ -15,14 +13,7 @@ const space = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-interface Widget {
-  id: string;
-  bot_name: string;
-  welcome_message: string;
-  role: string;
-  content: string;
-  created_at: string;
-}
+
 
 const FormInput = ({ label, value, onChange, placeholder, error }: any) => (
   <div className="w-[50vh]  mb-3">

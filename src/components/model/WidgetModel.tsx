@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import type { User } from '@supabase/supabase-js';
-import RedesignedDashboard2 from '@/app/(user)/wizard/page';
+import RedesignedDashboard2 from '@/app/(user)/wizard/Wizardpage';
 
 type Props = {
   isOpen: boolean;
