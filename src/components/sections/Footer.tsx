@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className=" bg-black text-white px-6 pt-25 pb-3.5" >
+    <footer className=" bg-black text-white px-6 pt-7 pb-3.5" >
       <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
         {/* Logo Section */}
         <div>

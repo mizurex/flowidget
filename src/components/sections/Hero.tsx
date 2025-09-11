@@ -108,7 +108,7 @@ useEffect(() => {
   };
    
   return (
-    <div className="text-white bg-[#010101]">
+    <div className="text-white bg-[#010101] overflow-hidden">
         {user ? (
         <HeaderLogged user={user} onCreateClick={handleCreateClick} />
       ) : (
@@ -190,24 +190,14 @@ useEffect(() => {
 </motion.div>
       
   
-   <div className="w-[70vw] h-[99vh] mx-auto flex justify-center bg-black shadow-[2px_0px_0px_orange,5px_0px_0px_#7cff3f]">
-  <Compare
-    firstImage="/comp.png"
-    secondImage="/comp6.png"
-    firstImageClassName="object-contain object-top w-full h-full"
-    secondImageClassname="object-contain object-fit w-full h-full"
-    className="w-[80vw] h-full"
-    slideMode="hover"
-    autoplay={true}
-  />
-</div> 
+   
  
   </section>
 
- <section className="flex bg-[#8fe457] py-50 h-[95vh]  gap-8 px-60 w-full">
+ <section className="flex flex-col lg:flex-row bg-[#8fe457] py-12 lg:py-50 min-h-[95vh] gap-8 px-6 sm:px-12 md:px-24 lg:px-60 w-full">
     <div className="flex-1">
       <div>
-      <h3 className={`text-2xl md:text-7xl font-extrabold text-black  ${Ptfont.className}`}>
+      <h3 className={`text-2xl sm:text-3xl md:text-5xl lg:text-7xl font-extrabold text-black  ${Ptfont.className}`}>
           Let AI enhance every conversation
           
         </h3>
@@ -216,18 +206,18 @@ useEffect(() => {
 
       <div>
 
-        <h3 className="leading-relaxed text-black ">
+        <h3 className="leading-relaxed text-black text-lg sm:text-xl md:text-2xl">
           Turn FAQs into Conversations
         </h3>
       </div>
 
-     <h2 className="text-lg leading-relaxed opacity-70 text-gray-700 mt-8">
+     <h2 className="text-base sm:text-lg leading-relaxed opacity-70 text-gray-700 mt-6 lg:mt-8">
   Provide instant, personalized answers right when your visitors need them.  
   Our AI-powered widget guides users, resolves FAQs, and walks them through every step 
   making support faster, smarter, and effortless.
 </h2>
 
-    <div className="mt-6  w-fit">
+    <div className="mt-6 w-fit">
      <a href="" className=" flex items-center gap-2 mt-4 text-sm font-medium border-b border-dotted pb-0.5 transition-colors text-black border-black/40 hover:text-blue-500 hover:border-blue-500">
       See How It Works
       <BiArrowToRight/>
@@ -236,11 +226,11 @@ useEffect(() => {
     </div> 
     
 
-  <div className="flex flex-col md:flex-row items-center md:items-start gap-6">  
+  <div className="flex flex-col items-center justify-center lg:items-start gap-6 flex-shrink-0">  
 <motion.img
       src="/ai_bot.gif"
       alt="AI Dashboard Screenshot"
-      className=" w-[300px]  h-[400px] transition-all shadow-[4px_7px_0px_black] cursor-pointer"
+      className="w-[250px] sm:w-[300px] lg:w-[300px] h-[320px] sm:h-[400px] lg:h-[400px] transition-all shadow-[4px_7px_0px_black] cursor-pointer"
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -250,25 +240,25 @@ useEffect(() => {
   </div>
     </section>
 
-<section className="bg-black text-white py-50 px-55">
-  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+<section className="bg-black text-white py-12 md:py-24 lg:py-50 px-4 sm:px-6 md:px-12 lg:px-55">
+  <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
 
    
-    <div>
-      <h2 className={`text-7xl font-bold mb-4 ${Ptfont.className}`}>
+    <div className="space-y-4 md:space-y-6">
+      <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 ${Ptfont.className}`}>
         Instant Compared to Manual Replies
       </h2>
-      <h2 className="text-lg leading-relaxed opacity-70 text-gray mb-6">
+      <h2 className="text-base sm:text-lg leading-relaxed opacity-70 text-gray mb-4 md:mb-6">
         Instead of waiting for someone to answer, your visitors  
         get immediate responses trained directly on your description.
       </h2>
 
-      <div className=" p-3 font-medium mb-6">
+      <div className="p-2 md:p-3 font-medium mb-4 md:mb-6">
          Faster replies. Happier visitors.
       </div>
 
      <div>
-      <h3 className="text-lg leading-relaxed opacity-70 text-gray mb-6">
+      <h3 className="text-base sm:text-lg leading-relaxed opacity-70 text-gray mb-4 md:mb-6">
        Create & embed your widget instantly. No special environment needed.
       </h3>
      </div>
@@ -278,19 +268,19 @@ useEffect(() => {
     </div>
 
     {/* Right Graph */}
-    <div className="bg-[#ffffff] py-15 px-13 transition-all shadow-[-7px_5px_0px_#7cff3f] border-4 border-l-amber-600 border-white text-black">
-      <h4 className="font-semibold mb-4 text-center">Response Time</h4>
+    <div className="bg-[#ffffff] py-6 md:py-10 lg:py-15 px-4 md:px-8 lg:px-13 transition-all shadow-[-4px_3px_0px_#7cff3f] md:shadow-[-7px_5px_0px_#7cff3f] border-2 md:border-4 border-l-amber-600 border-white text-black">
+      <h4 className="font-semibold mb-4 text-center text-sm md:text-base">Response Time</h4>
       <div className="w-full border border-b-1"></div>
-      <div className="flex items-end gap-6 h-48">
+      <div className="flex items-end gap-4 md:gap-6 h-32 sm:h-40 md:h-48 my-4">
         <div className="flex flex-col items-center flex-1">
-          <div className="bg-[#29ab59] w-12 hover:bg-[#3bc06b] rounded-t-lg h-[18vh]"></div>
+          <div className="bg-[#29ab59] w-8 sm:w-10 md:w-12 hover:bg-[#3bc06b] rounded-t-lg h-[12vh] sm:h-[15vh] md:h-[18vh]"></div>
         </div>
         <div className="flex flex-col items-center flex-1">
-          <div className="bg-[#29ab59] w-12 hover:bg-[#3bc06b]  rounded-t-lg h-[10vh]"></div>  
+          <div className="bg-[#29ab59] w-8 sm:w-10 md:w-12 hover:bg-[#3bc06b] rounded-t-lg h-[6vh] sm:h-[8vh] md:h-[10vh]"></div>  
         </div>
       </div>
        <div className="w-full border border-b-2"></div>
-       <div className="flex justify-between px-20 ">
+       <div className="flex justify-between px-4 sm:px-8 md:px-16 lg:px-20">
         <span className="text-xs mt-2 ml-1">Manual</span>
         <span className="text-xs mt-2 mr-4">AI</span>
        </div>
@@ -304,54 +294,54 @@ useEffect(() => {
 
 
 
-<section className="text-black font-light bg-[#8fe457] py-20 min-h-[95vh] px-10 md:px-60">
+<section className="text-black font-light bg-[#8fe457] py-20 min-h-[95vh] px-4 sm:px-6 md:px-10 lg:px-20 xl:px-60">
   <div className="max-w-4xl mx-auto space-y-12">
     
     
     <div className="text-center">
-       <h3 className={`text-7xl font-bold mb-4 ${Ptfont.className}`}>
+       <h3 className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 ${Ptfont.className}`}>
     Conversational Support <br/>
     <span className="">Without Endless FAQs</span>
   </h3>
-  <p className="text-lg leading-relaxed opacity-70 text-gray-700 mt-8">
+  <p className="text-base sm:text-lg leading-relaxed opacity-70 text-gray-700 mt-4 sm:mt-6 md:mt-8">
     Answer customer questions automatically — straight from your own content.
   </p>
     </div>
 
     
-    <div className="grid md:grid-cols-2 gap-10 items-start">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 items-start">
       {/* Left Column */}
-      <div className="space-y-8">
+      <div className="space-y-6 sm:space-y-8">
         <div>
-           <h2 className="text-2xl font-semibold mb-4 text-black">
+           <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-black">
         From Description to Answers
       </h2>
-      <p className="text-lg leading-relaxed opacity-70 text-gray-700 mt-8">
+      <p className="text-base sm:text-lg leading-relaxed opacity-70 text-gray-700 mt-4 sm:mt-6 md:mt-8">
         Forget creating a long list of FAQs. Just give the widget a short description of your product or service, and it will handle visitor questions instantly.
       </p>
-      <p className="text-lg leading-relaxed opacity-70 text-gray-700 mt-8">
+      <p className="text-base sm:text-lg leading-relaxed opacity-70 text-gray-700 mt-4 sm:mt-6 md:mt-8">
         Your customers get accurate, human-like answers in real time — without you having to predefine every possible question.
       </p>
         </div>
       </div>
 
       {/* Right Column */}
-      <div className="space-y-8">
-        <div className=" backdrop-blur p-8 border-4 border-l-black  transition-all shadow-[-3px_5px_0px_orange] border-white border-b-amber-600">
-          <h3 className="text-2xl font-bold mb-4 text-gray-900">
+      <div className="space-y-6 sm:space-y-8">
+        <div className=" backdrop-blur p-4 sm:p-6 md:p-8   transition-all shadow-[-2px_3px_0px_orange] sm:shadow-[-3px_4px_0px_orange] md:shadow-[-3px_5px_0px_orange] border-4 borderblack">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-900">
              <span className="text-black">Add</span> Setup Guidance
           </h3>
-          <p className="text-gray-800 mb-6 leading-relaxed">
+          <p className="text-sm sm:text-base text-gray-800 mb-4 sm:mb-6 leading-relaxed">
             If your app or product needs a setup process, your AI widget can walk new users through it — one step at a time, making complex onboarding feel effortless.
           </p>
 
-          <div className="bg-white border border-gray-300  p-4 mb-6">
-            <p className="text-gray-900 font-medium">
+          <div className="bg-white border border-gray-300 p-3 sm:p-4 mb-4 sm:mb-6">
+            <p className="text-sm sm:text-base text-gray-900 font-medium">
                Clear instructions. No confusion.
             </p>
           </div>
 
-          <p className="text-gray-800 leading-relaxed">
+          <p className="text-sm sm:text-base text-gray-800 leading-relaxed">
             From account creation to advanced configuration, your AI assistant transforms complicated processes into simple conversations.
           </p>
         </div>
@@ -359,11 +349,11 @@ useEffect(() => {
     </div>
 
     {/* Quote Section */}
-    <div className="text-center py-8">
-      <blockquote className="text-3xl md:text-4xl font-bold text-gray-900 italic">
+    <div className="text-center py-6 sm:py-8">
+      <blockquote className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 italic">
         "Embed once. Help forever."
       </blockquote>
-      <p className="text-lg text-gray-700 mt-4 font-normal">
+      <p className="text-base sm:text-lg text-gray-700 mt-4 font-normal">
         One widget, endless possibilities for user engagement
       </p>
     </div>
@@ -373,9 +363,9 @@ useEffect(() => {
   </div>
 </section>
 
-    <section className="py-30 h-[95vh] px-60">
-      <div className="mb-28">
-        <h3 className="text-5xl ">What Our Users Are Saying</h3>
+    <section className="py-12 sm:py-20 md:py-30 h-auto sm:h-[70vh] md:h-[95vh] px-4 sm:px-8 md:px-24 lg:px-60">
+      <div className="mb-8 sm:mb-16 md:mb-28">
+        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">What Our Users Are Saying</h3>
       </div>
         <InfiniteMovingCards
         items={testimonials}
@@ -385,55 +375,55 @@ useEffect(() => {
     </section>
    
      <section className="bg-black">
-        <div className="flex justify-center py-4   ">
+        <div className="flex justify-center py-4 px-4">
         
-           <img src="/line.png" alt=""  className="pt-10  pl-5"/>
-            <h3 className={`text-5xl  ${mont.className}`}>Got Questions?</h3>
+           <img src="/line.png" alt=""  className="pt-6 sm:pt-8 md:pt-10 pl-2 sm:pl-3 md:pl-5 w-auto h-8 sm:h-10 md:h-12"/>
+            <h3 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl ${mont.className}`}>Got Questions?</h3>
         </div>
-      <section className="py-1 flex justify-center mb-">
-      <div className="join join-vertical bg-black w-[90vh]">
-  <div className="collapse collapse-arrow join-item border-white border">
+      <section className="py-1 flex justify-center mb- px-4 sm:px-6 md:px-8">
+      <div className="join join-vertical bg-black w-full max-w-[90vh] sm:max-w-2xl md:max-w-4xl lg:max-w-5xl">
+  <div className="collapse collapse-arrow join-item border border-neutral-600">
     <input type="radio" name="my-accordion-4" defaultChecked />
-    <div className="collapse-title font-semibold">How do I create an account?</div>
-    <div className="collapse-content text-sm">Click the "Sign Up" button in the top right corner and follow the registration process.</div>
+    <div className="collapse-title font-semibold text-sm sm:text-base md:text-lg">How do I create an account?</div>
+    <div className="collapse-content text-xs sm:text-sm md:text-base">Click the "Sign Up" button in the top right corner and follow the registration process.</div>
   </div>
-  <div className="collapse collapse-arrow join-item border-white border">
+  <div className="collapse collapse-arrow join-item border border-neutral-600">
     <input type="radio" name="my-accordion-4" />
-    <div className="collapse-title font-semibold">I forgot my password. What should I do?</div>
-    <div className="collapse-content text-sm">Click on "Forgot Password" on the login page and follow the instructions sent to your email.</div>
+    <div className="collapse-title font-semibold text-sm sm:text-base md:text-lg">I forgot my password. What should I do?</div>
+    <div className="collapse-content text-xs sm:text-sm md:text-base">Click on "Forgot Password" on the login page and follow the instructions sent to your email.</div>
   </div>
-  <div className="collapse collapse-arrow join-item border-white border">
+  <div className="collapse collapse-arrow join-item border border-neutral-600">
     <input type="radio" name="my-accordion-4" />
-    <div className="collapse-title font-semibold">How do I update my profile information?</div>
-    <div className="collapse-content text-sm">Go to "My Account" settings and select "Edit Profile" to make changes.</div>
+    <div className="collapse-title font-semibold text-sm sm:text-base md:text-lg">How do I update my profile information?</div>
+    <div className="collapse-content text-xs sm:text-sm md:text-base">Go to "My Account" settings and select "Edit Profile" to make changes.</div>
   </div>
 </div>
       </section>
      </section>
 
-   <section className="py-20 text-center px-4 bg-black text-white">
+   <section className="py-12 sm:py-16 md:py-20 text-center px-4 bg-black text-white">
    
   {/* Heading */}
- <h3 className={`text-7xl mb-8 ${Ptfont.className}`}>
+ <h3 className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl mb-6 sm:mb-8 ${Ptfont.className}`}>
   FAQs Can&apos;t Cover Everything 
 </h3>
 
-<p className="text-lg leading-relaxed opacity-70 text-white mt-8">
+<p className="text-base sm:text-lg leading-relaxed opacity-70 text-white mt-6 sm:mt-8">
   Give your website visitors real-time answers and a more interactive experience.
 </p>
 
   {/* CTA */}
-  <div className="flex justify-center mb-3  gap-2.5 items-center">
-   First time? Check out our <span><a href="" className=" mt-4 text-sm font-medium border-b border-dotted pb-0.5 transition-colors text-green-400 border-green-500 hover:text-blue-500 hover:border-blue-500"> First time Guide </a> </span>
+  <div className="flex flex-col sm:flex-row justify-center mb-3 gap-1 sm:gap-2.5 items-center text-sm sm:text-base">
+   <span>First time? Check out our</span> <span><a href="" className="text-sm font-medium border-b border-dotted pb-0.5 transition-colors text-green-400 border-green-500 hover:text-blue-500 hover:border-blue-500"> First time Guide </a> </span>
   </div>
 
 
  
- <div className="text-gray-700 text-sm flex justify-center items-center gap-1 relative">
+ <div className="text-gray-700 text-xs sm:text-sm flex justify-center items-center gap-1 relative">
 
   <div className="absolute top-0 left-0 w-full overflow-hidden leading-none">
     <svg
-      className="w-full h-20"
+      className="w-full h-16 sm:h-20"
       xmlns="/demo.svg"
       viewBox="0 0 1200 70"
       preserveAspectRatio="none"
