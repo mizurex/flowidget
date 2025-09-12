@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Barlow } from "next/font/google";
 import "./globals.css";
-import Widget from "@/components/widget";
+
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="en">
   
       <body>
-        <Widget />
+        
         {children}
       </body>
     </html>

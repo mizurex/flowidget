@@ -143,7 +143,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
           ) : (
             <div className="flex text-center items-center w-full gap-4">
               {widgetData ? (
-                <div className="p-4 bg-[#09090b] flex w-full items-center justify-between border border-orange-400">
+                <div className="p-4 bg-[#09090b] flex w-full items-center justify-between border border-[#8fe457]">
                   <div className="text-left">
                     <h3 className="text-lg font-medium">{widgetData.name}</h3>
                     <p className="text-sm text-zinc-400 mt-1">
@@ -153,8 +153,8 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
                   
                   <div className="text-center flex items-center gap-2">
                     <div className="inline-grid *:[grid-area:1/1]">
-  <div className="status status-error  animate-ping"></div>
-  <div className="status status-error"></div>
+  <div className="bg-green-600 w-3 h-3 rounded-full animate-ping"></div>
+  <div className="bg-green-600 w-3 h-3 rounded-full"></div>
 </div> 
                     <p className="text-sm text-zinc-400">Status: {getWidgetStatus()}</p>
                    
