@@ -1,22 +1,47 @@
+"use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 type UserWidgetProps = {
   userId: string;
-  onClose: any;
+  onClose: () => void;
+ 
 };
 
 export default function UserWidget({ userId, onClose }: UserWidgetProps) {
   const [showModal, setShowModal] = useState(true);
-  const scriptCode = `<script src="https://widget-bot-ui.vercel.app/widget.js" user="${userId}"></script>`;
+  const [tab, setTab] = useState<"html" | "react">("html");
 
+  const htmlCode = `<script src="https://widget-bot-ui.vercel.app/widget.js" user="${userId}"></script>`;
 
-  const handleClick = ()=>{
+  const reactCode = `"use client";
+import { useEffect } from "react";
+
+export default function Widget() {
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://widget-bot-ui.vercel.app/widget.js";
+    script.setAttribute("user", "${userId}");
+    script.async = true;
+
+    document.body.appendChild(script);
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  return null;
+}`;
+
+  const handleClose = () => {
     setShowModal(false);
     onClose();
-  }
+  };
+
+  const codeToShow = tab === "html" ? htmlCode : reactCode;
+
   return (
-        <div>
+    <div>
       <AnimatePresence>
         {showModal && (
           <motion.div
@@ -32,56 +57,78 @@ export default function UserWidget({ userId, onClose }: UserWidgetProps) {
               transition={{ type: "spring", stiffness: 300, damping: 25 }}
               className="bg-[#0e0e0e] w-full max-w-2xl p-6 rounded-xl shadow-2xl relative border border-neutral-800"
             >
+              {/* Close Button */}
               <button
-                onClick={handleClick}
+                onClick={handleClose}
                 className="absolute top-4 right-4 text-neutral-400 hover:text-white transition"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <h2 className="text-xl font-bold text-white mb-2">Embed Code</h2>
+              {/* Heading */}
+              <h2 className="text-xl font-bold text-white mb-2">Embed Widget</h2>
               <p className="text-sm text-neutral-400 mb-4">
-                Copy and paste this code into the desired place of your website (HTML editor, theme file, footer, etc.).
+                Choose your platform and copy the code.
               </p>
 
-              <div className="bg-[#1a1a1a] border border-neutral-700 rounded-lg p-4 font-mono text-sm text-white mb-4 overflow-auto">
-                <div className="mockup-code w-full">
-                  <pre data-prefix="1"><code>{`<!-- Do not remove this script -->`}</code></pre>
-                  <pre data-prefix="2"><code>{scriptCode}</code></pre>
-                </div>
+              {/* Tabs */}
+              <div className="flex gap-4 mb-4">
+                <button
+                  onClick={() => setTab("html")}
+                  className={`px-4 py-2 rounded ${
+                    tab === "html" ? "bg-white text-black" : "bg-neutral-800 text-white"
+                  }`}
+                >
+                  HTML
+                </button>
+                <button
+                  onClick={() => setTab("react")}
+                  className={`px-4 py-2 rounded ${
+                    tab === "react" ? "bg-white text-black" : "bg-neutral-800 text-white"
+                  }`}
+                >
+                  React / Next.js
+                </button>
               </div>
 
+              {/* Code Box */}
+              <div className="bg-[#1a1a1a] border border-neutral-700 rounded-lg p-4 font-mono text-sm text-white mb-4 overflow-auto">
+                <pre>{codeToShow}</pre>
+              </div>
+
+              {/* Copy Button */}
               <button
-                onClick={() => navigator.clipboard.writeText(scriptCode)}
+                onClick={() => navigator.clipboard.writeText(codeToShow)}
                 className="bg-white text-black font-semibold px-4 py-2 rounded shadow hover:bg-neutral-200 transition"
               >
                 Copy Code
               </button>
 
-              <div className="mt-6">
-                <h3 className="font-semibold text-white mb-2">Where to Paste It?</h3>
-                <ul className="text-neutral-400 text-sm list-disc list-inside space-y-1">
-                  <li>Paste before closing <code className="text-white">&lt;/body&gt;</code> tag.</li>
-                  <li>Add to your website footer template for site-wide chat.</li>
-                </ul>
-              </div>
-
-              <div className="mt-6">
-                <h3 className="font-semibold text-white mb-2">Need Help?</h3>
-                <a
-                  href="https://example.com/setup-video"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-500 underline text-sm hover:text-blue-400"
-                >
-                  ▶️ Watch setup video
-                </a>
+              {/* Additional Notes */}
+              <div className="mt-6 text-sm text-neutral-400">
+                {tab === "html" ? (
+                  <>
+                    <h3 className="font-semibold text-white mb-2">Where to Paste It?</h3>
+                    <ul className="list-disc list-inside space-y-1">
+                      <li>Place before the closing <code className="text-white">&lt;/body&gt;</code> tag.</li>
+                      <li>Works in any HTML or CMS like WordPress, Webflow, etc.</li>
+                    </ul>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="font-semibold text-white mb-2">How to Use?</h3>
+                    <ul className="list-disc list-inside space-y-1">
+                      <li>Create a component like <code className="text-white">Widget.tsx</code></li>
+                      <li>Paste the code above into it</li>
+                      <li>Use it anywhere: <code className="text-white">&lt;Widget /&gt;</code></li>
+                    </ul>
+                  </>
+                )}
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
     </div>
-     
   );
 }

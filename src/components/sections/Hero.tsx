@@ -52,8 +52,10 @@ export default function HeroSection({ initialUser = null }: HeroProps) {
   const [hasWid,setHasWid] = useState(false);
   const [showNoti,setShowNotification] = useState(false);
 
+
+
    useEffect(() => {
-    // Listen for real-time auth changes (login/logout)
+   
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setUser(session?.user || null);
@@ -325,7 +327,6 @@ useEffect(() => {
         </div>
       </div>
 
-      {/* Right Column */}
       <div className="space-y-6 sm:space-y-8">
         <div className=" backdrop-blur p-4 sm:p-6 md:p-8   transition-all shadow-[-2px_3px_0px_orange] sm:shadow-[-3px_4px_0px_orange] md:shadow-[-3px_5px_0px_orange] border-4 borderblack">
           <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-900">
