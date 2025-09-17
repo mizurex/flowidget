@@ -6,17 +6,17 @@ import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase-browser';
 import { FiUsers, FiGift, FiCreditCard, FiLogOut } from "react-icons/fi";
 import {motion} from "motion/react"
+import { useRouter } from "next/navigation";
 
 export default function LogoutModalTrigger({ user }: { user: User }) {
   const [open, setOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
   const triggerRef = useRef<HTMLDivElement | null>(null);
-
+  const router = useRouter();
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       const target = event.target as Node;
       
-      // Don't close if clicking on the trigger or inside the modal
       if (
         (modalRef.current && modalRef.current.contains(target)) ||
         (triggerRef.current && triggerRef.current.contains(target))
@@ -28,7 +28,6 @@ export default function LogoutModalTrigger({ user }: { user: User }) {
     }
 
     if (open) {
-      // Add a small delay to prevent immediate closing when opening
       setTimeout(() => {
         document.addEventListener("mousedown", handleClickOutside);
       }, 10);
@@ -53,14 +52,16 @@ export default function LogoutModalTrigger({ user }: { user: User }) {
   };
 
   const handleModalClick = (e: React.MouseEvent) => {
-    // Prevent modal from closing when clicking inside it
     e.stopPropagation();
   };
 
   const handleMenuItemClick = (action?: () => void) => {
-    // Close modal when menu item is clicked
     setOpen(false);
     if (action) action();
+  };
+
+  const handlecreditsClick = () => {
+   router.push("/user/plans");
   };
 
   return (
@@ -89,14 +90,14 @@ export default function LogoutModalTrigger({ user }: { user: User }) {
       {open && (
         <div
           ref={modalRef}
-          onClick={handleModalClick}
+      
           className="absolute right-0 top-12 mt-1 w-48 bg-[#000000] text-white rounded-md shadow-lg animate-fade-in-down z-50"
         >
           <div className="px-4 py-2 text-sm font-semibold border-b border-zinc-700">
             {user.user_metadata.user_name || user.email || "User"}
           </div>
 
-          <ul className="text-sm">
+          <div className="text-sm">
             <li 
               className="flex items-center gap-2 px-4 py-2 hover:bg-zinc-800 cursor-pointer"
               onClick={() => handleMenuItemClick(() => alert('Organizations clicked'))}
@@ -109,18 +110,16 @@ export default function LogoutModalTrigger({ user }: { user: User }) {
             >
               <FiGift /> Referrals
             </li>
-            <li 
+            <button 
               className="flex items-center gap-2 px-4 py-2 hover:bg-zinc-800 cursor-pointer"
-              onClick={() => handleMenuItemClick(() => alert('Buy Credits clicked'))}
+              onClick={ handlecreditsClick}
             >
               <FiCreditCard /> Buy Credits
-            </li>
-          </ul>
+            </button>
+          </div>
 
-          {/* Divider */}
           <div className="border-t border-zinc-700"></div>
 
-          {/* Logout */}
           <div
             onClick={() => handleMenuItemClick(handleLogout)}
             className="flex items-center gap-2 px-4 py-2 hover:bg-zinc-800 cursor-pointer text-sm text-red-400"

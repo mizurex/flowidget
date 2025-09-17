@@ -27,7 +27,6 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  // Check if user is trying to access protected routes
   const isProtectedRoute = request.nextUrl.pathname.startsWith("/user/dashboard") || 
                           request.nextUrl.pathname.startsWith("/dashboard")
 
@@ -37,7 +36,6 @@ export async function middleware(request: NextRequest) {
     } = await supabase.auth.getUser()
 
     if (!user) {
-      // Redirect to signin with the correct URL construction
       const redirectUrl = new URL("/user/signin", request.url)
       return NextResponse.redirect(redirectUrl)
     }
@@ -48,13 +46,6 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     * - api routes
-     */
     '/((?!_next/static|_next/image|favicon.ico|api|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }
