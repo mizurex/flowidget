@@ -5,9 +5,6 @@ import LogoutModalTrigger from './ProfileModal';
 
 export default function HeaderLogged({ user, onCreateClick }: { user: User; onCreateClick : () => void }) {
 
- const handleLogoClick =  () => {
-      window.location.href = "/";
-    };
 
     
   return (
@@ -20,7 +17,7 @@ export default function HeaderLogged({ user, onCreateClick }: { user: User; onCr
       >
        
         <h1
-          onClick={handleLogoClick}
+          
           className={`text-2xl font-bold text-white transition-all duration-500 `}
         >
           flowidget.
