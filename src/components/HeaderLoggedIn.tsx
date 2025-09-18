@@ -32,14 +32,14 @@ export default function HeaderLogged({ user, onCreateClick }: { user: User; onCr
         >
           <button
             onClick={onCreateClick}
-            className="px-6 py-2 font-medium bg-white text-black w-fit transition-all shadow-[-2px_4px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] cursor-pointer"
+            className="px-3 py-1.5 text-sm sm:px-6 sm:py-2 sm:text-base font-medium bg-white text-black w-fit transition-all shadow-[-2px_4px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] cursor-pointer whitespace-nowrap"
           >
             Create Widget
           </button>
 
           <Link href="/dashboard">
             <button
-              className="px-6 py-2 font-medium bg-white text-black w-fit transition-all shadow-[-2px_4px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] cursor-pointer"
+              className="px-3 py-1.5 text-sm sm:px-6 sm:py-2 sm:text-base font-medium bg-white text-black w-fit transition-all shadow-[-2px_4px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] cursor-pointer whitespace-nowrap"
             >
               Dashboard
             </button>
