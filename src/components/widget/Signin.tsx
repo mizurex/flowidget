@@ -28,7 +28,7 @@ const handleGoogleLogin = async () => {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `https://flowidget.vercel.app/callback`
+      redirectTo: `https://flowidget.projects.turfworks.site/callback`
     }
   });
   
