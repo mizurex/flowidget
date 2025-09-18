@@ -45,6 +45,11 @@ interface HeroProps {
   initialUser?: User | null;
 }
 
+interface widgetStatus {
+  status: {
+    wid: boolean;
+  }
+}
  
 export default function HeroSection({ initialUser = null }: HeroProps) {
   const [user, setUser] = useState<User | null>(initialUser);
@@ -84,8 +89,9 @@ useEffect(() => {
         window.alert("error test");
         return;
       }
-
-      setHasWid(data.status.wid);
+      
+      const wid_stat = data.status.wid;
+      setHasWid(wid_stat);
     } catch (error) {
       console.error("Fetch failed:", error);
       window.alert("error test");

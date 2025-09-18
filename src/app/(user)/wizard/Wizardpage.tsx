@@ -13,30 +13,28 @@ const space = Space_Grotesk({
   weight: ["400", "500", "600", "700"],
 });
 
-
-
 const FormInput = ({ label, value, onChange, placeholder, error }: any) => (
-  <div className="w-[50vh]  mb-3">
+  <div className="w-full sm:w-[50vh] mb-4">
     <label className="block text-lg font-medium leading-relaxed text-white mb-1.5">{label}</label>
-   <input
-  value={value}
-  onChange={onChange}
-  placeholder={placeholder}
-  className={`w-full px-4 py-3 bg-[#1b1b1d] ${error && 'border-red-500'} text-white border border-stone-700 hover:border-orange-500 text-sm focus:outline-none  ${error && 'focus:ring-red-500'}`}
-/>
+    <input
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className={`w-full px-4 py-3 bg-[#0f0f12] ${error ? 'border-red-500 focus:ring-red-500' : 'border-zinc-700 focus:border-[#7cff3f] focus:ring-[#7cff3f]/30'} text-white placeholder:text-zinc-500 border rounded-lg text-sm outline-none focus:ring-2 transition-colors`}
+    />
     {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
   </div>
 );
 
 const FormTextarea = ({ label, value, onChange, placeholder, rows = 6, error }: any) => (
-  <div className="w-full mb-3">
+  <div className="w-full mb-4">
     <label className="block text-lg leading-relaxed font-medium text-white mb-1.5">{label}</label>
     <textarea
       value={value}
       onChange={onChange}
       placeholder={placeholder}
       rows={rows}
-      className={`w-[24vw] px-4 py-2  ${error ? 'border-red-500' : ''} bg-[#1b1b1d] text-white text-sm resize-none focus:outline-none border border-stone-700    hover:border-orange-500  ${error ? 'focus:ring-red-500' : 'focus:ring-amber-500'}`}
+      className={`w-full px-4 py-3 ${error ? 'border-red-500 focus:ring-red-500' : 'border-zinc-700 focus:border-[#7cff3f] focus:ring-[#7cff3f]/30'} bg-[#0f0f12] text-white text-sm placeholder:text-zinc-500 resize-none outline-none border rounded-lg focus:ring-2 transition-colors`}
     />
     {error && <p className="text-sm text-red-500 mt-1">{error}</p>}
   </div>
@@ -131,8 +129,8 @@ export default function RedesignedDashboard2({ user, widget,onSuccess }: Props) 
 
 
   return (
-    <div className={`flex items-center overflow-hidden ${space.className}`}>
-          <div className="w-[30vw] h-fit p-7  bg-[#09090b] mx-auto border border-stone-800  space-y-8">
+    <div className={`flex items-center justify-center overflow-hidden px-4 ${space.className}`}>
+          <div className="w-full sm:w-[30vw] max-w-xl h-fit p-7 bg-[#09090b] mx-auto border border-stone-800 rounded-xl space-y-8">
            
               <>
                 <h1 className="text-3xl font-bold">Create Your AI Assistant</h1>
@@ -163,7 +161,7 @@ export default function RedesignedDashboard2({ user, widget,onSuccess }: Props) 
                        <select
                         value={selectedUI}
                          onChange={(e) => setSelectedUI(e.target.value)}
-                         className="w-[25vh] px-4 py-2 border border-stone-700 bg-[#1b1b1d] text-white text-sm  hover:border-orange-500 "
+                         className="w-full sm:w-[25vh] px-4 py-2 border border-zinc-700 bg-[#0f0f12] text-white text-sm rounded-lg outline-none focus:border-[#7cff3f] focus:ring-2 focus:ring-[#7cff3f]/30 transition-colors"
                         >
                           <option value="classic">Classic</option>
                           
@@ -180,7 +178,7 @@ export default function RedesignedDashboard2({ user, widget,onSuccess }: Props) 
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -40 }}
                       transition={{ duration: 0.4 }}
-                      className="space-y-6 bg-[#0a0808] p-6"
+                      className="space-y-6 bg-[#0a0808] p-6 rounded-lg border border-stone-800/60"
                     >
                         <FormInput label="Welcome Message" value={welcomeMessage} onChange={(e: any) => setWelcomeMessage(e.target.value)} placeholder="Hi! How can I help you?" error={fieldErrors.welcomeMessage} />
                         <FormInput label="Bot Role / Personality" value={role} onChange={(e: any) => setRole(e.target.value)} placeholder="e.g., Friendly support assistant" error={fieldErrors.role} />
@@ -220,7 +218,7 @@ export default function RedesignedDashboard2({ user, widget,onSuccess }: Props) 
                           Next →
                              </button>
                         ) : (
-                 <button onClick={handleCreateOrUpdateWidget} disabled={loading} className="bg-white cursor-pointer text-black px-6 py-2 font-medium shadow-[-2px_4px_0px_#FF6600] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] disabled:opacity-50">
+                <button onClick={handleCreateOrUpdateWidget} disabled={loading} className="bg-white cursor-pointer text-black px-6 py-2 font-medium shadow-[-2px_4px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] disabled:opacity-50">
                       {loading ? "Saving..." : "Create Widget"}
                      </button>
                         )}

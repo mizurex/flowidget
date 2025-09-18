@@ -101,10 +101,10 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
         />
       )}
 
-      <main className="pt-24 sm:pt-32 px-4 sm:px-6 max-w-xl sm:max-w-2xl md:max-w-3xl mx-auto space-y-8 sm:space-y-12">
+      <main className="pt-32 px-6 max-w-2xl mx-auto space-y-12">
         {showNotification && (
-  <div className="fixed bottom-4 sm:bottom-1 left-4 right-4 sm:left-auto sm:right-5 z-50 border border-zinc-800 rounded-md animate-fade-in-down max-w-sm sm:max-w-xs mx-auto sm:mx-0">
-    <div className="bg-[#09090b] text-white px-4 py-3 shadow-lg flex items-center gap-2">
+  <div className="fixed bottom-1 right-5 z-50 border border-zinc-300 animate-fade-in-down">
+    <div className="bg-[#09090b] text-white px-4 py-3  shadow-lg flex items-center gap-2">
       <svg
         className="w-5 h-5"
         fill="none"
@@ -114,17 +114,16 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
       >
         <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
       </svg>
-      <span className="text-sm">You’ve already created 1 free widget </span>
+      <span>You’ve already created 1 free widget </span>
     </div>
   </div>
 )}
 
         {/* 1. Widgets */}
-        <section className="bg-[#09090b] p-4 sm:p-6 border border-zinc-800 rounded-lg">
+        <section className="bg-[#09090b] p-6 border border-zinc-800">
           <div>
-            <h2 className="text-xl sm:text-2xl font-semibold mb-1">Your Widgets</h2>
-            <p className="text-zinc-400 text-sm sm:text-base">Manage and preview your active widgets</p>
-            <div className="h-px bg-zinc-800/60 my-4" />
+            <h2 className="text-xl font-semibold mb-2">Your Widgets</h2>
+            <p className="text-zinc-400 mb-4">Manage and preview your active widgets</p>
           </div>
 
           {loading ? (
@@ -142,41 +141,41 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
               </button>
             </div>
           ) : (
-            <div className="flex flex-col sm:flex-row text-center sm:text-left items-center sm:items-center w-full gap-4">
+            <div className="flex text-center items-center w-full gap-4">
               {widgetData ? (
-                <div className="p-4 bg-[#09090b] flex w-full items-center justify-between border border-[#8fe457] rounded-md">
-                  <div className="text-left w-full sm:w-auto">
-                    <h3 className="text-lg sm:text-xl font-medium">{widgetData.name}</h3>
-                    <p className="text-xs sm:text-sm text-zinc-400 mt-1">
+                <div className="p-4 bg-[#09090b] flex w-full items-center justify-between border border-[#8fe457]">
+                  <div className="text-left">
+                    <h3 className="text-lg font-medium">{widgetData.name}</h3>
+                    <p className="text-sm text-zinc-400 mt-1">
                       Created: {formatDate(widgetData.createdAt)}
                     </p>
                   </div>
                   
-                  <div className="text-center flex items-center gap-2 mt-3 sm:mt-0">
+                  <div className="text-center flex items-center gap-2">
                     <div className="inline-grid *:[grid-area:1/1]">
   <div className="bg-green-600 w-3 h-3 rounded-full animate-ping"></div>
   <div className="bg-green-600 w-3 h-3 rounded-full"></div>
 </div> 
-                    <p className="text-xs sm:text-sm text-zinc-400">Status: {getWidgetStatus()}</p>
+                    <p className="text-sm text-zinc-400">Status: {getWidgetStatus()}</p>
                    
                   </div>
                   
                   <button 
-                    className="w-full sm:w-auto px-6 py-2 text-sm font-medium bg-white text-black shadow hover:bg-zinc-100 mt-3 sm:mt-0"
+                    className=" px-3 py-1 text-xs sm:px-6 sm:py-1 sm:text-sm font-medium bg-white text-black shadow hover:bg-zinc-100"
                     onClick={handleWidget}
                   > 
                     Show Embed Code
                   </button>
                 </div>
               ) : (
-                <div className="p-4 bg-zinc-800 flex w-full items-center justify-center border border-zinc-600 rounded-md">
+                <div className="p-4 bg-zinc-800 flex w-full items-center justify-center border border-zinc-600">
                   <div className="text-center">
                     <h3 className="text-lg font-medium text-zinc-400">No Widget Found</h3>
                     <p className="text-sm text-zinc-500 mt-1">
                       Create your first widget to get started
                     </p>
                     <button 
-                      className="mt-3 w-full sm:w-auto px-4 py-2 text-sm font-medium bg-orange-500 text-white hover:bg-orange-600 rounded"
+                      className="mt-3 px-4 py-2 text-sm font-medium bg-orange-500 text-white hover:bg-orange-600 rounded"
                       onClick={() => alert('Create Widget Clicked')}
                     >
                       Create Widget
@@ -189,30 +188,23 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
         </section>
 
           
-         <section className="bg-[#09090b] p-4 sm:p-6  border border-zinc-800 rounded-lg">
-      <h2 className="text-xl sm:text-2xl font-semibold mb-1">Widget Stats</h2>
-      <p className="text-zinc-400 text-sm sm:text-base">Recent usage for your widgets</p>
-      <div className="mt-3">
-        <span className="inline-flex items-center gap-2 text-xs text-zinc-400">
-          <span className="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-          Credits left: {creditsLeft}
-        </span>
-      </div>
-      <div className="h-px bg-zinc-800/60 my-4" />
+         <section className="bg-[#09090b] p-6  border border-zinc-800">
+      <h2 className="text-xl font-semibold mb-2">Widget Stats</h2>
+      <p className="text-zinc-400 mb-4">Recent usage for your widgets</p>
 
       {widgetData ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
-          <div className="p-4 bg-[#0f0f12] border border-zinc-700 rounded-md">
+          <div className="p-4 bg-[#09090b] border-t-1 border-b-1 border-zinc-700">
             <div className="text-2xl font-bold">
               {widgetData.messageCount}
             </div>
             <div className="text-sm text-zinc-400">Total Response</div>
           </div>
-          <div className="p-4 bg-[#0f0f12] border border-zinc-700 rounded-md">
+          <div className="p-4 bg-[#09090b] ">
             <div className="text-2xl font-bold">1</div>
             <div className="text-sm text-zinc-400">Active Widgets</div>
           </div>
-          <div className='pl-0 sm:pl-2'>
+          <div className='pl-2'>
              <button
         onClick={() => setShowDetails(!showDetails)}
         className="mt-4 text-blue-500 hover:underline"
@@ -246,15 +238,14 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     </section>
 
        
-        <section className="bg-[#09090b] p-4 sm:p-6  border border-zinc-800 rounded-lg">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-1">Plan & Usage</h2>
-          <div className="h-px bg-zinc-800/60 my-4" />
+        <section className="bg-[#09090b] p-6  border border-zinc-800">
+          <h2 className="text-xl font-semibold mb-2">Plan & Usage</h2>
           <div className="space-y-2">
-            <div className="border border-zinc-700 rounded-md w-full ">
+            <div className="border border-zinc-700  w-full ">
      
       <div
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between px-3 sm:px-4 py-3 cursor-pointer  transition-colors hover:bg-zinc-900/40"
+        className="flex items-center justify-between px-4 py-3 cursor-pointer  transition-colors"
       >
         <div className="flex items-center gap-2">
           {open ? (
@@ -274,9 +265,9 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
 
 
       {open && (
-        <div className="pl-6 sm:pl-9 pr-3.5 py-3 space-y-3 border-t border-zinc-700 bg-[#09090b]">
+        <div className="pl-9 pr-3.5 py-3 space-y-3 border-t border-zinc-700 bg-[#09090b]">
           {/* Monthly Free */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <div className="flex justify-between items-center">
             <div className=''>
               <GiftIcon size={17} />
               <p className="text-white font-bold flex items-center gap-2">
@@ -290,7 +281,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
             </div>
           </div>
 
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+          <div className="flex justify-between items-center">
             <div>
               <BsPeople size={17}/>
               <p className="text-white font-bold flex items-center gap-2">

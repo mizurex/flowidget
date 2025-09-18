@@ -4,6 +4,7 @@
 import React, { useEffect, useRef } from 'react';
 import type { User } from '@supabase/supabase-js';
 import RedesignedDashboard2 from '@/app/(user)/wizard/Wizardpage';
+import { X } from 'lucide-react';
 
 type Props = {
   isOpen: boolean;
@@ -51,7 +52,7 @@ export default function CreateWidgetModal({ isOpen, onClose, user }: Props) {
           onClick={onClose}
           className="absolute top-[-2.5rem] right-0 bg-black px-3 py-1 rounded hover:bg-neutral-800 cursor-pointer"
         >
-          X
+          <X className="w-5 h-5" />
         </button>
         <RedesignedDashboard2 user={user} widget={null} onSuccess={onClose} />
       </div>
