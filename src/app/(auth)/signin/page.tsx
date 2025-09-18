@@ -9,6 +9,7 @@ export default function (){
       <div> 
       <Header/>
       <LoginPage/>
+      <Footer/>
       </div>
   )
 }

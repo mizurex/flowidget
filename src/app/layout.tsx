@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Barlow } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/sections/Header";
-import Footer from "@/components/sections/Footer";
+
 import { createSupabaseServer } from "@/lib/supabase-server";
-import HeaderLogged from "@/components/HeaderLoggedIn";
+
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -39,15 +38,10 @@ export default async function RootLayout({
     <html lang="en">
   
       <body className={`${geistSans.variable} ${geistMono.variable} ${barlow.className} min-h-screen flex flex-col`}>
-        {user ? (
-          <HeaderLogged user={user} onCreateClick={() => {}} />
-        ) : (
-          <Header />
-        )}
         <main className="flex-1 pt-[10vh]">
           {children}
         </main>
-        <Footer />
+       
       </body>
     </html>
   );
