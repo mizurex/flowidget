@@ -4,7 +4,6 @@ import { supabase } from '@/lib/supabase-browser';
 import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 
-// A simple SVG spinner component for loading states
 const Spinner = () => (
   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
 );
@@ -43,10 +42,7 @@ const handleGoogleLogin = async () => {
 
   
   useEffect(() => {
-    // Start with loading true
     setLoading(true);
-
-    // Check for an existing session
     const getCurrUser = async () => {
       const { data:{user} } = await supabase.auth.getUser();
       if(!user){
@@ -85,7 +81,6 @@ const handleGoogleLogin = async () => {
             <Spinner />
           </div>
         ) : !user ? (
-          // Login View
           <div className="text-center h-[20vh] z-40">
             
             <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -103,7 +98,6 @@ const handleGoogleLogin = async () => {
             </button>   
           </div>
         ) : (
-          // Logged In View
           <div className="text-center">
             <img
               src={user.user_metadata.avatar_url || `https://api.dicebear.com/8.x/initials/svg?seed=${user.email}`}

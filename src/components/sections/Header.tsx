@@ -34,7 +34,6 @@ export default function Header() {
           scrolled ? 'max-w-7xl' : 'max-w-3xl'
         }`}
       >
-        {/* Left: Logo */}
         <div
           className={`text-lg md:text-xl space-x-3 font-bold transition-all flex justify-center items-center duration-500 ${
             scrolled ? 'translate-x-0' : 'translate-x-8'
@@ -43,8 +42,6 @@ export default function Header() {
       
           <span className={`text-white  ${space.className}`}>flowidget.</span>
         </div>
-
-        {/* Right: Links */}
         <nav
           className={`flex space-x-6 text-sm md:text-base items-center font-medium transition-all duration-500 ${
             scrolled ? 'translate-x-0' : '-translate-x-8'

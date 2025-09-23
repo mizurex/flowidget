@@ -100,13 +100,13 @@ export default function LogoutModalTrigger({ user }: { user: User }) {
           <div className="text-sm">
             <li 
               className="flex items-center gap-2 px-4 py-2 hover:bg-zinc-800 cursor-pointer"
-              onClick={() => handleMenuItemClick(() => alert('Organizations clicked'))}
+            
             >
               <FiUsers /> Organizations
             </li>
             <li 
               className="flex items-center gap-2 px-4 py-2 hover:bg-zinc-800 cursor-pointer"
-              onClick={() => handleMenuItemClick(() => alert('Referrals clicked'))}
+            
             >
               <FiGift /> Referrals
             </li>

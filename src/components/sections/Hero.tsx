@@ -11,11 +11,10 @@ import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase-browser';
 import CreateWidgetModal from "@/components/model/WidgetModel";
 import HeaderLogged from "@/components/HeaderLoggedIn";
-import { Compare } from "../ui/compare";
 import { PT_Serif } from "next/font/google";
-import { pt } from "zod/locales";
 import { BiArrowToRight } from "react-icons/bi";
-import { useSelectedLayoutSegment } from "next/navigation";
+import { Siren } from "lucide-react";
+import Widget from "../widget";
 
 
 const bricolage = Bricolage_Grotesque({
@@ -86,15 +85,15 @@ useEffect(() => {
       const data = await response.json();
 
       if (!data.success) {
-        window.alert("error test");
-        return;
+        throw new Error('Failed to fetch widget status');
+        
       }
       
       const wid_stat = data.status.wid;
       setHasWid(wid_stat);
     } catch (error) {
       console.error("Fetch failed:", error);
-      window.alert("error test");
+      throw new Error('Failed to fetch widget status');
     }
   };
 
@@ -133,15 +132,7 @@ useEffect(() => {
       {showNoti && (
         <div className="fixed bottom-1 right-5 z-50 border border-zinc-300 animate-fade-in-down">
           <div className="bg-[#09090b] text-white px-4 py-3 shadow-lg flex items-center gap-2">
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              viewBox="0 0 24 24"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-            </svg>
+          <Siren/>
             <span>You’ve already created 1 free widget</span>
           </div>
         </div>
@@ -165,7 +156,7 @@ useEffect(() => {
       visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
     }}
   >
-    <span className={`text-white ${Ptfont.className}`}> AI Support Widget </span> <br />
+    <span className={`text-white ${Ptfont.className}`}> Train an AI Website Widget </span> <br />
   </motion.h1>
 
   <motion.h2
@@ -175,10 +166,10 @@ useEffect(() => {
       visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
     }}
   >
-   <span>Instant Answers, Happy Users  </span>
+   <span>Instant answers, trained on your business  </span>
     <br />
     <span>
-      Add AI widget to your site in minutes and free support that actually feels smart.
+      Paste services, hours, pricing, FAQs and contacts, our widget answers like your team.
     </span>
     
   </motion.h2>
@@ -190,9 +181,12 @@ useEffect(() => {
       visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },
     }}
   >
-      <button className="px-6 py-3 font-medium bg-white text-black w-fit transition-all shadow-[-3px_5px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] cursor-pointer">
+      <Link href="/dashboard">
+       <button className="px-6 py-3 font-medium bg-white text-black w-fit transition-all shadow-[-3px_5px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] cursor-pointer">
         Get Started
       </button>
+      </Link>
+     
    
   </motion.div>
 </motion.div>
@@ -219,10 +213,9 @@ useEffect(() => {
         </h3>
       </div>
 
-     <h2 className="text-base sm:text-lg leading-relaxed opacity-70 text-gray-700 mt-6 lg:mt-8">
-  Provide instant, personalized answers right when your visitors need them.  
-  Our AI-powered widget guides users, resolves FAQs, and walks them through every step 
-  making support faster, smarter, and effortless.
+    <h2 className="text-base sm:text-lg leading-relaxed opacity-70 text-gray-700 mt-6 lg:mt-8">
+ Turn your business details into conversations. Add your services, pricing, hours, locations,
+ contacts and policies, our widget gives accurate, friendly answers 24/7.
 </h2>
 
     <div className="mt-6 w-fit">
@@ -254,11 +247,11 @@ useEffect(() => {
    
     <div className="space-y-4 md:space-y-6">
       <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 ${Ptfont.className}`}>
-        Instant Compared to Manual Replies
+      Instant <br /> Compared to <br /> Manual Replies
       </h2>
       <h2 className="text-base sm:text-lg leading-relaxed opacity-70 text-gray mb-4 md:mb-6">
-        Instead of waiting for someone to answer, your visitors  
-        get immediate responses trained directly on your description.
+        No more waiting for manual replies. Your visitors get instant answers trained on your
+        business description, policies, docs and website links.
       </h2>
 
       <div className="p-2 md:p-3 font-medium mb-4 md:mb-6">
@@ -267,15 +260,13 @@ useEffect(() => {
 
      <div>
       <h3 className="text-base sm:text-lg leading-relaxed opacity-70 text-gray mb-4 md:mb-6">
-       Create & embed your widget instantly. No special environment needed.
+       Create and embed in minutes. Add business info, URLs or docs — no special setup.
       </h3>
      </div>
      <div className="w-fit">
-      <a href=""  className=" flex items-center gap-2 mt-4 text-sm font-medium border-b border-dotted pb-0.5 transition-colors text-white border-white hover:text-blue-500 hover:border-blue-500">View Setup Guide & Tips</a>
+      <a href="#"  className=" flex items-center gap-2 mt-4 text-sm font-medium border-b border-dotted pb-0.5 transition-colors text-white border-white hover:text-blue-500 hover:border-blue-500">View Setup Guide & Tips</a>
      </div>
     </div>
-
-    {/* Right Graph */}
     <div className="bg-[#ffffff] py-6 md:py-10 lg:py-15 px-4 md:px-8 lg:px-13 transition-all shadow-[-4px_3px_0px_#7cff3f] md:shadow-[-7px_5px_0px_#7cff3f] border-2 md:border-4 border-l-amber-600 border-white text-black">
       <h4 className="font-semibold mb-4 text-center text-sm md:text-base">Response Time</h4>
       <div className="w-full border border-b-1"></div>
@@ -318,7 +309,7 @@ useEffect(() => {
 
     
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 items-start">
-      {/* Left Column */}
+     
       <div className="space-y-6 sm:space-y-8">
         <div>
            <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-black">
@@ -334,7 +325,7 @@ useEffect(() => {
       </div>
 
       <div className="space-y-6 sm:space-y-8">
-        <div className=" backdrop-blur p-4 sm:p-6 md:p-8   transition-all shadow-[-2px_3px_0px_orange] sm:shadow-[-3px_4px_0px_orange] md:shadow-[-3px_5px_0px_orange] border-4 borderblack">
+        <div className=" backdrop-blur p-4 sm:p-6 md:p-8   transition-all shadow-[-2px_3px_0px_orange] sm:shadow-[-3px_4px_0px_orange] md:shadow-[-3px_5px_0px_orange]">
           <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-4 text-gray-900">
              <span className="text-black">Add</span> Setup Guidance
           </h3>
@@ -343,7 +334,7 @@ useEffect(() => {
           </p>
 
           <div className="bg-white border border-gray-300 p-3 sm:p-4 mb-4 sm:mb-6">
-            <p className="text-sm sm:text-base text-gray-900 font-medium">
+            <p className="text-sm sm:text-base text-gray-900 font-medium text-center">
                Clear instructions. No confusion.
             </p>
           </div>
@@ -354,8 +345,6 @@ useEffect(() => {
         </div>
       </div>
     </div>
-
-    {/* Quote Section */}
     <div className="text-center py-6 sm:py-8">
       <blockquote className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 italic">
         "Embed once. Help forever."
@@ -453,8 +442,7 @@ useEffect(() => {
  
 </div>
 </section>
-
-
+    <Widget/>
  </div>
    
   );

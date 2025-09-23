@@ -1,9 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Flowidget
+=========
 
-## Getting Started
+Flowidget is a Next.js application that lets you create and embed an AI-powered support widget for your website. Provide your business details (services, pricing, hours, locations, contacts, policies, links) and the widget delivers instant, accurate answers to visitors 24/7.
 
-First, run the development server:
+Features
+--------
+- AI website widget trained on your business details
+- Guided wizard to create a widget and generate embed code
+- Dashboard with widget status and basic usage stats
+- Authentication via Supabase (SSR-ready)
+- Clean, responsive UI with a focus on performance and clarity
 
+Tech Stack / Languages
+----------------------
+- TypeScript
+- Next.js
+- React
+- Tailwind CSS
+- Motion
+- Supabase 
+- Node.js 
+
+Getting Started
+---------------
+
+Prerequisites
+- Node.js 18+
+- npm, pnpm, yarn, or bun
+- Supabase project with anon key and URL
+
+Install dependencies
+```bash
+npm install
+# or
+yarn
+# or
+pnpm install
+# or
+bun install
+```
+
+Environment variables
+Create a `.env.local` file in the repository root with the following values:
+```bash
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+Run the development server
 ```bash
 npm run dev
 # or
@@ -13,24 +57,40 @@ pnpm dev
 # or
 bun dev
 ```
+Open http://localhost:3000 in your browser.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build for production
+```bash
+npm run build && npm run start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Project Structure
+-----------------
+```
+src/
+  app/
+    (auth)/signin/page.tsx          # Sign-in
+    (auth)/callback/route.ts        # Auth callback
+    (user)/dashboard/page.tsx       # User dashboard
+    (user)/wizard/                  # Widget creation flow
+    layout.tsx                      # Root layout
+    page.tsx                        # Landing page
+  components/
+    sections/                       # Header, Hero, Footer, etc.
+    widget/                         # Widget popups and sign-in
+    model/                          # Create widget modal
+    HeaderLoggedIn.tsx              # Authenticated header
+    DashBoard-ui.tsx                # Dashboard UI
+  lib/
+    supabase-browser.ts             # Supabase browser client
+    supabase-server.ts              # Supabase server client (SSR)
+    schema/                         # Zod schemas
+```
+Deployment
+----------
+You can deploy on Vercel or any platform that supports Next.js App Router.
+- Ensure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are set in the deployment environment
+- Run `npm run build` during the build step
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Note 
+- This is a half baked project with ongoing feature development and improvements.

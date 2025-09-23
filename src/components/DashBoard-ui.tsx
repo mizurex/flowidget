@@ -5,8 +5,8 @@ import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase-browser';
 import HeaderLogged from '@/components/HeaderLoggedIn';
 import UserWidget from '@/components/widget/UserWidgetPopup';
-import { ArrowBigDown, ArrowDown, ArrowRight, ArrowUp, ArrowUpNarrowWideIcon, GiftIcon } from 'lucide-react';
-import { BsArrow90DegRight, BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
+import { GiftIcon } from 'lucide-react';
+import { BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
 
 interface DashboardProps {
   initialUser?: User | null;
@@ -28,6 +28,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
   const [showDetails, setShowDetails] = useState(false);
   const [open, setOpen] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [noWidget, setNoWidget] = useState(false);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -55,20 +56,59 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
       const response = await fetch(`https://widget-xxtv.onrender.com/dashboard-data?user_id=${user.id}`);
       const data = await response.json();
 
+      // Treat missing widget as a clean empty state, not an error
+      const apiErrorMessage = (data?.error || '').toString().toLowerCase();
+      if (response.status === 404 || apiErrorMessage.includes('no widget')) {
+        setWidgetData(null);
+        setNoWidget(true);
+        return;
+      }
+
       if (!response.ok) {
         throw new Error(data.error || 'Failed to fetch dashboard data');
       }
 
       if (data.success) {
         setWidgetData(data.widget);
+        setNoWidget(false);
       }
     } catch (err) {
       console.error('Error fetching dashboard data:', err);
-      setError(err instanceof Error ? err.message : 'Failed to load data');
+      const msg = err instanceof Error ? err.message : 'Failed to load data';
+      if (msg.toLowerCase().includes('no widget')) {
+        setNoWidget(true);
+        setError(null);
+      } else {
+        setError(msg);
+      }
     } finally {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const fetchHasWid = async () => {
+  try{
+    const hasWid = await fetch(`https://widget-xxtv.onrender.com/widget-status?user_id=${user?.id}`);
+    if(!hasWid.ok) {
+      throw new Error('Failed to fetch widget status');
+    }
+
+    const data = await hasWid.json();
+    if (!data.success) {
+      throw new Error('Failed to fetch widget status');
+      
+    }
+    const wid_stat = data.status.wid;
+    setShowNotification(wid_stat);
+  } catch (err) {
+    console.error('Error fetching widget status:', err);
+  }
+  };
+  if(user?.id) {
+    fetchHasWid();
+  }
+  }, []);
 
   const handleWidget = () => {
     setShowEmbedPopup(true);
@@ -94,14 +134,19 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
         <HeaderLogged
           user={user}
          onCreateClick={() => {
-          
-  setShowNotification(true);
-  setTimeout(() => setShowNotification(false), 3000); // hide after 3s
+  setTimeout(() => setShowNotification(false), 3000); 
 }}
         />
       )}
 
       <main className="pt-10  px-6 max-w-2xl mx-auto space-y-12">
+        {noWidget ? (
+          <div className="py-24 text-center">
+            <h2 className="text-xl font-semibold">No widgets found</h2>
+            <p className="text-zinc-400 mt-2">Create a widget first</p>
+          </div>
+        ) : (
+        <>
         {showNotification && (
   <div className="fixed bottom-1 right-5 z-50 border border-zinc-300 animate-fade-in-down">
     <div className="bg-[#09090b] text-white px-4 py-3  shadow-lg flex items-center gap-2">
@@ -153,16 +198,16 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
                   
                   <div className="text-center flex items-center gap-2">
                     <div className="inline-grid *:[grid-area:1/1]">
-  <div className="bg-green-600 w-3 h-3 rounded-full animate-ping"></div>
-  <div className="bg-green-600 w-3 h-3 rounded-full"></div>
-</div> 
+        <div className="bg-green-600 w-3 h-3 rounded-full animate-ping"></div>
+        <div className="bg-green-600 w-3 h-3 rounded-full"></div>
+                  </div> 
                     <p className="text-sm text-zinc-400">Status: {getWidgetStatus()}</p>
                    
                   </div>
                   
                   <button 
                     className="px-2 py-1 text-xs font-medium bg-white text-black rounded-md shadow-sm hover:bg-zinc-50 hover:shadow-md transition-all duration-200 md:px-3 md:py-1.5 md:text-sm"
-                    onClick={handleWidget}
+                    onClick={handleWidget} 
                   > 
                     Embed Code
                   </button>
@@ -301,9 +346,6 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
         </div>
       )}
     </div>
-            
-            
-         
             <div className="mt-4">
               <div className="flex justify-between text-sm text-zinc-400 mb-1">
                 <span>Usage</span>
@@ -322,6 +364,8 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
         </section>
          {showEmbedPopup && user?.id && (
           <UserWidget onClose={() => setShowEmbedPopup(false)} userId={user.id} />
+        )}
+        </>
         )}
       </main>
     </div>
