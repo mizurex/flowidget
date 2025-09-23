@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import type { User } from '@supabase/supabase-js';
-import { supabase } from '@/lib/supabase-browser';
 import LogoutModalTrigger from './ProfileModal';
 
 export default function HeaderLogged({ user, onCreateClick }: { user: User; onCreateClick : () => void }) {
@@ -12,7 +11,7 @@ export default function HeaderLogged({ user, onCreateClick }: { user: User; onCr
     
   return (
     <header
-      className={`fixed top-0 px-20 py-1 left-0 w-full   h-fit bg-black  text-black z-50 transition-all duration-500 
+      className={`fixed top-0 px-2 md:px-20 py-1 left-0 w-full   h-fit bg-black  text-black z-50 transition-all duration-500 
       `}
     >
       <div
