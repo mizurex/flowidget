@@ -13,9 +13,7 @@ export async function createWidgetOnServer(formData: unknown) {
   }
 
   const { botName, welcomeMessage, role, content } = result.data;
-
-  // Example: Add to DB or external API
-  console.log('✅ Valid data received on server:', result.data);
+  console.log('', result.data);
 
   return {
     success: true,

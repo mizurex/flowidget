@@ -125,9 +125,6 @@ export default function RedesignedDashboard2({ user, widget,onSuccess }: Props) 
     }
   };
 
- 
-
-
   return (
     <div className={`flex items-center justify-center overflow-hidden px-4 ${space.className}`}>
           <div className="w-full sm:w-[30vw] max-w-xl h-fit p-7 bg-[#09090b] mx-auto border border-stone-800 rounded-xl space-y-8">

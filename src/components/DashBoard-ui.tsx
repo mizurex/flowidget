@@ -5,6 +5,7 @@ import type { User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase-browser';
 import HeaderLogged from '@/components/HeaderLoggedIn';
 import UserWidget from '@/components/widget/UserWidgetPopup';
+import CreateWidgetModal from '@/components/model/WidgetModel';
 import { GiftIcon } from 'lucide-react';
 import { BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
 
@@ -22,12 +23,14 @@ interface WidgetData {
 export default function UiDashBoard({ initialUser = null }: DashboardProps) {
   const [user, setUser] = useState<User | null>(initialUser);
   const [showEmbedPopup, setShowEmbedPopup] = useState(false);
+  const [showCreateWidgetModal, setShowCreateWidgetModal] = useState(false);
   const [widgetData, setWidgetData] = useState<WidgetData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showDetails, setShowDetails] = useState(false);
   const [open, setOpen] = useState(false);
-  const [showNotification, setShowNotification] = useState(false);
+  const [hasWidget, setHasWidget] = useState(false);
+  const [showAlreadyCreatedToast, setShowAlreadyCreatedToast] = useState(false);
   const [noWidget, setNoWidget] = useState(false);
 
   useEffect(() => {
@@ -39,7 +42,6 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Fetch dashboard data when user is available
   useEffect(() => {
     if (user?.id) {
       fetchDashboardData();
@@ -55,12 +57,12 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     try {
       const response = await fetch(`https://widget-xxtv.onrender.com/dashboard-data?user_id=${user.id}`);
       const data = await response.json();
-
-      // Treat missing widget as a clean empty state, not an error
+      //for empty widget
       const apiErrorMessage = (data?.error || '').toString().toLowerCase();
       if (response.status === 404 || apiErrorMessage.includes('no widget')) {
         setWidgetData(null);
         setNoWidget(true);
+        setHasWidget(false);
         return;
       }
 
@@ -71,12 +73,14 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
       if (data.success) {
         setWidgetData(data.widget);
         setNoWidget(false);
+        setHasWidget(true);
       }
     } catch (err) {
       console.error('Error fetching dashboard data:', err);
       const msg = err instanceof Error ? err.message : 'Failed to load data';
       if (msg.toLowerCase().includes('no widget')) {
         setNoWidget(true);
+        setHasWidget(false);
         setError(null);
       } else {
         setError(msg);
@@ -100,7 +104,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
       
     }
     const wid_stat = data.status.wid;
-    setShowNotification(wid_stat);
+    setHasWidget(!!wid_stat);
   } catch (err) {
     console.error('Error fetching widget status:', err);
   }
@@ -108,10 +112,19 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
   if(user?.id) {
     fetchHasWid();
   }
-  }, []);
+  }, [user?.id]);
 
   const handleWidget = () => {
     setShowEmbedPopup(true);
+  };
+
+  const handleCreateClick = () => {
+    if (hasWidget) {
+      setShowAlreadyCreatedToast(true);
+      setTimeout(() => setShowAlreadyCreatedToast(false), 3000);
+    } else {
+      setShowCreateWidgetModal(true);
+    }
   };
 
   const formatDate = (dateString: string) => {
@@ -133,9 +146,18 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
       {user && (
         <HeaderLogged
           user={user}
-         onCreateClick={() => {
-  setTimeout(() => setShowNotification(false), 3000); 
-}}
+          onCreateClick={handleCreateClick}
+        />
+      )}
+
+      {user && !hasWidget && (
+        <CreateWidgetModal
+          isOpen={showCreateWidgetModal}
+          onClose={() => {
+            setShowCreateWidgetModal(false);
+            fetchDashboardData();
+          }}
+          user={user}
         />
       )}
 
@@ -144,10 +166,16 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
           <div className="py-24 text-center">
             <h2 className="text-xl font-semibold">No widgets found</h2>
             <p className="text-zinc-400 mt-2">Create a widget first</p>
+            <button
+              onClick={handleCreateClick}
+              className="mt-6 px-4 py-2 text-sm font-medium bg-white text-black rounded-md shadow-sm hover:bg-zinc-50 hover:shadow-md transition-all duration-200"
+            >
+              Create Widget
+            </button>
           </div>
         ) : (
         <>
-        {showNotification && (
+        {showAlreadyCreatedToast && (
   <div className="fixed bottom-1 right-5 z-50 border border-zinc-300 animate-fade-in-down">
     <div className="bg-[#09090b] text-white px-4 py-3  shadow-lg flex items-center gap-2">
       <svg
@@ -221,7 +249,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
                     </p>
                     <button 
                       className="mt-3 px-4 py-2 text-sm font-medium bg-orange-500 text-white hover:bg-orange-600 rounded"
-                      onClick={() => alert('Create Widget Clicked')}
+                      onClick={handleCreateClick}
                     >
                       Create Widget
                     </button>

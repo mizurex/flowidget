@@ -5,7 +5,7 @@ export default function Widget() {
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://widget-bot-ui.vercel.app/widget.js';
-        script.setAttribute('user', '1a6a0ad9-7224-4215-89fa-e4854d4a030a');
+        script.setAttribute('user', '8693e0d8-fbd1-4ae2-9c64-f8641fcd7d56');
         script.async = true;
         
         document.body.appendChild(script);
