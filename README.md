@@ -11,34 +11,8 @@ Features
 - Authentication via Supabase (SSR-ready)
 - Clean, responsive UI with a focus on performance and clarity
 
-Tech Stack / Languages
-----------------------
-- TypeScript
-- Next.js
-- React
-- Tailwind CSS
-- Motion
-- Supabase 
-- Node.js 
-
 Getting Started
 ---------------
-
-Prerequisites
-- Node.js 18+
-- npm, pnpm, yarn, or bun
-- Supabase project with anon key and URL
-
-Install dependencies
-```bash
-npm install
-# or
-yarn
-# or
-pnpm install
-# or
-bun install
-```
 
 Environment variables
 Create a `.env.local` file in the repository root with the following values:
@@ -64,33 +38,6 @@ Build for production
 npm run build && npm run start
 ```
 
-Project Structure
------------------
-```
-src/
-  app/
-    (auth)/signin/page.tsx          # Sign-in
-    (auth)/callback/route.ts        # Auth callback
-    (user)/dashboard/page.tsx       # User dashboard
-    (user)/wizard/                  # Widget creation flow
-    layout.tsx                      # Root layout
-    page.tsx                        # Landing page
-  components/
-    sections/                       # Header, Hero, Footer, etc.
-    widget/                         # Widget popups and sign-in
-    model/                          # Create widget modal
-    HeaderLoggedIn.tsx              # Authenticated header
-    DashBoard-ui.tsx                # Dashboard UI
-  lib/
-    supabase-browser.ts             # Supabase browser client
-    supabase-server.ts              # Supabase server client (SSR)
-    schema/                         # Zod schemas
-```
-Deployment
-----------
-You can deploy on Vercel or any platform that supports Next.js App Router.
-- Ensure `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` are set in the deployment environment
-- Run `npm run build` during the build step
 
 Note 
 - This is a half baked project with ongoing feature development and improvements.
