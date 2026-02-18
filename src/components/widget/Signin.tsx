@@ -27,7 +27,7 @@ const handleGoogleLogin = async () => {
   const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: `https://flowidget.projects.turfworks.site/callback`
+      redirectTo: `${window.location.origin}/callback`
     }
   });
   

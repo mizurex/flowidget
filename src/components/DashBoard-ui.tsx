@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase-browser';
 import HeaderLogged from '@/components/HeaderLoggedIn';
 import UserWidget from '@/components/widget/UserWidgetPopup';
 import CreateWidgetModal from '@/components/model/WidgetModel';
+import TerminalLog, { type TerminalQueryEntry } from '@/components/widget/terminal';
 import { GiftIcon } from 'lucide-react';
 import { BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
 
@@ -32,6 +33,8 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
   const [hasWidget, setHasWidget] = useState(false);
   const [showAlreadyCreatedToast, setShowAlreadyCreatedToast] = useState(false);
   const [noWidget, setNoWidget] = useState(false);
+  const [recentEntries, setRecentEntries] = useState<TerminalQueryEntry[]>([]);
+  
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -45,6 +48,34 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
   useEffect(() => {
     if (user?.id) {
       fetchDashboardData();
+    }
+  }, [user?.id]);
+
+  useEffect(() => {
+
+    async function fetchi(){
+    if (!user?.id) return;
+    try{
+         const data = await fetch(`https://widget-xxtv.onrender.com/recent-q?user_id=${user.id}`)
+
+         if(!data.ok){
+          return;
+         }
+
+         const res = await data.json();
+
+         const entries: TerminalQueryEntry[] = res.questions.map((q:string, i:number) => ({
+          question: q,
+          answer: res.answers[i],
+          timestamp: res.timestamps[i],
+         }));
+         setRecentEntries(entries);
+      } catch (err) {
+        console.error('Error fetching recent entries:', err);
+      }
+    }
+    if(user?.id){
+      fetchi();
     }
   }, [user?.id]);
 
@@ -308,6 +339,13 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
           </ul>
         </div>
       )}
+    </section>
+
+    <section className="bg-[#09090b] p-6 border border-zinc-800">
+      <h2 className="text-xl font-semibold mb-2">Recent Conversations</h2>
+      <p className="text-zinc-400 mb-4">See what visitors are asking your widget</p>
+
+      <TerminalLog entries={recentEntries} />
     </section>
 
        
