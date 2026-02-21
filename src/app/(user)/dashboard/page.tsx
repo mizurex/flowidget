@@ -9,7 +9,7 @@ export default async function(){
     return(
         <>
         <UiDashBoard initialUser={user}/>
-        <Footer/>
+  
         </>
     )
 }

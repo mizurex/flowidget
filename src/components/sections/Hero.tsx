@@ -417,31 +417,7 @@ useEffect(() => {
   </div>
 </section>
 
-    <section className="py-12 sm:py-20 md:py-30 h-auto sm:h-[70vh] md:h-[95vh] px-4 sm:px-8 md:px-24 lg:px-60 overflow-hidden">
-      <motion.div
-        className="mb-8 sm:mb-16 md:mb-28"
-        initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-        whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-        viewport={{ once: true, margin: "-60px" }}
-        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-      >
-        <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">What Our Users Are Saying</h3>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-      >
-        <InfiniteMovingCards
-          items={testimonials}
-          direction="right"
-          speed="slow"
-        />
-      </motion.div>
-    </section>
-   
-     <section className="bg-black overflow-hidden">
+     <section className="bg-black overflow-hidden py-20">
         <motion.div
           className="flex justify-center py-4 px-4"
           initial={{ opacity: 0, y: 20 }}

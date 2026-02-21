@@ -7,7 +7,7 @@ import HeaderLogged from '@/components/HeaderLoggedIn';
 import UserWidget from '@/components/widget/UserWidgetPopup';
 import CreateWidgetModal from '@/components/model/WidgetModel';
 import TerminalLog, { type TerminalQueryEntry } from '@/components/widget/terminal';
-import { GiftIcon } from 'lucide-react';
+import { GiftIcon, Code2, BotIcon } from 'lucide-react';
 import { BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
 
 interface DashboardProps {
@@ -247,29 +247,45 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
           ) : (
             <div className="flex text-center items-center w-full gap-4">
               {widgetData ? (
-                <div className="p-4 bg-[#09090b] flex w-full items-center justify-between border border-[#8fe457]">
-                  <div className="text-left">
-                    <h3 className="text-lg font-medium">{widgetData.name}</h3>
-                    <p className="text-sm text-zinc-400 mt-1">
-                      Created: {formatDate(widgetData.createdAt)}
-                    </p>
+                <div className="w-full border border-zinc-800 bg-[#09090b] rounded-xl overflow-hidden">
+                  {/* Top accent bar */}
+                  <div className="h-px w-full bg-gradient-to-r from-transparent via-[#8fe457]/60 to-transparent" />
+
+                  <div className="p-5 flex items-center justify-between gap-4">
+                    {/* Left: icon + info */}
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-[#8fe457]/10 border border-[#8fe457]/20 flex items-center justify-center text-[#8fe457] flex-shrink-0">
+                        <BotIcon size={18} />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2 mb-0.5">
+                          <span className="text-sm font-semibold text-white truncate max-w-[180px]">
+                            {widgetData.name}
+                          </span>
+                          {/* Status badge */}
+                          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[11px] font-medium bg-green-500/10 text-green-400 border border-green-500/20">
+                            <span className="relative flex h-1.5 w-1.5">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+                            </span>
+                            {getWidgetStatus()}
+                          </span>
+                        </div>
+                        <p className="text-xs text-zinc-500">
+                          Created {formatDate(widgetData.createdAt)}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Right: action */}
+                    <button
+                      className="flex-shrink-0 inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold bg-white text-black rounded-lg shadow-[-2px_3px_0px_#8fe457] hover:shadow-none hover:translate-x-[-1px] hover:translate-y-[1px] transition-all duration-150 cursor-pointer"
+                      onClick={handleWidget}
+                    >
+                      <Code2 size={13} />
+                      Embed Code
+                    </button>
                   </div>
-                  
-                  <div className="text-center flex items-center gap-2">
-                    <div className="inline-grid *:[grid-area:1/1]">
-        <div className="bg-green-600 w-3 h-3 rounded-full animate-ping"></div>
-        <div className="bg-green-600 w-3 h-3 rounded-full"></div>
-                  </div> 
-                    <p className="text-sm text-zinc-400">Status: {getWidgetStatus()}</p>
-                   
-                  </div>
-                  
-                  <button 
-                    className="px-2 py-1 text-xs font-medium bg-white text-black rounded-md shadow-sm hover:bg-zinc-50 hover:shadow-md transition-all duration-200 md:px-3 md:py-1.5 md:text-sm"
-                    onClick={handleWidget} 
-                  > 
-                    Embed Code
-                  </button>
                 </div>
               ) : (
                 <div className="p-4 bg-zinc-800 flex w-full items-center justify-center border border-zinc-600">
