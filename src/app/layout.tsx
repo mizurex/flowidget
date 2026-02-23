@@ -40,7 +40,7 @@ export default async function RootLayout({
     <html lang="en">
   
       <body className={`${geistSans.variable} ${geistMono.variable} ${barlow.className} min-h-screen flex flex-col`}>
-        <main className="flex-1 pt-[10vh]">
+        <main className="">
           {children}
         </main>
        

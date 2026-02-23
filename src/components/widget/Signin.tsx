@@ -5,57 +5,37 @@ import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 
 const Spinner = () => (
-  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+  <div className="h-10 w-10 border-2 border-white/10 border-t-[#F04D26] animate-spin" />
 );
-
-// Google Icon SVG
-const GoogleIcon = () => (
-  <svg className="w-5 h-5" viewBox="0 0 48 48">
-    <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039L38.804 9.196C34.887 5.625 29.824 4 24 4C12.955 4 4 12.955 4 24s8.955 20 20 20s20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"></path>
-    <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039L38.804 9.196C34.887 5.625 29.824 4 24 4C16.791 4 10.463 7.824 6.306 14.691z"></path>
-    <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.222 0-9.618-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"></path>
-    <path fill="#1976D2" d="M43.611 20.083H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C42.012 35.37 44 30.021 44 24c0-1.341-.138-2.65-.389-3.917z"></path>
-  </svg>
-);
-
 
 export default function LoginPage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
-const handleGoogleLogin = async () => {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google',
-    options: {
-      redirectTo: `${window.location.origin}/callback`
-    }
-  });
-  
-  if (error) console.error('Error logging in:', error);
-};
+  const handleGoogleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/callback`
+      }
+    });
+    if (error) console.error('Error logging in:', error);
+  };
 
- 
   const handleLogout = async () => {
     await supabase.auth.signOut();
     setUser(null);
   };
 
-  
   useEffect(() => {
     setLoading(true);
     const getCurrUser = async () => {
-      const { data:{user} } = await supabase.auth.getUser();
-      if(!user){
-        setUser(null);
-      }
-      else{
-        setUser(user);
-      } 
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user ?? null);
       setLoading(false);
     };
     getCurrUser();
 
-    // Set up a listener for authentication state changes
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         setUser(session?.user ?? null);
@@ -63,60 +43,54 @@ const handleGoogleLogin = async () => {
       }
     );
 
-    // Cleanup the listener when the component unmounts
     return () => {
       authListener.subscription.unsubscribe();
     };
   }, []);
 
-  // Main component render
   return (
-    <div className="min-h-screen  flex items-center justify-center p-4 font-sans">
-    
-      
-      <div className='shadow-[-5px_-4px_0px_#7cff3f] '>
-<div className="w-full max-w-sm bg-white  p-8">
+    <div className="flex min-h-screen items-center justify-center bg-[#151515] p-4 font-mono">
+      <div className="w-full max-w-sm border border-white/10 bg-[#0d0d0d] p-8">
         {loading ? (
-          <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center py-12">
             <Spinner />
           </div>
         ) : !user ? (
-          <div className="text-center h-[20vh] z-40">
-            
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <div className="flex flex-col items-center py-4">
+            <h1 className="font-mono text-xl font-bold tracking-tight text-white">
               Welcome
             </h1>
-            <p className="text-gray-600 mb-8">
-              Login to continue to your account.
+            <p className="mt-2 font-mono text-[13px] text-white/45">
+              Sign in to continue
             </p>
             <button
               onClick={handleGoogleLogin}
-              className="px-17 py-2 flex gap-3.5 items-center font-medium bg-white text-black w-fit transition-all shadow-[-2px_4px_0px_#7cff3f] hover:shadow-none hover:translate-x-[-2px] hover:translate-y-[1px] cursor-pointer"
+              className="mt-8 w-full border border-white/10 bg-[#F04D26] px-4 py-3 font-mono text-sm font-medium text-white transition-opacity hover:opacity-90"
             >
-              <GoogleIcon />
               Continue with Google
-            </button>   
+            </button>
           </div>
         ) : (
           <div className="text-center">
             <img
-              src={user.user_metadata.avatar_url || `https://api.dicebear.com/8.x/initials/svg?seed=${user.email}`}
-              alt="User Avatar"
-              className="w-24 h-24 rounded-full mx-auto mb-4 border-2 border-gray-200"
+              src={user.user_metadata?.avatar_url || `https://api.dicebear.com/8.x/initials/svg?seed=${user.email}`}
+              alt=""
+              className="mx-auto mb-4 h-20 w-20 border border-white/10 object-cover"
             />
-            <p className="text-gray-600">Logged in as:</p>
-            <p className="font-semibold text-gray-900 break-words">
+            <p className="font-mono text-[11px] uppercase tracking-widest text-white/35">
+              Logged in as
+            </p>
+            <p className="mt-1 break-words font-mono text-sm text-white/80">
               {user.email}
             </p>
             <button
               onClick={handleLogout}
-              className="w-full mt-8 py-2 px-4 bg-gray-800 text-white font-semibold rounded-lg hover:bg-gray-900 transition-colors duration-300"
+              className="mt-8 w-full border border-white/10 bg-white/5 px-4 py-3 font-mono text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
-              Sign Out
+              Sign out
             </button>
           </div>
         )}
-      </div>
       </div>
     </div>
   );
