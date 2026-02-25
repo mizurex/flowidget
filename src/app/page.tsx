@@ -4,6 +4,8 @@ import EditorialLines from "@/components/hero/hero-lines";
 import Header from "@/components/hero/header";
 import HeroContent from "@/components/hero/hero-content";
 import Footer from "@/components/sections/Footer";
+import { TemplatesSection } from "@/components/hero/showcase";
+import { FAQSection } from "@/components/hero/faq";
 export default function WizardPage(){
     return(
     <div className="relative bg-background ">
@@ -12,7 +14,9 @@ export default function WizardPage(){
         <RulerTicks />
         <DiagonalPattern side="left" />
         <DiagonalPattern side="right" />
-        <HeroContent/>   
+        <HeroContent/> 
+        <TemplatesSection />
+        <FAQSection />
         <Footer />
     </div>
     )

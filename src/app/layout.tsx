@@ -23,10 +23,10 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "flowidget",
-  description: "A website widget that answers your business questions.",
+  description: "A ai widget for your next project",
   icons: {
-    icon: "/favicon.jpeg",
-    apple: "/favicon.jpeg",
+    icon: "/logo.jpeg",
+    apple: "/logo.jpeg",
   },
 };
 

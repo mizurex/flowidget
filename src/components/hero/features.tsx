@@ -89,7 +89,7 @@ export default function FeaturesSection() {
   return (
     <section
       id="features"
-      className="relative overflow-hidden  py-16 md:py-20 xl:py-24"
+      className="relative overflow-hidden  py-16 md:py-20 xl:py-24 font-mono"
     >
     <FadePattern className="top-9"/>
       {/* background pattern over blank space */}
@@ -98,17 +98,13 @@ export default function FeaturesSection() {
       
       />
 
-      <div className="relative z-10 mx-auto w-[92%] max-w-6xl md:w-[88%] lg:w-[90%]">
+      <div className="relative z-10 mx-auto w-[92%] max-w-6xl md:w-[88%] lg:w-[90%] ">
         <div className="flex flex-col items-center text-center">
-          <div className="flex h-8 items-center gap-2 border border-muted-foreground/40 bg-muted/10 px-2.5 text-xs font-medium text-muted-foreground">
-            <span className="font-mono tracking-wide">HOW IT WORKS</span>
-          </div>
-          <h2 className="mt-4 text-pretty font-mono text-2xl text-white md:text-3xl lg:text-4xl">
-            Live widget in 3 steps
+        
+          <h2 className="mt-4 text-pretty font-mono text-2xl text-neutral-500 md:text-3xl lg:text-4xl">
+            Live <span className="text-neutral-200"> widget </span> in 3 steps
           </h2>
-          <p className="mt-3 max-w-2xl text-sm text-white/60 md:text-base">
-            Create it, train it, embed it — then watch real conversations and logs in your dashboard.
-          </p>
+         
         </div>
 
         <div className="py-20 grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
@@ -206,15 +202,6 @@ export default function FeaturesSection() {
                             <span className="text-white/45">Tone:</span> concise, friendly, no small
                             talk
                           </p>
-                        </div>
-                      </div>
-
-                      <div className="border border-white/10 bg-white/[0.03] p-3">
-                        <div className="font-mono text-[11px] text-white/45">Knowledge sources</div>
-                        <div className="mt-2 space-y-1 font-mono text-[12px] text-white/70">
-                          <p>· Pricing page URL</p>
-                          <p>· Docs / FAQ markdown</p>
-                          <p>· Internal notes pasted as text</p>
                         </div>
                       </div>
                     </div>

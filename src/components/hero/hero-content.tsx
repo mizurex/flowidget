@@ -8,13 +8,13 @@ export default function HeroContent() {
                     
                     <div className=" mt-0 sm:mt-2 md:mt-0 lg:mt-7 xl:mt-8 2xl:mt-9 items-center ">
                         <h1 className="font-mono text-2xl sm:text-2xl md:text-[26px] lg:text-[40px] xl:text-[45px] min-[97.5rem]:text-[50px] leading-tight lg:leading-[1.08] tracking-tight text-white mb-6 md:mb-8">
-                        <span className="block 2xl:whitespace-nowrap">Meet flowidget:</span>
-                            <span className="block 2xl:whitespace-nowrap">The embeddable AI bot for your next project.</span>
-                            <span className="block text-[#ff8201] font-bold tracking-wide uppercase text-sm mt-2 2xl:whitespace-nowrap text-center w-full">flowidget — the embeddable AI bot for your next project</span>
+                        <span className="block 2xl:whitespace-nowrap text-neutral-200"> <span className="text-neutral-500">Meet </span>flowidget</span>
+                            <span className="block 2xl:whitespace-nowrap text-neutral-500">The embeddable AI bot for your next project.</span>
+                            {/* <span className="block text-neutral-500 font-bold tracking-wide uppercase text-sm mt-2 2xl:whitespace-nowrap text-center w-full">flowidget — the embeddable AI bot for your next project</span> */}
                             
                         </h1>
 
-                        <p className="max-w-xl 2xl:max-w-2xl mx-auto md:mx-0 text-sm lg:text-[17px] xl:text-[14px] 2xl:text-[18px] min-[97.5rem]:text-[18px] text-[#A1A1AA] mb-10 md:mb-10 leading-relaxed font-sans">
+                        <p className="max-w-xl 2xl:max-w-2xl mx-auto md:mx-0 text-sm lg:text-[17px] xl:text-[14px] 2xl:text-[18px] min-[97.5rem]:text-[18px] text-[#A1A1AA] mb-10 md:mb-10 leading-relaxed font-mono">
                             A graph-based workflow engine with node-level retries, checkpointing, and crash-safe execution built for production systems.
                         </p>
                     </div>
@@ -23,11 +23,11 @@ export default function HeroContent() {
                   
                     
                     <div className="mx-auto flex w-fit max-w-full flex-row flex-nowrap items-center justify-center gap-2 sm:gap-3 md:mx-0 md:w-full md:justify-start md:gap-4 mt-25 mb-6 sm:mb-4 md:mb-0 md:mt-8 lg:mt-0">
-                        <a href="/home" className="group shrink-0 flex items-center gap-0.5 whitespace-nowrap bg-foreground hover:bg-muted text-black  pl-3 pr-2.5 md:pl-4 md:pr-3.5 min-[97.5rem]:pl-5 min-[97.5rem]:pr-4 h-9 md:h-10 lg:h-10 xl:h-10 2xl:h-11 min-[97.5rem]:h-12 text-xs md:text-sm lg:text-sm xl:text-sm 2xl:text-base min-[97.5rem]:text-base font-medium shadow-sm transition-[background-color,transform] duration-150 ease focus:outline-none active:scale-[0.97] motion-reduce:transition-none">
+                        <a href="/home" className="group shrink-0 flex items-center gap-0.5 whitespace-nowrap bg-muted-foreground hover:bg-muted-foreground/80   pl-3 pr-2.5 md:pl-4 md:pr-3.5 min-[97.5rem]:pl-5 min-[97.5rem]:pr-4 h-9 md:h-10 lg:h-10 xl:h-10 2xl:h-11 min-[97.5rem]:h-12 text-xs md:text-sm lg:text-sm xl:text-sm 2xl:text-base min-[97.5rem]:text-base font-medium shadow-sm transition-[background-color,transform] duration-150 ease focus:outline-none active:scale-[0.97] motion-reduce:transition-none">
                             Get Started
                         
                         </a>
-                        <a href="https://github.com/mizurex/flowidget" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-white/10 hover:bg-white/20 whitespace-nowrap text-white rounded-[11px] md:rounded-[12px] px-3 md:px-4 min-[97.5rem]:px-5 h-9 md:h-10 lg:h-10 xl:h-10 2xl:h-11 min-[97.5rem]:h-12 text-xs md:text-sm lg:text-sm xl:text-sm 2xl:text-base min-[97.5rem]:text-base font-medium shadow-sm transition-[background-color,transform] duration-150 ease flex items-center gap-1.5 md:gap-2 active:scale-[0.97] motion-reduce:transition-none">
+                        <a href="https://github.com/mizurex/flowidget" target="_blank" rel="noopener noreferrer" className="shrink-0 bg-muted-foreground/30 hover:bg-muted-foreground/20 whitespace-nowrap text-white px-3 md:px-4 min-[97.5rem]:px-5 h-9 md:h-10 lg:h-10 xl:h-10 2xl:h-11 min-[97.5rem]:h-12 text-xs md:text-sm lg:text-sm xl:text-sm 2xl:text-base min-[97.5rem]:text-base font-medium shadow-sm transition-[background-color,transform] duration-150 ease flex items-center gap-1.5 md:gap-2 active:scale-[0.97] motion-reduce:transition-none">
                             <span>Star Github</span>
                            <Github className="w-4 h-4" />
                         </a>
