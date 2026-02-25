@@ -38,11 +38,7 @@ export default function HeroContent() {
                 
            
             </div>
-            <div style={{
-          backgroundImage: 'repeating-linear-gradient(-35deg, transparent, transparent 2px, currentcolor 2px, currentcolor 3px, transparent 3px, transparent 4px)'
-        }} className="absolute dark:opacity-[0.1] opacity-[0.9]  w-full h-[20px] border border-b border-t dark:border-[#333333] border-border">
-
-            </div>
+         
             <FeaturesSection />
         </div>);
 }

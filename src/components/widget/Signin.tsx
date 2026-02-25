@@ -3,9 +3,19 @@
 import { supabase } from '@/lib/supabase-browser';
 import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
+import Logo from '../svg/logo';
+import { RiGoogleFill } from 'react-icons/ri';
 
 const Spinner = () => (
-  <div className="h-10 w-10 border-2 border-white/10 border-t-[#F04D26] animate-spin" />
+  <div className="flex items-end gap-[3px]">
+    {[0, 150, 300].map((delay) => (
+      <div
+        key={delay}
+        className="h-4 w-[3px] bg-[#F04D26] animate-spin"
+        style={{ animationDelay: `${delay}ms` }}
+      />
+    ))}
+  </div>
 );
 
 export default function LoginPage() {
@@ -49,26 +59,41 @@ export default function LoginPage() {
   }, []);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#151515] p-4 font-mono">
-      <div className="w-full max-w-sm border border-white/10 bg-[#0d0d0d] p-8">
+    <div className="flex min-h-screen items-center justify-center p-4 font-mono">
+      <div className="w-full max-w-2xl mx-auto ">
         {loading ? (
           <div className="flex items-center justify-center py-12">
             <Spinner />
           </div>
         ) : !user ? (
-          <div className="flex flex-col items-center py-4">
-            <h1 className="font-mono text-xl font-bold tracking-tight text-white">
-              Welcome
-            </h1>
-            <p className="mt-2 font-mono text-[13px] text-white/45">
-              Sign in to continue
-            </p>
-            <button
-              onClick={handleGoogleLogin}
-              className="mt-8 w-full border border-white/10 bg-[#F04D26] px-4 py-3 font-mono text-sm font-medium text-white transition-opacity hover:opacity-90"
-            >
-              Continue with Google
-            </button>
+          <div className="flex flex-col items-stretch gap-8 px-6 py-10 md:flex-row md:items-center md:gap-12">
+           
+            <div className="flex flex-1 items-center justify-center">
+              <div className="mb-6">
+                <Logo  width={100} height={100} />
+              </div>
+            </div>
+
+           
+            <div className="flex flex-1 flex-col items-start gap-4">
+              <div>
+                <h1 className="font-mono text-xl font-semibold text-white md:text-2xl">
+                  Login
+                </h1>
+                <p className="mt-1 max-w-xs text-sm text-white/50">
+                  Continue with Google to continue.
+                </p>
+              </div>
+
+              <button
+                onClick={handleGoogleLogin}
+                className="shadow-sm flex items-center gap-2 bg-muted-foreground px-5 py-3 text-sm font-medium uppercase tracking-wide text-background transition-colors hover:bg-muted-foreground/90 w-full md:w-auto"
+              >
+                <RiGoogleFill/>  Google
+              </button>
+
+              
+            </div>
           </div>
         ) : (
           <div className="text-center">

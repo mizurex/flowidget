@@ -102,7 +102,7 @@ export default function Header() {
 
           <div className="flex items-center pr-2 lg:pr-3">
             <motion.a
-              href="/home"
+              href="/signin"
               className="group bg-foreground hover:bg-muted/90 text-background  px-3.5 h-8 text-sm font-medium flex items-center gap-2 transition-[background-color,transform] duration-150 ease focus:outline-none active:scale-[0.97] motion-reduce:transition-none"
               initial="idle"
               whileHover="hover"

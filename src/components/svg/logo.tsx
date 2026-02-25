@@ -1,8 +1,13 @@
-export default function Logo() {
+interface LogoProps {
+  width?: number;
+  height?: number;
+}
+
+export default function Logo({ width = 20, height = 20 }: LogoProps) {
     return (
         <svg
-        width="20  "
-        height="20"
+        width={width}
+        height={height}
         viewBox="0 0 20 20"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
