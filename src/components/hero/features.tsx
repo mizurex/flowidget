@@ -89,14 +89,10 @@ export default function FeaturesSection() {
   return (
     <section
       id="features"
-      className="relative overflow-hidden  pt-14 md:py-20 xl:py-24 font-mono"
+      className="relative overflow-hidden  pt-14 md:py-20 xl:py-24 font-mono  w-full"
     >
     <FadePattern className="top-9"/>
-      {/* background pattern over blank space */}
-      <div
-        className="pointer-events-none absolute bg-background inset-0 z-0 text-white opacity-[0.05]"
-      
-      />
+
 
       <div className="relative z-10 mx-auto w-[92%] max-w-6xl md:w-[88%] lg:w-[90%] ">
         <div className="flex flex-col items-center text-center">

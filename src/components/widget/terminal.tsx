@@ -47,53 +47,57 @@ export default function TerminalLog({
   }, [entries.length, headerLabel, title]);
 
   return (
-    <div className="border border-zinc-800 bg-[#09090b] overflow-hidden">
-      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-zinc-800 bg-[#0f0f12]">
+    <div className="border border-white/10 bg-[#0F0F0F] overflow-hidden">
+      <div className="flex items-center gap-2 px-4 py-2.5 border-b border-white/10 bg-[#0d0d0d]">
         <div className="flex gap-1.5">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
-          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
-          <div className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
+          <span className="h-2 w-2 bg-red-500/80" />
+          <span className="h-2 w-2 bg-yellow-500/80" />
+          <span className="h-2 w-2 bg-green-500/80" />
         </div>
-        <span className="text-xs text-zinc-500 ml-2 font-mono">{headerText}</span>
+        <span className="text-[11px] text-white/45 ml-2 font-mono">{headerText}</span>
       </div>
       <div className={`font-mono text-sm overflow-y-auto ${maxHeightClassName}`}>
         {loading ? (
           <div className="flex items-center gap-2 px-4 py-8 justify-center">
-            <span className="loading loading-spinner loading-xs bg-green-300"></span>
-            <span className="text-zinc-500 text-xs">fetching logs...</span>
+            <div className="flex items-end gap-[3px]">
+              <span className="h-4 w-[3px] bg-[#F04D26] animate-pulse" />
+              <span className="h-4 w-[3px] bg-[#F04D26] animate-pulse [animation-delay:150ms]" />
+              <span className="h-4 w-[3px] bg-[#F04D26] animate-pulse [animation-delay:300ms]" />
+            </div>
+            <span className="text-white/45 text-[11px] font-mono">fetching logs...</span>
           </div>
         ) : error ? (
           <div className="px-4 py-6 text-center">
-            <p className="text-red-400 text-xs">
+            <p className="text-red-400 text-[11px] font-mono">
               <span className="text-red-500">ERR</span> {error}
             </p>
           </div>
         ) : entries.length === 0 ? (
           <div className="px-4 py-8 text-center">
-            <p className="text-zinc-500 text-xs">{emptyText}</p>
+            <p className="text-white/45 text-[11px] font-mono">{emptyText}</p>
           </div>
         ) : (
           entries.map((q, i) => (
             <div
               key={`${q.timestamp}-${i}`}
-              className={`px-4 py-3 border-b border-zinc-800/50 cursor-pointer transition-colors hover:bg-zinc-900/50 ${
-                expandedIdx === i ? 'bg-zinc-900/30' : ''
+              className={`px-4 py-3 border-b border-white/10 cursor-pointer transition-colors hover:bg-white/5 ${
+                expandedIdx === i ? 'bg-white/5' : ''
               }`}
               onClick={() => setExpandedIdx(expandedIdx === i ? null : i)}
             >
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-start gap-2 min-w-0">
-                  <span className="text-[#7cff3f] shrink-0 mt-0.5">&gt;</span>
-                  <span className="text-zinc-200 break-words">{q.question}</span>
+                  <span className="text-[#F04D26] shrink-0 mt-0.5">&gt;</span>
+                  <span className="text-white/80 break-words">{q.question}</span>
                 </div>
-                <span className="text-zinc-600 text-xs whitespace-nowrap shrink-0">
+                <span className="text-white/45 text-[11px] whitespace-nowrap shrink-0 font-mono">
                   {formatRelativeTime(q.timestamp)}
                 </span>
               </div>
 
               {expandedIdx === i && (
-                <div className="mt-2 ml-5 pl-3 border-l border-zinc-700">
-                  <p className="text-zinc-400 text-xs leading-relaxed">{q.answer}</p>
+                <div className="mt-2 ml-5 pl-3 border-l border-white/10">
+                  <p className="text-white/55 text-[11px] leading-relaxed">{q.answer}</p>
                 </div>
               )}
             </div>
@@ -101,8 +105,8 @@ export default function TerminalLog({
         )}
       </div>
       {!loading && !error && entries.length > 0 && (
-        <div className="px-4 py-2 border-t border-zinc-800 bg-[#0f0f12]">
-          <span className="text-zinc-600 text-xs font-mono">
+        <div className="px-4 py-2 border-t border-white/10 bg-[#0d0d0d]">
+          <span className="text-white/45 text-[11px] font-mono">
             showing {entries.length} of {entries.length}
           </span>
         </div>

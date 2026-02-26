@@ -2,8 +2,8 @@ import Logo from "../svg/logo";
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t   border-white/10 ">
-           <div className="relative z-10 flex-1  max-w-6xl pt-14 pb-6 px-20 ">
+    <div className="relative overflow-hidden border-t  max-w-4xl mx-auto border-white/10 ">
+           <div className="relative z-10 flex-1  max-w-4xl pt-14 pb-6 px-20 ">
         <div className="grid grid-cols-2 gap-y-10 sm:grid-cols-4">
          
           <div className="col-span-2 sm:col-span-1 px-0 md:px-30">
@@ -80,6 +80,6 @@ export default function Footer() {
       </div>
 
    
-    </footer>
+    </div>
   );
 }

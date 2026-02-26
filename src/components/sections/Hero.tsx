@@ -541,7 +541,7 @@ useEffect(() => {
 
 </div>
 </section>
-    <Widget/>
+  
  </div>
    
   );

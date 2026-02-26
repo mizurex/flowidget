@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import FadePattern from "./fade-pattern";
 
 type PresetId = "retro" | "neutral" | "8bit";
 type Position = "bottom-right" | "bottom-left" | "top-right" | "top-left";
@@ -50,25 +51,18 @@ export function WidgetPresetsSection() {
   const { preset, position, bubble, bubbleSize, surfaceFlat, launcher, allowOverrides } = state;
 
   return (
-    <section id="widget-presets" className="relative  py-2 md:py-20 xl:py-10 overflow-hidden">
-      <div
-        className="pointer-events-none absolute inset-0 z-0 text-white opacity-[0.04]"
-        style={{
-          backgroundImage:
-            "repeating-linear-gradient(-35deg, transparent, transparent 2px, currentColor 2px, currentColor 3px, transparent 3px, transparent 4px)",
-        }}
-      />
+    <section id="widget-presets" className="relative mx-auto bg-black max-w-5xl   py-2 md:py-20 xl:pb-18 xl:pt-16 overflow-hidden">
+           <FadePattern className="top-0"/>
+      
 
       <div className="relative z-10 mx-auto flex w-[92%] max-w-6xl flex-col gap-10 md:w-[88%] lg:w-[90%] lg:flex-row lg:items-start">
         {/* left: controls */}
         <div className="flex-1 space-y-5">
-          <div className="inline-flex border border-muted-foreground/40 bg-muted/10 px-2.5 py-1 text-[11px] font-mono uppercase tracking-widest text-muted-foreground">
-            Widget presets
-          </div>
-          <h2 className="font-mono text-2xl text-white md:text-3xl">
-            Try different bot looks
+        
+          <h2 className="font-mono text-2xl text-neutral-500 md:text-3xl">
+           <span className="text-neutral-200">Customize</span> your widget
           </h2>
-          <p className="max-w-md text-sm text-white/55">
+          <p className="max-w-md text-sm text-neutral-400 font-sans">
             Pick a preset to preview. Add your chat boxes below.
           </p>
 

@@ -7,9 +7,10 @@ import Footer from "@/components/sections/Footer";
 import { TemplatesSection } from "@/components/hero/showcase";
 import { WidgetPresetsSection } from "@/components/hero/wids";
 import { FAQSection } from "@/components/hero/faq";
+import { Pricing } from "@/components/hero/pricing";
 export default function WizardPage(){
     return(
-    <div className="relative bg-background ">
+    <div className="relative bg-black ">
         <Header />
         <EditorialLines />
         <RulerTicks />
@@ -18,6 +19,7 @@ export default function WizardPage(){
         <HeroContent/> 
         <TemplatesSection />
         <WidgetPresetsSection />
+        <Pricing />
         <FAQSection />
         <Footer />
     </div>

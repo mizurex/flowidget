@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { widgetFormSchema } from "@/lib/schema/schema";
 import { z } from "zod";
 
-// ── tiny primitives ──────────────────────────────────────────────────────────
+
 
 const Field = ({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) => (
   <div className="flex flex-col gap-1.5">
@@ -18,7 +18,7 @@ const Field = ({ label, error, children }: { label: string; error?: string; chil
 );
 
 const inputCls = (error?: string) =>
-  `w-full bg-black/40 border ${error ? "border-red-400/60" : "border-white/10"} px-3 py-2.5 font-mono text-sm text-white placeholder:text-white/20 outline-none focus:border-[#F04D26]/60 transition-colors`;
+  `w-full bg-black/40 border ${error ? "border-red-400/60" : "border-white/10"} px-3 py-2.5 font-mono text-sm text-white placeholder:text-white/20 outline-none focus:border-white/40 transition-colors`;
 
 const FormInput = ({ label, value, onChange, placeholder, error }: any) => (
   <Field label={label} error={error}>
@@ -61,7 +61,7 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
   const [loading, setLoading]               = useState(false);
   const [error, setError]                   = useState("");
   const [selectedUI, setSelectedUI]         = useState("classic");
-  const [selectedColor, setSelectedColor]   = useState("#f59e0b");
+  const [selectedColor, setSelectedColor]   = useState("#ffffff");
   const [showEmbedPopup, setShowEmbedPopup] = useState(false);
   const [fieldErrors, setFieldErrors]       = useState<Partial<Record<keyof z.infer<typeof widgetFormSchema>, string>>>({});
   const [step, setStep]                     = useState(1);
@@ -130,16 +130,15 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
             return (
               <div
                 key={label}
-                className={`border-r border-white/10 px-4 py-3 last:border-r-0 ${active ? "bg-[#F04D26]/8" : ""}`}
+                className={`border-r border-white/10 px-4 py-3 last:border-r-0 ${active ? "bg-white/5" : ""}`}
               >
                 <div className="flex items-center gap-2">
                   <span
-                    className="font-mono text-[10px]"
-                    style={{ color: active ? "#F04D26" : done ? "rgba(255,255,255,0.35)" : "rgba(255,255,255,0.2)" }}
+                    className={`font-mono text-[10px] ${active ? "text-white/80" : done ? "text-white/35" : "text-white/20"}`}
                   >
                     {String(n).padStart(2, "0")}
                   </span>
-                  {active && <div className="h-px flex-1 bg-[#F04D26]/30" />}
+                  {active && <div className="h-px flex-1 bg-white/20" />}
                 </div>
                 <div
                   className="mt-1 font-mono text-[11px] leading-tight"
@@ -176,7 +175,7 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
                   <select
                     value={selectedUI}
                     onChange={(e) => setSelectedUI(e.target.value)}
-                    className="w-full bg-black/40 border border-white/10 px-3 py-2.5 font-mono text-sm text-white outline-none focus:border-[#F04D26]/60 transition-colors"
+                    className="w-full bg-black/40 border border-white/10 px-3 py-2.5 font-mono text-sm text-white outline-none focus:border-white/40 transition-colors"
                   >
                     <option value="classic">Classic</option>
                   </select>
@@ -263,7 +262,7 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
           {step < 3 ? (
             <button
               onClick={handleNextStep}
-              className="bg-[#F04D26] px-5 py-2 font-mono text-sm font-medium text-white transition-opacity hover:opacity-80"
+              className="border border-white bg-white px-5 py-2 font-mono text-sm font-medium text-black transition-colors hover:bg-white/90"
             >
               Next →
             </button>
@@ -271,7 +270,7 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
             <button
               onClick={handleCreateOrUpdateWidget}
               disabled={loading}
-              className="bg-[#F04D26] px-5 py-2 font-mono text-sm font-medium text-white transition-opacity hover:opacity-80 disabled:opacity-40"
+              className="border border-white bg-white px-5 py-2 font-mono text-sm font-medium text-black transition-colors hover:bg-white/90 disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {loading ? "Saving…" : "Create widget"}
             </button>

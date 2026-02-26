@@ -8,7 +8,7 @@ import DiagonalPattern from "@/components/hero/pattern"
 
 export default function (){
   return (
-      <div className="relative bg-background "> 
+      <div className="relative bg-black "> 
       
       <EditorialLines />
         <RulerTicks />

@@ -82,33 +82,21 @@ export default function Header() {
               onClick={(e) => handleSmoothScroll(e, "playground")}
               className="text-sm font-medium text-[#C1B9B9] hover:text-white transition-colors duration-150 ease motion-reduce:transition-none"
             >
-              Playground
+              Docs
             </Link>
-            <Link
-              href="#templates"
-              onClick={(e) => handleSmoothScroll(e, "templates")}
-              className="text-sm font-medium text-[#C1B9B9] hover:text-white transition-colors duration-150 ease motion-reduce:transition-none"
-            >
-              Templates
-            </Link>
-            <Link
-              href="#pricing"
-              onClick={(e) => handleSmoothScroll(e, "pricing")}
-              className="text-sm font-medium text-[#C1B9B9] hover:text-white transition-colors duration-150 ease motion-reduce:transition-none"
-            >
-              Pricing
-            </Link>
+          
+        
           </nav>
 
           <div className="flex items-center pr-2 lg:pr-3">
             <motion.a
               href="/signin"
-              className="group bg-foreground hover:bg-muted/90 text-background  px-3.5 h-8 text-sm font-medium flex items-center gap-2 transition-[background-color,transform] duration-150 ease focus:outline-none active:scale-[0.97] motion-reduce:transition-none"
+              className="group bg-muted-foreground hover:bg-muted/90 text-black  px-3.5 h-8 text-sm font-medium flex items-center gap-2 transition-[background-color,transform] duration-150 ease focus:outline-none active:scale-[0.97] motion-reduce:transition-none"
               initial="idle"
               whileHover="hover"
             >
-              <span>Login</span>
-              <LogInIcon className="w-4 h-4 text-muted" />
+              <span>Signin</span>
+              <LogInIcon className="w-4 h-4 text-black" />
             </motion.a>
           </div>
         </header>

@@ -43,16 +43,16 @@ export function FAQSection() {
         setOpenIndex(openIndex === index ? null : index);
     };
     return (
-        <section id="faq" className="relative bg-[#151515] py-16 md:py-24">
-            <div className="mx-auto max-w-5xl px-6">
+        <section id="faq" className="relative  py-16 md:py-24">
+            <div className="mx-auto max-w-4xl px-6">
                 <div className="flex flex-col gap-12 xl:flex-row xl:gap-16">
              
                     <div className="flex shrink-0 flex-col xl:w-[340px]">
                       
-                        <h2 className="mt-4 font-mono text-2xl text-neutral-500 md:text-3xl">
+                        <h2 className="mt-4 font-mono text-2xl text-neutral-500 md:text-3xl text-center md:text-left">
                           <span className="text-neutral-200">  Questions</span>  about Flowidget
                         </h2>
-                        <p className="mt-3 max-w-md text-sm text-neutral-500">
+                        <p className="mt-3 text-xs md:text-sm text-neutral-400 text-center md:text-left">
                             Short answers to the things you might ask before adding an AI widget to
                             your project.
                         </p>
@@ -65,7 +65,7 @@ export function FAQSection() {
                                     className="group flex w-full items-center justify-between gap-4 py-3 text-left"
                                     aria-expanded={openIndex === index}
                                 >
-                                    <span className="flex-1 font-mono text-sm text-white">
+                                    <span className="flex-1 font-mono text-sm text-neutral-200">
                                         {item.question}
                                     </span>
                                     <ChevronDown
