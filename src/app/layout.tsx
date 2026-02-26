@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Barlow } from "next/font/google";
 import "./globals.css";
-
-
+import Widget from "@/components/widget";
 
 const barlow = Barlow({
   subsets: ["latin"],
@@ -38,8 +37,11 @@ export default async function RootLayout({
  
   return (
     <html lang="en">
-  
       <body className={`${geistSans.variable} ${geistMono.variable} ${barlow.className} min-h-screen flex flex-col`}>
+        <Widget attrs={{
+          src: "https://widget-bot-ui.vercel.app/widget.js",
+          user: "8693e0d8-fbd1-4ae2-9c64-f8641fcd7d56",
+        }} />
         <main className="">
           {children}
         </main>

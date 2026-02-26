@@ -46,7 +46,7 @@ const NodeSvg = () => (
 );
 export default function Header() {
   return (
-    <div className="flex flex-col items-center pt-3 mt-2 md:pt-4">
+    <div className="flex flex-col items-center pt-3 mt-2 md:pt-4 fixed sm:static -top-6 w-full backdrop-blur-md z-50">
       <div className="relative z-20 flex w-full items-center justify-center gap-6 lg:gap-0 px-4 lg:px-0">
         <SideLine side="left" />
 

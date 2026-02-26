@@ -89,7 +89,7 @@ export default function FeaturesSection() {
   return (
     <section
       id="features"
-      className="relative overflow-hidden  py-16 md:py-20 xl:py-24 font-mono"
+      className="relative overflow-hidden  pt-14 md:py-20 xl:py-24 font-mono"
     >
     <FadePattern className="top-9"/>
       {/* background pattern over blank space */}
@@ -102,12 +102,12 @@ export default function FeaturesSection() {
         <div className="flex flex-col items-center text-center">
         
           <h2 className="mt-4 text-pretty font-mono text-2xl text-neutral-500 md:text-3xl lg:text-4xl">
-            Live <span className="text-neutral-200"> widget </span> in 3 steps
+            Get Live <span className="text-neutral-200"> widget </span> in 3 steps
           </h2>
          
         </div>
 
-        <div className="py-20 grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
+        <div className="py-10 grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-10">
           {/* left: step list */}
           <div className="lg:col-span-5">
             <div className="flex flex-col gap-2.5">

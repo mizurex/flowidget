@@ -5,6 +5,7 @@ import Header from "@/components/hero/header";
 import HeroContent from "@/components/hero/hero-content";
 import Footer from "@/components/sections/Footer";
 import { TemplatesSection } from "@/components/hero/showcase";
+import { WidgetPresetsSection } from "@/components/hero/wids";
 import { FAQSection } from "@/components/hero/faq";
 export default function WizardPage(){
     return(
@@ -16,6 +17,7 @@ export default function WizardPage(){
         <DiagonalPattern side="right" />
         <HeroContent/> 
         <TemplatesSection />
+        <WidgetPresetsSection />
         <FAQSection />
         <Footer />
     </div>

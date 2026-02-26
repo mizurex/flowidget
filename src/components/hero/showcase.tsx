@@ -210,10 +210,10 @@ export function TemplatesSection() {
     }, [router]);
     return (<>
     
-    <div className="hidden md:flex justify-center">
+    <div className="hidden md:flex justify-center max-w-xl">
      
     </div>
-    <section id="templates" className="relative min-h-screen snap-start py-16 md:py-20 xl:py-24 overflow-x-hidden">
+    <section id="templates" className="relative min-h-screen snap-start py-16 md:py-20 xl:py-0 overflow-x-hidden">
       <div className="relative z-10 w-[92%] md:w-[88%] lg:w-[60%] mx-auto">
       
 
