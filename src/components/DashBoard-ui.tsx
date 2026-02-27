@@ -11,6 +11,7 @@ import TerminalLog, { type TerminalQueryEntry } from '@/components/widget/termin
 import { GiftIcon, Code2, BotIcon } from 'lucide-react';
 import { BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
 import Logo from './svg/logo';
+import EditorialLines from './hero/hero-lines';
 
 interface DashboardProps {
   initialUser?: User | null;
@@ -133,16 +134,13 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     }
   };
 
-  const formatDate = (dateString: string) =>
-    new Date(dateString).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-
-  const getWidgetStatus = () => (widgetData ? 'Active' : 'Not Found');
-  const creditsLeft = widgetData ? 500 - widgetData.messageCount : 0;
+  
+  const creditsLeft = widgetData ? 100 - widgetData.messageCount : 0;
 
   return (
     <div className="relative min-h-screen text-white bg-black">
      
-     
+     <EditorialLines />
 
       {user && !hasWidget && (
         <CreateWidgetModal
@@ -208,7 +206,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
                 Your Widgets
               </div>
               <h2 className="font-mono text-xl text-white md:text-2xl">Manage widgets</h2>
-              <p className="mt-1 text-sm text-white/55">Preview and manage your active widgets</p>
+              
 
               {loading ? (
                 <div className="flex items-center justify-center py-12">
@@ -233,25 +231,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
                   {widgetData ? (
                     <div className="border border-white/10 bg-[#0F0F0F] overflow-hidden">
                       <div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div className="flex items-center gap-4">
-                          <div className="w-10 h-10 border border-white/10 bg-white/5 flex items-center justify-center text-white/80 flex-shrink-0">
-                            <BotIcon size={18} />
-                          </div>
-                          <div>
-                            <div className="flex flex-wrap items-center gap-2">
-                              <span className="font-mono text-sm font-medium text-white truncate max-w-[180px]">
-                                {widgetData.name}
-                              </span>
-                              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 border border-white/20 bg-white/5 font-mono text-[11px] text-white/80">
-                                <span className="h-1.5 w-1.5 shrink-0 bg-green-500" />
-                                {getWidgetStatus()}
-                              </span>
-                            </div>
-                            <p className="mt-0.5 font-mono text-[11px] text-white/45">
-                              Created {formatDate(widgetData.createdAt)}
-                            </p>
-                          </div>
-                        </div>
+                      
                         <button
                           className="inline-flex items-center gap-2 px-4 py-2 border border-white bg-white text-black font-mono text-sm hover:bg-white/90 transition-colors"
                           onClick={handleWidget}
@@ -358,7 +338,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
                       </div>
                       <div className="text-right">
                         <p className="font-mono text-sm text-white">{creditsLeft} <span className="text-white/45">left</span></p>
-                        <p className="font-mono text-[11px] text-white/45">500 total</p>
+                        <p className="font-mono text-[11px] text-white/45">100 total</p>
                       </div>
                     </div>
                  
@@ -369,12 +349,12 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
               <div className="mt-6">
                 <div className="flex justify-between font-mono text-[11px] text-white/45 mb-2">
                   <span>Usage</span>
-                  <span>{widgetData?.messageCount || 0}/500</span>
+                  <span>{widgetData?.messageCount || 0}/100</span>
                 </div>
                 <div className="w-full h-2 bg-white/10 border border-white/10">
                   <div
                     className="h-full bg-[#F04D26] transition-all duration-300"
-                    style={{ width: `${Math.min(((widgetData?.messageCount || 0) / 500) * 100, 100)}%` }}
+                    style={{ width: `${Math.min(((widgetData?.messageCount || 0) / 100) * 100, 100)}%` }}
                   />
                 </div>
               </div>
