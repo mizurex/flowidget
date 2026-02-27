@@ -91,12 +91,12 @@ export default function Header() {
           <div className="flex items-center pr-2 lg:pr-3">
             <motion.a
               href="/signin"
-              className="group bg-muted-foreground hover:bg-muted/90 text-black  px-3.5 h-8 text-sm font-medium flex items-center gap-2 transition-[background-color,transform] duration-150 ease focus:outline-none active:scale-[0.97] motion-reduce:transition-none"
+              className="group bg-muted-foreground hover:bg-muted-foreground/80 text-white/80  px-3.5 h-8 text-sm font-medium flex items-center gap-2 transition-[background-color,transform] duration-150 ease focus:outline-none active:scale-[0.97] motion-reduce:transition-none"
               initial="idle"
               whileHover="hover"
             >
               <span>Signin</span>
-              <LogInIcon className="w-4 h-4 text-black" />
+              <LogInIcon className="w-4 h-4 text-white/80" />
             </motion.a>
           </div>
         </header>

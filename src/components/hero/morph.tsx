@@ -2,36 +2,36 @@
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 
-type Tick = { value: number; baseAlpha: number };
+type Tick = { value: any; baseAlpha: number };
 type Mouse = { x: number; y: number };
 
 const LEFT_TICKS: Tick[] = [
-    { value: 0, baseAlpha: 0.15 },
-    { value: 50, baseAlpha: 0.2 },
-    { value: 100, baseAlpha: 0.3 },
-    { value: 150, baseAlpha: 0.3 },
-    { value: 200, baseAlpha: 0.3 },
-    { value: 250, baseAlpha: 0.3 },
-    { value: 300, baseAlpha: 0.3 },
-    { value: 550, baseAlpha: 0.2 },
-    { value: 600, baseAlpha: 0.15 },
-    { value: 650, baseAlpha: 0.1 },
-    { value: 700, baseAlpha: 0.05 },
-    { value: 750, baseAlpha: 0.02 },
+    { value: "T", baseAlpha: 0.15 },
+    { value: "G", baseAlpha: 0.2 },
+    { value: "E", baseAlpha: 0.3 },
+    { value: "D", baseAlpha: 0.3 },
+    { value: "I", baseAlpha: 0.3 },
+    { value: "W", baseAlpha: 0.3 },
+    { value: "O", baseAlpha: 0.3 },
+    { value: "L", baseAlpha: 0.2 },
+    { value: "F", baseAlpha: 0.15 },
+    { value: "·", baseAlpha: 0.1 },
+    { value: "·", baseAlpha: 0.05 },
+    { value: "·", baseAlpha: 0.02 },
 ];
 
 const RIGHT_TICKS: Tick[] = [
-    { value: 0, baseAlpha: 0.15 },
-    { value: 50, baseAlpha: 0.2 },
-    { value: 100, baseAlpha: 0.3 },
-    { value: 150, baseAlpha: 0.3 },
-    { value: 200, baseAlpha: 0.3 },
-    { value: 250, baseAlpha: 0.3 },
-    { value: 300, baseAlpha: 0.3 },
-    { value: 600, baseAlpha: 0.15 },
-    { value: 650, baseAlpha: 0.1 },
-    { value: 700, baseAlpha: 0.05 },
-    { value: 750, baseAlpha: 0.02 },
+    { value: "T", baseAlpha: 0.15 },
+    { value: "G", baseAlpha: 0.2 },
+    { value: "E", baseAlpha: 0.3 },
+    { value: "D", baseAlpha: 0.3 },
+    { value: "I", baseAlpha: 0.3 },
+    { value: "W", baseAlpha: 0.3 },
+    { value: "O", baseAlpha: 0.2 },
+    { value: "L", baseAlpha: 0.15 },
+    { value: "F", baseAlpha: 0.1 },
+    { value: "·", baseAlpha: 0.05 },
+    { value: "·", baseAlpha: 0.02 },
 ];
 
 function clamp01(n: number) {
@@ -62,7 +62,7 @@ function RulerSide({
         <div
             className={`ruler-ticks ${isLeft ? "" : "ruler-ticks-right"} absolute ${isLeft ? "left-2 -translate-x-[calc(100%-1px)] pr-0 items-end origin-right" : "right-2 translate-x-[calc(100%-1px)] pl-0 items-start origin-left"} top-[40px] flex flex-col gap-10 text-xs font-mono`}
         >
-            {ticks.map((t) => {
+            {ticks.map((t, i) => {
                 const alpha = Math.min(0.7, t.baseAlpha * factor);
                 const color = rgbaWhite(alpha);
 
@@ -75,14 +75,14 @@ function RulerSide({
                 const labelStyle: CSSProperties = { color };
 
                 return isLeft ? (
-                    <div key={t.value} className="flex w-fit items-center gap-2">
+                    <div key={i} className="flex w-fit items-center gap-2">
                         <span style={labelStyle} className="-rotate-90">
                             {t.value}
                         </span>
                         <span style={tickStyle} className="w-1 h-px" />
                     </div>
                 ) : (
-                    <div key={t.value} className="flex w-fit items-center gap-2">
+                    <div key={i} className="flex w-fit items-center gap-2">
                         <span style={tickStyle} className="w-1 h-px" />
                         <span style={labelStyle} className="rotate-90">
                             {t.value}

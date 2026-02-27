@@ -8,6 +8,7 @@ import { TemplatesSection } from "@/components/hero/showcase";
 import { WidgetPresetsSection } from "@/components/hero/wids";
 import { FAQSection } from "@/components/hero/faq";
 import { Pricing } from "@/components/hero/pricing";
+import FooterLogo from "@/components/ui/footer-logo";
 export default function WizardPage(){
     return(
     <div className="relative bg-black ">
@@ -22,6 +23,7 @@ export default function WizardPage(){
         <Pricing />
         <FAQSection />
         <Footer />
+        <FooterLogo />
     </div>
     )
 }

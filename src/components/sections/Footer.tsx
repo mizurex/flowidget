@@ -2,7 +2,7 @@ import Logo from "../svg/logo";
 
 export default function Footer() {
   return (
-    <div className="relative overflow-hidden border-t  max-w-4xl mx-auto border-white/10 ">
+    <div className="relative overflow-hidden border-t  mx-auto border-white/10 ">
            <div className="relative z-10 flex-1  max-w-4xl pt-14 pb-6 px-20 ">
         <div className="grid grid-cols-2 gap-y-10 sm:grid-cols-4">
          
@@ -56,28 +56,7 @@ export default function Footer() {
 
     
       </div>
-      <div className="flex items-center justify-center text-white pt-10 border-t border-white/10">
-
-      <div className="w-[40%] bottom-0 max-w-[480px] font-bold font-mono  overflow-hidden relative flex justify-center items-center text-lg sm:text-3xl  text-muted-foreground/30 pointer-events-none select-none" aria-hidden="true">
-         
-          FLOWIDGET
-        </div>
-        <div className="hidden md:flex w-full justify-center gap-2">
-          
-          <div className="w-[40%] bottom-0 max-w-[480px] font-bold font-mono overflow-hidden relative flex justify-center items-center text-3xl max-sm:text-6xl text-muted-foreground/30 pointer-events-none select-none" aria-hidden="true">
-            FLOWIDGET
-          </div>
-          <div className="w-[40%] bottom-0 max-w-[480px] font-bold font-mono overflow-hidden relative flex justify-center items-center text-3xl max-sm:text-6xl text-muted-foreground/30 pointer-events-none select-none" aria-hidden="true">
-            FLOWIDGET
-          </div>
-          <div className="w-[40%] bottom-0 max-w-[480px] font-bold font-mono overflow-hidden relative flex justify-center items-center text-3xl max-sm:text-6xl text-muted-foreground/30 pointer-events-none select-none" aria-hidden="true">
-            FLOWIDGET
-          </div>
-          <div className="w-[40%] bottom-0 max-w-[480px] font-bold font-mono overflow-hidden relative flex justify-center items-center text-3xl max-sm:text-6xl text-muted-foreground/30 pointer-events-none select-none" aria-hidden="true">
-            FLOWIDGET
-          </div>
-        </div>
-      </div>
+      
 
    
     </div>

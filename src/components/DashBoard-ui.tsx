@@ -12,6 +12,9 @@ import { GiftIcon, Code2, BotIcon } from 'lucide-react';
 import { BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
 import Logo from './svg/logo';
 import EditorialLines from './hero/hero-lines';
+import DiagonalPattern from './hero/pattern';
+import RulerTicks from './hero/morph';
+import EditorialLines2 from './hero/lines';
 
 interface DashboardProps {
   initialUser?: User | null;
@@ -141,6 +144,8 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     <div className="relative min-h-screen text-white bg-black">
      
      <EditorialLines />
+     <RulerTicks />
+     
 
       {user && !hasWidget && (
         <CreateWidgetModal
@@ -155,6 +160,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
 
       <main className="relative z-10 pt-5 md:pt-10 px-6 max-w-3xl mx-auto space-y-6 md:space-y-8">
         <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+       
           <div className="flex items-start gap-3">
             <Link href="/" className="flex items-center ">
               <Logo width={40} height={40} />
@@ -202,9 +208,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
             )}
 
             <section className="border border-white/10 bg-[#0d0d0d] p-6 md:p-8">
-              <div className="inline-flex border border-muted-foreground/40 bg-muted/10 px-2.5 py-1 text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
-                Your Widgets
-              </div>
+            
               <h2 className="font-mono text-xl text-white md:text-2xl">Manage widgets</h2>
               
 
@@ -217,11 +221,11 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
                   </div>
                 </div>
               ) : error ? (
-                <div className="mt-6 grid gap-4 p-4 border border-red-500/30 bg-red-900/10">
+                <div className="mt-6 grid gap-4 p-4 ">
                   <p className="font-mono text-sm text-red-400">Error: {error}</p>
                   <button
                     onClick={fetchDashboardData}
-                    className="border border-white/20 px-4 py-2 font-mono text-sm text-white hover:border-white/40 hover:bg-white/5"
+                    className="border border-white/20 px-4 py-2 max-w-fit font-mono text-sm text-white hover:border-white/40 hover:bg-white/5"
                   >
                     Retry
                   </button>
@@ -258,9 +262,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
             </section>
 
             <section className="border border-white/10 bg-[#0d0d0d] p-6 md:p-8">
-              <div className="inline-flex border border-muted-foreground/40 bg-muted/10 px-2.5 py-1 text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
-                Stats
-              </div>
+            
               <h2 className="font-mono text-xl text-white md:text-2xl">Widget Stats</h2>
               <p className="mt-1 text-sm text-white/55">Recent usage for your widgets</p>
 
@@ -295,9 +297,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
             </section>
 
             <section className="border border-white/10 bg-[#0d0d0d] p-6 md:p-8">
-              <div className="inline-flex border border-muted-foreground/40 bg-muted/10 px-2.5 py-1 text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
-                Logs
-              </div>
+             
               <h2 className="font-mono text-xl text-white md:text-2xl">Recent Conversations</h2>
               <p className="mt-1 text-sm text-white/55">See what visitors are asking your widget</p>
               <div className="mt-6">
@@ -306,10 +306,8 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
             </section>
 
             <section className="border border-white/10 bg-[#0d0d0d] p-6 md:p-8">
-              <div className="inline-flex border border-muted-foreground/40 bg-muted/10 px-2.5 py-1 text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
-                Usage
-              </div>
-              <h2 className="font-mono text-xl text-white md:text-2xl">Plan & Usage</h2>
+            
+              <h2 className="font-mono text-xl text-white md:text-2xl">Usage</h2>
 
               <div className="mt-6 border border-white/10">
                 <button
@@ -322,7 +320,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
                   </div>
                   <div className="flex items-center gap-4">
                     <span className="font-mono text-[11px] border border-white/20 px-2 py-0.5 text-white/80">Free Tier</span>
-                    <span className="font-mono text-sm text-white">{creditsLeft} <span className="text-white/45 font-normal">left</span></span>
+                  
                   </div>
                 </button>
 
@@ -346,28 +344,25 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
                 )}
               </div>
 
-              <div className="mt-6">
-                <div className="flex justify-between font-mono text-[11px] text-white/45 mb-2">
-                  <span>Usage</span>
-                  <span>{widgetData?.messageCount || 0}/100</span>
-                </div>
-                <div className="w-full h-2 bg-white/10 border border-white/10">
-                  <div
-                    className="h-full bg-[#F04D26] transition-all duration-300"
-                    style={{ width: `${Math.min(((widgetData?.messageCount || 0) / 100) * 100, 100)}%` }}
-                  />
-                </div>
-              </div>
+           
             </section>
 
             <section className="border border-white/10 bg-[#0a0a0a] px-4 py-4 md:px-5 md:py-4">
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="font-mono text-[11px] text-white/55">
-                  flowidget dashboard · updates automatically as visitors chat with your widget.
+                  Like flowidget? Support the project.
                 </p>
-                <p className="font-mono text-[11px] text-white/40">
-                  Stats and logs are tied to your account. You can safely close this tab anytime.
-                </p>
+                <div className="flex flex-wrap gap-2">
+                  <a
+                    href="https://github.com/mizurex/flowidget"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1  bg-muted-foreground px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-white transition-colors hover:bg-muted-foreground/80"
+                  >
+                    Star Github
+                  </a>
+              
+                </div>
               </div>
             </section>
 
@@ -377,6 +372,8 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
           </>
         )}
       </main>
+      <DiagonalPattern side="left" />
+      <DiagonalPattern side="right" />
     </div>
   );
 }
