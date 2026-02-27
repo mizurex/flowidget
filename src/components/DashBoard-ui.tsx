@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
+import Link from 'next/link';
 import { supabase } from '@/lib/supabase-browser';
 import HeaderLogged from '@/components/HeaderLoggedIn';
 import UserWidget from '@/components/widget/UserWidgetPopup';
@@ -9,6 +10,7 @@ import CreateWidgetModal from '@/components/model/WidgetModel';
 import TerminalLog, { type TerminalQueryEntry } from '@/components/widget/terminal';
 import { GiftIcon, Code2, BotIcon } from 'lucide-react';
 import { BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
+import Logo from './svg/logo';
 
 interface DashboardProps {
   initialUser?: User | null;
@@ -138,9 +140,9 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
   const creditsLeft = widgetData ? 500 - widgetData.messageCount : 0;
 
   return (
-    <div className="relative min-h-screen  text-white">
+    <div className="relative min-h-screen text-white bg-black">
      
-      {user && <HeaderLogged user={user} onCreateClick={handleCreateClick} />}
+     
 
       {user && !hasWidget && (
         <CreateWidgetModal
@@ -153,7 +155,31 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
         />
       )}
 
-      <main className="relative z-10 pt-10 px-6 max-w-3xl mx-auto space-y-6 md:space-y-8">
+      <main className="relative z-10 pt-5 md:pt-10 px-6 max-w-3xl mx-auto space-y-6 md:space-y-8">
+        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-start gap-3">
+            <Link href="/" className="flex items-center ">
+              <Logo width={40} height={40} />
+            </Link>
+            <div>
+           
+              <h1 className="pt-2.5 font-mono text-xl text-white md:text-2xl">
+                Dashboard
+              </h1>
+          
+            </div>
+          </div>
+
+          <div className="flex flex-col items-start gap-2 text-xs text-white/60 sm:items-end">
+            {user?.email && (
+              <div className="font-mono">
+                Signed in as <span className="text-white/80">{user.email}</span>
+              </div>
+            )}
+         
+          </div>
+        </div>
+
        {noWidget ? (
           <div className="py-24 text-center">
             <div className="inline-flex border border-muted-foreground/40 bg-muted/10 px-2.5 py-1 text-[11px] font-mono uppercase tracking-widest text-muted-foreground mb-4">
@@ -351,6 +377,17 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
                     style={{ width: `${Math.min(((widgetData?.messageCount || 0) / 500) * 100, 100)}%` }}
                   />
                 </div>
+              </div>
+            </section>
+
+            <section className="border border-white/10 bg-[#0a0a0a] px-4 py-4 md:px-5 md:py-4">
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                <p className="font-mono text-[11px] text-white/55">
+                  flowidget dashboard · updates automatically as visitors chat with your widget.
+                </p>
+                <p className="font-mono text-[11px] text-white/40">
+                  Stats and logs are tied to your account. You can safely close this tab anytime.
+                </p>
               </div>
             </section>
 

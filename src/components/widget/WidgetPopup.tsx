@@ -10,9 +10,9 @@ export default function WidgetEmbedPopup({ userId }: { userId: string }) {
     <div>
       <button
         onClick={() => setShowModal(true)}
-        className="bg-black text-white px-4 py-2 rounded-md font-medium">
-      
-         Show Script
+        className="border border-white bg-white px-4 py-2 font-mono text-sm text-black transition-colors hover:bg-white/90"
+      >
+        Show script
       </button>
 
       <AnimatePresence>
@@ -21,57 +21,61 @@ export default function WidgetEmbedPopup({ userId }: { userId: string }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center"
+            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center"
           >
             <motion.div
-              initial={{ y: 50, opacity: 0 }}
+              initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 50, opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-              className="bg-white w-full max-w-2xl p-6 rounded-xl shadow-xl relative"
+              exit={{ y: 40, opacity: 0 }}
+              transition={{ type: "spring", stiffness: 260, damping: 26 }}
+              className="relative w-full max-w-2xl border border-white/10 bg-[#0a0a0a] px-6 py-6 md:px-8 md:py-7 shadow-[0_22px_60px_rgba(0,0,0,0.9)]"
             >
               <button
                 onClick={() => setShowModal(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+                className="absolute top-4 right-4 text-white/40 hover:text-white/80 transition-colors"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
-              <h2 className="text-xl font-bold text-gray-800 mb-2">Embed Code</h2>
-              <p className="text-gray-600 text-sm mb-4">
-                Copy and paste this code into the desired place of your website (HTML editor, theme file, footer, etc.).
-              </p>
-              <div className=" rounded-lg p-4 font-mono text-sm mb-1">
-                <div className="mockup-code w-full">
-                <pre data-prefix="1"><code>`Do not remove this script`</code></pre>
-                <pre data-prefix="2"><code > {scriptCode}</code></pre>
-               </div>
-                
+
+              <div className="font-mono text-[11px] uppercase tracking-widest text-white/45">
+                Embed snippet
               </div>
+              <h2 className="mt-2 font-mono text-lg text-white">Add flowidget to your site</h2>
+              <p className="mt-1 text-sm text-white/55">
+                Paste this script near the end of your HTML, before the closing {'</body>'} tag.
+              </p>
+
+              <div className="mt-4 border border-white/10 bg-black/40 p-4 font-mono text-[12px] leading-relaxed text-white/75 overflow-x-auto">
+                <pre>
+{`// Do not remove this script
+${scriptCode}`}
+                </pre>
+              </div>
+
               <button
                 onClick={() => navigator.clipboard.writeText(scriptCode)}
-                className=" text-black px-4 py-2 rounded "
+                className="mt-3 border border-white bg-white px-4 py-2 font-mono text-[11px] uppercase tracking-widest text-black transition-colors hover:bg-white/90"
               >
-                Copy Code
+                Copy code
               </button>
 
-              <div className="mt-6">
-                <h3 className="font-semibold text-gray-800 mb-2">Where to Paste It?</h3>
-                <ul className="text-gray-600 text-sm list-disc list-inside space-y-1">
-                  <li>Paste before closing <code>&lt;/body&gt;</code> tag.</li>
-                  <li>Add to your website footer template for site-wide chat.</li>
-                </ul>
-              </div>
+              <div className="mt-6 space-y-4">
+                <div>
+                  <h3 className="font-mono text-[13px] text-white">Where to paste it</h3>
+                  <ul className="mt-1 list-disc list-inside text-sm text-white/55 space-y-1">
+                    <li>
+                      Add it before the closing <code className="font-mono text-white/80">&lt;/body&gt;</code> tag.
+                    </li>
+                    <li>Use your site footer template to load it on every page.</li>
+                  </ul>
+                </div>
 
-              <div className="mt-6">
-                <h3 className="font-semibold text-gray-800 mb-2">Need Help?</h3>
-                <a
-                  href="https://example.com/setup-video"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-blue-600 underline text-sm"
-                >
-                  ▶️ Watch setup video
-                </a>
+                <div>
+                  <h3 className="font-mono text-[13px] text-white">Need help?</h3>
+                  <p className="mt-1 text-sm text-white/55">
+                    Docs & setup guides are coming soon. For now, reach out if you need a hand wiring it up.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </motion.div>

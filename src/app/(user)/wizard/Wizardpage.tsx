@@ -43,15 +43,13 @@ const FormTextarea = ({ label, value, onChange, placeholder, rows = 6, error }: 
   </Field>
 );
 
-// ── types ────────────────────────────────────────────────────────────────────
 
-type Props = {
+interface Props {
   user: User;
   widget: any;
   onSuccess: any;
 };
 
-// ── component ────────────────────────────────────────────────────────────────
 
 export default function RedesignedDashboard2({ user, widget, onSuccess }: Props) {
   const [botName, setBotName]               = useState("");
@@ -66,9 +64,8 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
   const [fieldErrors, setFieldErrors]       = useState<Partial<Record<keyof z.infer<typeof widgetFormSchema>, string>>>({});
   const [step, setStep]                     = useState(1);
 
-  const STEPS = ["Bot Details", "Personality & Content", "Review & Confirm"];
+  const STEPS = ["Bot Details", "Personality & Content", "Review"];
 
-  // ── validation (unchanged logic) ──────────────────────────────────────────
   const handleNextStep = () => {
     let partialData: Partial<z.infer<typeof widgetFormSchema>> = {};
     if (step === 1) partialData = { botName };
@@ -85,23 +82,22 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
     setStep(step + 1);
   };
 
-  // ── submit (unchanged logic) ───────────────────────────────────────────────
-  const handleCreateOrUpdateWidget = async () => {
+
+  const handleCreateWidget = async () => {
     if (!user?.id) return;
     try {
-      const finalContent = `Bot Name: ${botName}\nWelcome Message: ${welcomeMessage}\nRole: ${role}\nContent: ${content}`.trim();
+      const user_content = `Bot Name: ${botName}\nWelcome Message: ${welcomeMessage}\nRole: ${role}\nContent: ${content}`.trim();
       setLoading(true);
       setError("");
-      const res = await fetch("https://widget-xxtv.onrender.com/add-context", {
+      const res = await fetch("https://widget-xxtv.onrender.com/create-widget", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: finalContent, user_id: user.id }),
+        body: JSON.stringify({ content: user_content, user_id: user.id }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Failed to create widget.");
+      if (!res.ok) throw new Error("Failed to create widget.");
       setShowEmbedPopup(true);
     } catch (err: any) {
-      setError(err.message || "Unknown error");
+      setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -111,7 +107,7 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
     <div className="flex min-h-screen items-center justify-center bg-[#151515] px-4 py-16">
       <div className="w-full max-w-lg border border-white/10 ">
 
-        {/* top bar */}
+     
         <div className="flex items-center justify-between border-b border-white/10 px-6 py-4">
           <span className="font-mono text-xs uppercase tracking-widest text-white/40">
             Create widget
@@ -268,7 +264,7 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
             </button>
           ) : (
             <button
-              onClick={handleCreateOrUpdateWidget}
+              onClick={handleCreateWidget}
               disabled={loading}
               className="border border-white bg-white px-5 py-2 font-mono text-sm font-medium text-black transition-colors hover:bg-white/90 disabled:opacity-40 disabled:cursor-not-allowed"
             >
