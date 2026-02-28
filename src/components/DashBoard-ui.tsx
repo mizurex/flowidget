@@ -60,7 +60,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     async function fetchi() {
       if (!user?.id) return;
       try {
-        const data = await fetch(`https://widget-xxtv.onrender.com/recent-q?user_id=${user.id}`);
+        const data = await fetch(`https://widget-api.turfworks.site/recent-q?user_id=${user.id}`);
         if (!data.ok) return;
         const res = await data.json();
         const entries: TerminalQueryEntry[] = res.questions.map((q: string, i: number) => ({
@@ -81,7 +81,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`https://widget-xxtv.onrender.com/dashboard-data?user_id=${user.id}`);
+      const response = await fetch(`https://widget-api.turfworks.site/dashboard-data?user_id=${user.id}`);
       const data = await response.json();
       const apiErrorMessage = (data?.error || '').toString().toLowerCase();
       if (response.status === 404 || apiErrorMessage.includes('no widget')) {
@@ -114,7 +114,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
   useEffect(() => {
     const fetchHasWid = async () => {
       try {
-        const hasWid = await fetch(`https://widget-xxtv.onrender.com/widget-status?user_id=${user?.id}`);
+        const hasWid = await fetch(`https://widget-api.turfworks.site/widget-status?user_id=${user?.id}`);
         if (!hasWid.ok) throw new Error('Failed to fetch widget status');
         const data = await hasWid.json();
         if (!data.success) throw new Error('Failed to fetch widget status');

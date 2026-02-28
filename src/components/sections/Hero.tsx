@@ -73,7 +73,7 @@ useEffect(() => {
   const fetchWidgetStatus = async () => {
     try {
       const response = await fetch(
-        `https://widget-xxtv.onrender.com/widget-status?user_id=${user?.id}`
+        `https://widget-api.turfworks.site/widget-status?user_id=${user?.id}`
 
       );
 

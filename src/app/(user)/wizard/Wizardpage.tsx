@@ -89,7 +89,7 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
       const user_content = `Bot Name: ${botName}\nWelcome Message: ${welcomeMessage}\nRole: ${role}\nContent: ${content}`.trim();
       setLoading(true);
       setError("");
-      const res = await fetch("https://widget-xxtv.onrender.com/create-widget", {
+      const res = await fetch("https://widget-api.turfworks.site/create-widget", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: user_content, user_id: user.id }),
