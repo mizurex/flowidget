@@ -5,16 +5,11 @@ import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 import Logo from '../svg/logo';
 import { RiGoogleFill } from 'react-icons/ri';
+import { Loader2 } from 'lucide-react';
 
 const Spinner = () => (
-  <div className="flex items-end gap-[3px]">
-    {[0, 150, 300].map((delay) => (
-      <div
-        key={delay}
-        className="h-4 w-[3px] bg-[#F04D26] animate-spin"
-        style={{ animationDelay: `${delay}ms` }}
-      />
-    ))}
+  <div className="flex items-center justify-center">
+    <Loader2 className="w-4 h-4 animate-spin text-white" />
   </div>
 );
 
@@ -96,12 +91,21 @@ export default function LoginPage() {
             </div>
           </div>
         ) : (
-          <div className="text-center">
-            <img
-              src={user.user_metadata?.avatar_url || `https://api.dicebear.com/8.x/initials/svg?seed=${user.email}`}
+          <div className="text-center mx-auto">
+            <div 
+            className="mx-auto p-2"
+           style={{
+          backgroundImage: 'repeating-linear-gradient(-35deg, transparent, transparent 2px, currentColor 2px, currentColor 3px, transparent 3px, transparent 4px)'
+        }}
+            >
+
+                <img
+              src={user.user_metadata?.avatar_url || ''}
               alt=""
               className="mx-auto mb-4 h-20 w-20 border border-white/10 object-cover"
             />
+            </div>
+          
             <p className="font-mono text-[11px] uppercase tracking-widest text-white/35">
               Logged in as
             </p>
@@ -110,7 +114,7 @@ export default function LoginPage() {
             </p>
             <button
               onClick={handleLogout}
-              className="mt-8 w-full border border-white/10 bg-white/5 px-4 py-3 font-mono text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+              className="mt-8 w-fit border border-white/10 bg-white/5 px-4 py-3 font-mono text-sm text-white/70 transition-colors hover:bg-white/10 hover:text-white"
             >
               Sign out
             </button>

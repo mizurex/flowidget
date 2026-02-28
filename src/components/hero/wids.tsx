@@ -59,10 +59,10 @@ export function WidgetPresetsSection() {
         {/* left: controls */}
         <div className="flex-1 space-y-5">
         
-          <h2 className="font-mono text-2xl text-neutral-500 md:text-3xl">
+          <h2 className="font-mono text-2xl text-neutral-500 md:text-3xl text-center md:text-left">
            <span className="text-neutral-200">Customize</span> your widget
           </h2>
-          <p className="max-w-md text-sm text-neutral-400 font-sans">
+          <p className="max-w-md text-sm text-neutral-400 font-sans text-center md:text-left">
             Pick a preset to preview. Add your chat boxes below.
           </p>
 

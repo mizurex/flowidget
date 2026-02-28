@@ -39,8 +39,11 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} ${barlow.className} min-h-screen flex flex-col`}>
         <Widget attrs={{
-          src: "https://widget-bot-ui.vercel.app/widget.js",
-          user: "8693e0d8-fbd1-4ae2-9c64-f8641fcd7d56",
+          "src": "https://widget-bot-ui.vercel.app/widget.js",
+          "user": "8693e0d8-fbd1-4ae2-9c64-f8641fcd7d56",
+         
+          "bubbleSize": "sm",
+
         }} />
         <main className="">
           {children}

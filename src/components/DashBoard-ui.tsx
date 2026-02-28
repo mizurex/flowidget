@@ -8,7 +8,7 @@ import HeaderLogged from '@/components/HeaderLoggedIn';
 import UserWidget from '@/components/widget/UserWidgetPopup';
 import CreateWidgetModal from '@/components/model/WidgetModel';
 import TerminalLog, { type TerminalQueryEntry } from '@/components/widget/terminal';
-import { GiftIcon, Code2, BotIcon } from 'lucide-react';
+import { GiftIcon, Code2, BotIcon, Loader2 } from 'lucide-react';
 import { BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
 import Logo from './svg/logo';
 import EditorialLines from './hero/hero-lines';
@@ -214,11 +214,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
 
               {loading ? (
                 <div className="flex items-center justify-center py-12">
-                  <div className="flex items-end gap-[3px]">
-                    <span className="h-4 w-[3px] bg-[#F04D26] animate-pulse" />
-                    <span className="h-4 w-[3px] bg-[#F04D26] animate-pulse [animation-delay:150ms]" />
-                    <span className="h-4 w-[3px] bg-[#F04D26] animate-pulse [animation-delay:300ms]" />
-                  </div>
+                <Loader2 className="w-4 h-4 animate-spin text-white" />
                 </div>
               ) : error ? (
                 <div className="mt-6 grid gap-4 p-4 ">

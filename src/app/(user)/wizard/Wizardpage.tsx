@@ -58,7 +58,7 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
   const [content, setContent]               = useState("");
   const [loading, setLoading]               = useState(false);
   const [error, setError]                   = useState("");
-  const [selectedUI, setSelectedUI]         = useState("classic");
+  const [selectedUI, setSelectedUI]         = useState("default");
   const [selectedColor, setSelectedColor]   = useState("#ffffff");
   const [showEmbedPopup, setShowEmbedPopup] = useState(false);
   const [fieldErrors, setFieldErrors]       = useState<Partial<Record<keyof z.infer<typeof widgetFormSchema>, string>>>({});

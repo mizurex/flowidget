@@ -12,11 +12,11 @@ export default function HeroContent() {
                                 <span className="text-neutral-500">Meet </span>flowidget
                             </span>
                             <span className="block min-[97.5rem]:whitespace-nowrap text-neutral-500 mt-[20px] md:mt-0 break-words">
-                                The embeddable AI bot for your next project.
+                                The embeddable AI widget for your next project.
                             </span>
                         </h1>
                         <p className="max-w-xl 2xl:max-w-2xl mx-auto md:mx-0 text-sm lg:text-[17px] xl:text-[14px] 2xl:text-[18px] min-[97.5rem]:text-[18px] text-neutral-500 mb-6 md:mb-8 leading-tight font-mono">
-                            Add AI to your site instantly. Embed, configure, and connect in seconds. No coding required—customize however you want. Works great on all major browsers and devices.
+                            Add AI to your site instantly. Embed, customize, and connect. No coding required. Works on all browsers and devices.
                         </p>
                     </div>
                     <div className="w-full flex flex-col items-center md:items-start">

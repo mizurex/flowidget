@@ -65,22 +65,15 @@ export default function Header() {
               href="/"
               className="focus:outline-none flex items-center gap-2"
             >
-                <Logo />
+                <Logo width={20} height={20} />
             </Link>
           </div>
 
           <nav className="hidden lg:flex items-center gap-5 mx-10">
+          
             <Link
-              href="#features"
-              onClick={(e) => handleSmoothScroll(e, "features")}
-              className="text-sm font-medium text-[#C1B9B9] hover:text-white transition-colors duration-150 ease motion-reduce:transition-none"
-            >
-              Features
-            </Link>
-            <Link
-              href="#playground"
-              onClick={(e) => handleSmoothScroll(e, "playground")}
-              className="text-sm font-medium text-[#C1B9B9] hover:text-white transition-colors duration-150 ease motion-reduce:transition-none"
+              href="/docs"
+              className="text-sm font-medium text-[#C1B9B9] hover:text-white transition-colors duration-150 ease motion-reduce:transition-none mt-1"
             >
               Docs
             </Link>
