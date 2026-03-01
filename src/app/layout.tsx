@@ -27,6 +27,20 @@ export const metadata: Metadata = {
     icon: "/logo.jpeg",
     apple: "/logo.jpeg",
   },
+  keywords: ["flowidget", "ai widget", "ai", "widget", "nextjs", "tailwind", "typescript", "javascript", "html", "css"],
+  authors: [{ name: "Jay", url: "https://flowidget.vercel.app" }],
+  creator: "Jay",
+  publisher: "Jay",
+  openGraph: {
+    title: "flowidget",
+    description: "AI widget for your next project",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "flowidget",
+    description: "AI widget for your next project",
+    images: ["/project.jpeg"],
+  },
 };
 
 export default async function RootLayout({
@@ -40,8 +54,7 @@ export default async function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} ${barlow.className} min-h-screen flex flex-col`}>
         <Widget attrs={{
           "src": "https://widget-bot-ui.vercel.app/widget.js",
-          "user": "8693e0d8-fbd1-4ae2-9c64-f8641fcd7d56",
-         
+          "user": "8693e0d8-fbd1-4ae2-9c64-f8641fcd7d56",       
           "bubbleSize": "sm",
 
         }} />
