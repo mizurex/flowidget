@@ -47,8 +47,6 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
         setUser(session?.user || null);
       }
     );
-
-
     return () => subscription.unsubscribe();
   }, []);
 
@@ -60,23 +58,15 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
 
   useEffect(() => {
     async function fetchi() {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session || !user?.id) return;
+      if (!user?.id) return;
       try {
-        const url = `https://widget-api.turfworks.site/recent-q?user_id=${user.id}`;
-        const data = await fetch(url, {
-          headers: { Authorization: `Bearer ${session.access_token}` },
-        });
-        if (!data.ok) {
-          const errBody = await data.json().catch(() => ({}));
-          console.error('recent-q failed:', data.status, data.statusText, errBody);
-          return;
-        }
+        const data = await fetch(`https://widget-api.turfworks.site/recent-q?user_id=${user.id}`);
+        if (!data.ok) return;
         const res = await data.json();
-        const entries: TerminalQueryEntry[] = (res.questions ?? []).map((q: string, i: number) => ({
+        const entries: TerminalQueryEntry[] = res.questions.map((q: string, i: number) => ({
           question: q,
-          answer: res.answers?.[i] ?? '',
-          timestamp: res.timestamps?.[i],
+          answer: res.answers[i],
+          timestamp: res.timestamps[i],
         }));
         setRecentEntries(entries);
       } catch (err) {
@@ -90,14 +80,8 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     if (!user?.id) return;
     setLoading(true);
     setError(null);
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) {
-      return;
-    }
     try {
-      const response = await fetch(`https://widget-api.turfworks.site/dashboard-data`,{
-        headers: { 'Authorization': `Bearer ${session.access_token}` },
-      });
+      const response = await fetch(`https://widget-api.turfworks.site/dashboard-data?user_id=${user.id}`);
       const data = await response.json();
       const apiErrorMessage = (data?.error || '').toString().toLowerCase();
       if (response.status === 404 || apiErrorMessage.includes('no widget')) {
