@@ -6,6 +6,7 @@ import UserWidget from "@/components/widget/UserWidgetPopup";
 import { AnimatePresence, motion } from "framer-motion";
 import { widgetFormSchema } from "@/lib/schema/schema";
 import { z } from "zod";
+import { supabase } from "@/lib/supabase-browser";
 
 
 
@@ -84,15 +85,18 @@ export default function RedesignedDashboard2({ user, widget, onSuccess }: Props)
 
 
   const handleCreateWidget = async () => {
-    if (!user?.id) return;
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      return;
+    }
     try {
       const user_content = `Bot Name: ${botName}\nWelcome Message: ${welcomeMessage}\nRole: ${role}\nContent: ${content}`.trim();
       setLoading(true);
       setError("");
       const res = await fetch("https://widget-api.turfworks.site/create-widget", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: user_content, user_id: user.id }),
+        headers: { "Content-Type": "application/json" ,"Authorization": `Bearer ${session.access_token}` },
+        body: JSON.stringify({ content: user_content}),
       });
       if (!res.ok) throw new Error("Failed to create widget.");
       setShowEmbedPopup(true);

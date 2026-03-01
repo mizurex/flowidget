@@ -47,6 +47,8 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
         setUser(session?.user || null);
       }
     );
+
+
     return () => subscription.unsubscribe();
   }, []);
 
@@ -58,9 +60,16 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
 
   useEffect(() => {
     async function fetchi() {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) {
+       
+        return;
+      }
       if (!user?.id) return;
       try {
-        const data = await fetch(`https://widget-api.turfworks.site/recent-q?user_id=${user.id}`);
+        const data = await fetch(`https://widget-api.turfworks.site/recent-q`,{
+          headers: { 'Authorization': `Bearer ${session.access_token}` },
+        });
         if (!data.ok) return;
         const res = await data.json();
         const entries: TerminalQueryEntry[] = res.questions.map((q: string, i: number) => ({
@@ -80,8 +89,14 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     if (!user?.id) return;
     setLoading(true);
     setError(null);
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) {
+      return;
+    }
     try {
-      const response = await fetch(`https://widget-api.turfworks.site/dashboard-data?user_id=${user.id}`);
+      const response = await fetch(`https://widget-api.turfworks.site/dashboard-data`,{
+        headers: { 'Authorization': `Bearer ${session.access_token}` },
+      });
       const data = await response.json();
       const apiErrorMessage = (data?.error || '').toString().toLowerCase();
       if (response.status === 404 || apiErrorMessage.includes('no widget')) {
