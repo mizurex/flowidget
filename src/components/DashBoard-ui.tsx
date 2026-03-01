@@ -81,7 +81,7 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`https://widget-api.turfworks.site/dashboard-data?user_id=${user.id}`);
+      const response = await fetch(`https://widget-xxtv.onrender.com/dashboard-data?user_id=${user.id}`);
       const data = await response.json();
       const apiErrorMessage = (data?.error || '').toString().toLowerCase();
       if (response.status === 404 || apiErrorMessage.includes('no widget')) {
