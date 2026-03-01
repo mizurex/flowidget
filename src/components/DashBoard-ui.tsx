@@ -61,21 +61,22 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
   useEffect(() => {
     async function fetchi() {
       const { data: { session } } = await supabase.auth.getSession();
-      if (!session) {
-       
-        return;
-      }
-      if (!user?.id) return;
+      if (!session || !user?.id) return;
       try {
-        const data = await fetch(`https://widget-api.turfworks.site/recent-q`,{
-          headers: { 'Authorization': `Bearer ${session.access_token}` },
+        const url = `https://widget-api.turfworks.site/recent-q?user_id=${user.id}`;
+        const data = await fetch(url, {
+          headers: { Authorization: `Bearer ${session.access_token}` },
         });
-        if (!data.ok) return;
+        if (!data.ok) {
+          const errBody = await data.json().catch(() => ({}));
+          console.error('recent-q failed:', data.status, data.statusText, errBody);
+          return;
+        }
         const res = await data.json();
-        const entries: TerminalQueryEntry[] = res.questions.map((q: string, i: number) => ({
+        const entries: TerminalQueryEntry[] = (res.questions ?? []).map((q: string, i: number) => ({
           question: q,
-          answer: res.answers[i],
-          timestamp: res.timestamps[i],
+          answer: res.answers?.[i] ?? '',
+          timestamp: res.timestamps?.[i],
         }));
         setRecentEntries(entries);
       } catch (err) {
