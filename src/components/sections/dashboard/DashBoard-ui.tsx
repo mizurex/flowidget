@@ -1,20 +1,17 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import type { User } from '@supabase/supabase-js';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase-browser';
-import HeaderLogged from '@/components/HeaderLoggedIn';
 import UserWidget from '@/components/widget/UserWidgetPopup';
 import CreateWidgetModal from '@/components/model/WidgetModel';
 import TerminalLog, { type TerminalQueryEntry } from '@/components/widget/terminal';
-import { GiftIcon, Code2, BotIcon, Loader2 } from 'lucide-react';
-import { BsArrowDown, BsArrowRight, BsPeople } from 'react-icons/bs';
-import Logo from './svg/logo';
-import EditorialLines from './hero/hero-lines';
-import DiagonalPattern from './hero/pattern';
-import RulerTicks from './hero/morph';
-import EditorialLines2 from './hero/lines';
+import { GiftIcon, Code2, Loader2 } from 'lucide-react';
+import { BsArrowDown, BsArrowRight } from 'react-icons/bs';
+import Logo from '../../svg/logo';
+import Lines from '@/components/ui/lines';
+import DiagonalPattern from '@/components/ui/pattern';
+import Morph from '@/components/hero/morph';
 
 interface DashboardProps {
   initialUser?: User | null;
@@ -143,8 +140,8 @@ export default function UiDashBoard({ initialUser = null }: DashboardProps) {
   return (
     <div className="relative min-h-screen text-white bg-black">
      
-     <EditorialLines />
-     <RulerTicks />
+     <Lines />
+     <Morph />
      
 
       {user && !hasWidget && (

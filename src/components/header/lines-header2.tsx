@@ -1,10 +1,10 @@
 
 "use client";
 import React from 'react';
-interface SideLine2Props {
+interface LinesHeader2Props {
     side: 'left' | 'right';
 }
-export function SideLine2({ side }: SideLine2Props) {
+export function LinesHeader2({ side }: LinesHeader2Props) {
     const isLeft = side === 'left';
     return (<div className="relative hidden h-px flex-1 border-t border-solid border-white/20 lg:block">
       

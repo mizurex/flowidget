@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import { SideLine } from "@/components/header/lines-header";
-import { SideLine2 } from "@/components/header/lines-header2";
+import { LinesHeader } from "@/components/header/lines-header";
+import { LinesHeader2 } from "@/components/header/lines-header2";
 import { motion } from "framer-motion";
 import { LogInIcon } from "lucide-react";
 import Logo from "../svg/logo";
@@ -48,7 +48,7 @@ export default function Header() {
   return (
     <div className="flex flex-col items-center pt-3 mt-2 md:pt-4 fixed sm:static -top-6 w-full backdrop-blur-md z-50">
       <div className="relative z-20 flex w-full items-center justify-center gap-6 lg:gap-0 px-4 lg:px-0">
-        <SideLine side="left" />
+        <LinesHeader side="left" />
 
         <header
           className={`
@@ -94,10 +94,10 @@ export default function Header() {
           </div>
         </header>
 
-        <SideLine side="right" />
+        <LinesHeader side="right" />
         <div className="absolute inset-0  mx-auto pointer-events-none hidden lg:block">
           {" "}
-          <SideLine2 side="right" />
+          <LinesHeader2 side="right" />
         </div>
       </div>
     </div>

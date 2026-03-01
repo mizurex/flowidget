@@ -1,4 +1,4 @@
-import UiDashBoard from "@/components/DashBoard-ui";
+import UiDashBoard from "@/components/sections/dashboard/DashBoard-ui";
 import Footer from "@/components/sections/Footer";
 import LoginPage from "@/components/widget/Signin";
 import { createSupabaseServer } from "@/lib/supabase-server";

@@ -9,11 +9,8 @@ export default function Footer() {
           <div className="col-span-2 sm:col-span-1 px-0 md:px-30">
             <span className="font-mono text-base font-bold tracking-tight text-white">
               <Logo />
-            </span>
-           
+            </span>    
           </div>
-
-          {/* site */}
           <div>
             <h3 className="font-mono text-[11px] uppercase tracking-widest text-white/25">
               Site
@@ -31,10 +28,6 @@ export default function Footer() {
               ))}
             </ul>
           </div>
-
-     
-
-          {/* community */}
           <div>
             <h3 className="font-mono text-[11px] uppercase tracking-widest text-white/25">
               Community

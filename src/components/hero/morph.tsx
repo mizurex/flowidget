@@ -47,7 +47,7 @@ function rgbaWhite(alpha: number) {
     return `rgba(255,255,255,${a})`;
 }
 
-function RulerSide({
+function MorphSide({
     side,
     factor,
     ticks,
@@ -94,7 +94,7 @@ function RulerSide({
     );
 }
 
-export default function RulerTicks() {
+export default function Morph() {
     const rafRef = useRef<number | null>(null);
     const latestRef = useRef<Mouse>({ x: 0.5, y: 0.5 });
     const [mouse, setMouse] = useState<Mouse>({ x: 0.5, y: 0.5 });
@@ -128,8 +128,8 @@ export default function RulerTicks() {
             className="absolute inset-0 w-[80%] mx-auto pointer-events-none hidden lg:block z-10"
             aria-hidden="true"
         >
-            <RulerSide side="left" factor={leftFactor} ticks={LEFT_TICKS} />
-            <RulerSide side="right" factor={rightFactor} ticks={RIGHT_TICKS} />
+            <MorphSide side="left" factor={leftFactor} ticks={LEFT_TICKS} />
+            <MorphSide side="right" factor={rightFactor} ticks={RIGHT_TICKS} />
         </div>
     );
 }

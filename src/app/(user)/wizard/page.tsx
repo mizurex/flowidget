@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "@/components/sections/Footer";
-import UiDashBoard from "@/components/DashBoard-ui";
+import UiDashBoard from "@/components/sections/dashboard/DashBoard-ui";
 import UserWidget from "@/components/widget/UserWidgetPopup";
 
 const MOCK_USER = { id: "preview" } as any;

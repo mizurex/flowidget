@@ -1,17 +1,17 @@
 import LoginPage from "@/components/widget/Signin"
 import { MoveLeft } from "lucide-react"
 import Link from "next/link"
-import EditorialLines from "@/components/hero/hero-lines"
-import RulerTicks from "@/components/hero/morph"
-import DiagonalPattern from "@/components/hero/pattern"
+import Lines from "@/components/ui/lines"
+import Morph from "@/components/hero/morph"
+import DiagonalPattern from "@/components/ui/pattern"
 
 
 export default function (){
   return (
       <div className="relative bg-black "> 
       
-      <EditorialLines />
-        <RulerTicks />
+      <Lines />
+        <Morph />
         <DiagonalPattern side="left" />
         <DiagonalPattern side="right" />
       <LoginPage/>

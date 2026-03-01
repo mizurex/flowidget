@@ -1,7 +1,7 @@
-import RulerTicks from "@/components/hero/morph";
-import DiagonalPattern from "@/components/hero/pattern";
-import EditorialLines from "@/components/hero/hero-lines";
-import Header from "@/components/hero/header";
+import Morph from "@/components/hero/morph";
+import DiagonalPattern from "@/components/ui/pattern";
+import Lines from "@/components/ui/lines";
+import Header from "@/components/header/header";
 import HeroContent from "@/components/hero/hero-content";
 import Footer from "@/components/sections/Footer";
 import { TemplatesSection } from "@/components/hero/showcase";
@@ -13,8 +13,8 @@ export default function WizardPage(){
     return(
     <div className="relative bg-black ">
         <Header />
-        <EditorialLines />
-        <RulerTicks />
+        <Lines />
+        <Morph />
         <DiagonalPattern side="left" />
         <DiagonalPattern side="right" />
         <HeroContent/> 
